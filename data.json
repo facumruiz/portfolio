@@ -1,0 +1,110 @@
+{
+  "en": {
+    "profile": {
+      "name": "Facundo Ruiz",
+      "title": "Fullstack Developer",
+      "description": "I am a Full Stack Developer specializing in backend development, with experience in modern web technologies, SQL/NoSQL databases, and Python automation. I am known for my adaptability, commitment to continuous learning, and drive to contribute to innovative projects within dynamic teams."
+    },
+    "projects": [
+      {
+        "title": "One to one",
+        "description": "A system designed for a one-to-one courier company. This system is of the CRUD type, providing the capability to input the products purchased by the customer and requiring delivery. Within the same system, the shipment status for each product can be edited. Notably, each time this status is updated, the customer is notified via email.",
+        "image": "./gifs/proyectochina.webm",
+        "technologies": "firebase, html, bootstrap, javascript",
+        "demo_link": null
+      },
+      {
+        "title": "Futbol Managment",
+        "description": "This application is designed for soccer team management, utilizing a CRUD system through an API deployed on AWS Lightsail. The backend is implemented in Node.js, and the frontend is developed in React. It allows for the addition and management of players, including personal and contract details, and offers filter options to facilitate the sorting and display of team data.",
+        "image": "./gifs/gif_proyectofutbol.webm",
+        "technologies": "react, mongo, mongoose, express",
+        "demo_link": null
+      },
+      {
+        "title": "How Trainer",
+        "description": "A system designed for a surgical training simulator, wherein the interface records the duration of each exercise performed by the student. Subsequently, these recorded times can be analyzed through graphical representation, providing insights into the user's best times and the quantity of repetitions completed for each exercise.",
+        "image": "./gifs/gif_trainerproyecto.webm",
+        "technologies": "react, mongo, mongoose, bootstrap, express",
+        "demo_link": null
+      },
+      {
+        "title": "Game Colors",
+        "description": "A mental agility game where you must quickly choose the correct color based on visual cues and patterns. Test your reaction time and decision-making skills as the game challenges your ability to stay focused and think fast.",
+        "image": "./gifs/juegos-colores.webm",
+        "technologies": "react, mongo, mongoose, express",
+        "demo_link": "https://coloresfront.onrender.com/"
+      },
+      {
+        "title": "RfidHub",
+        "description": "API for authentication using RFID cards, developed in Node.js. Manages user authentication with the UID data from the cards and provides endpoints for managing users, roles, and access control.",
+        "image": "./gifs/rfidhub.webm",
+        "technologies": "firebase, html, bootstrap, javascript",
+        "demo_link": null
+      }
+    ],
+    "contact": {
+      "header": "Contact Me",
+      "name_placeholder": "Your Name",
+      "email_placeholder": "Your Email",
+      "message_placeholder": "Your Message",
+      "send_message": "Send Message"
+    },
+    "footer": {
+      "text": "@2024 Facundo Ruiz Perez. Made in Argentina 🇦🇷"
+    }
+  },
+  "es": {
+    "profile": {
+      "name": "Facundo Ruiz",
+      "title": "Desarrollador Fullstack",
+      "description": "Soy un desarrollador Full Stack especializado en backend, con experiencia en tecnologías web modernas, bases de datos SQL/NoSQL y automatización con Python. Me caracterizo por mi adaptabilidad, compromiso con el aprendizaje continuo y motivación para contribuir a proyectos innovadores dentro de equipos dinámicos."
+    },
+    "projects": [
+      {
+        "title": "One to one",
+        "description": "Un sistema diseñado para una empresa de mensajería uno a uno. Este sistema es de tipo CRUD, permitiendo ingresar los productos comprados por el cliente y que requieren ser entregados. Dentro del mismo sistema, se puede editar el estado de envío de cada producto. Cabe destacar que cada vez que se actualiza este estado, el cliente es notificado por correo electrónico.",
+        "image": "./gifs/proyectochina.webm",
+        "technologies": "firebase, html, bootstrap, javascript",
+        "demo_link": null
+      },
+      {
+        "title": "Futbol Managment",
+        "description": "Esta aplicación está diseñada para la gestión de equipos de fútbol, utilizando un sistema CRUD a través de una API desplegada en AWS Lightsail. El backend está implementado en Node.js, y el frontend se desarrolla en React. Permite agregar y gestionar jugadores, incluyendo detalles personales y contractuales, y ofrece opciones de filtro para facilitar la organización y visualización de los datos del equipo.",
+        "image": "./gifs/gif_proyectofutbol.webm",
+        "technologies": "react, mongo, mongoose, material-ui, express",
+        "demo_link": null
+      },
+      {
+        "title": "How Trainer",
+        "description": "Un sistema diseñado para un simulador de entrenamiento quirúrgico, donde la interfaz registra la duración de cada ejercicio realizado por el estudiante. Posteriormente, estos tiempos registrados pueden analizarse mediante representaciones gráficas, proporcionando información sobre los mejores tiempos del usuario y la cantidad de repeticiones completadas para cada ejercicio.",
+        "image": "./gifs/gif_trainerproyecto.webm",
+        "technologies": "react, mongo, mongoose, bootstrap, express",
+        "demo_link": null
+      },
+      {
+        "title": "Juego de colores",
+        "description": "Un juego de agilidad mental en el que debes elegir rápidamente el color correcto según las pistas visuales y los patrones. Pon a prueba tu tiempo de reacción y habilidades de toma de decisiones mientras el juego desafía tu concentración y rapidez mental.",
+        "image": "./gifs/juegos-colores.webm",
+        "technologies": "react, mongo, mongoose, express",
+        "demo_link": "https://coloresfront.onrender.com/"
+      },
+      {
+        "title": "RfidHub",
+        "description": "API para autenticación mediante tarjetas RFID, desarrollada en Node.js. Gestiona la autenticación de usuarios con los datos UID de las tarjetas y ofrece endpoints para administrar usuarios, roles y control de acceso.",
+        "image": "./gifs/rfidhub.webm",
+        "technologies": "firebase, html, bootstrap, javascript",
+        "demo_link": null
+      }
+    ],
+    "contact": {
+      "header": "Contáctame",
+      "name_placeholder": "Tu Nombre",
+      "email_placeholder": "Tu Correo Electrónico",
+      "message_placeholder": "Tu Mensaje",
+      "send_message": "Enviar Mensaje"
+    },
+    "footer": {
+      "text": "@2024 Facundo Ruiz Perez. Hecho en Argentina 🇦🇷"
+    }
+  }
+}

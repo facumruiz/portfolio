@@ -1,0 +1,308 @@
+/* Estilos Globales */
+html,
+body {
+    height: 100%;
+    scroll-behavior: smooth;
+}
+
+/* Modo Claro y General */
+body {
+    background-color: #ffffff;
+    color: #333;
+}
+
+/* Contenedor principal del portafolio */
+.portfolio-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 20px;
+}
+
+/* Estilos de las tarjetas */
+.card {
+    width: 100%;
+    max-width: 600px;
+    min-width: 600px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-height: 350px;
+}
+
+
+
+.card .card-body {
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #f9f9f9;
+    flex-grow: 1;
+}
+
+/* Imagen en las tarjetas */
+.card img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+
+
+
+
+
+/* Efecto hover en las tarjetas */
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Estilo base de los íconos en el texto de la tarjeta */
+.card-text i {
+    font-size: 1.2rem;
+    margin-right: 5px;
+    margin-bottom: 20px;
+    margin-top: 3px;
+    color: #b4b4b4;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.btn-success {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+/* Estilos del encabezado del perfil */
+.profile-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+/* Información del perfil */
+.profile-info {
+    text-align: center;
+}
+
+.profile-info .profile-name {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.profile-info .profile-title {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: #555;
+}
+
+/* Estilo del cuerpo de la tarjeta */
+.card-body {
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+/* Estilos de los botones */
+button {
+    background-color: transparent;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+
+/* Estilos del botón para contactar */
+.contact-button {
+    width: 200px;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+/* Estilo del botón para regresar arriba */
+.scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #191e24;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: none;
+    /* Oculto por defecto */
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.scroll-to-top:hover {
+    background-color: #191e24;
+    transform: translateY(-5px);
+}
+
+/* Estilos generales para que siempre sea visible */
+.toggle-container {
+    position: fixed; /* Siempre visible */
+    top: 10px; /* Margen superior */
+    right: 10px; /* Margen derecho */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100; /* Asegurar que quede encima de otros elementos */
+    background-color: rgba(0, 0, 0, 0); /* Fondo negro */
+    padding: 10px;
+    border-radius: 0 0 0 10px; /* Bordes redondeados solo en la esquina inferior izquierda */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo base del botón para alternar entre modo oscuro */
+.toggle-dark-mode {
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* Hover en modo claro (cambia a fondo negro) */
+body:not(.dark-mode) .toggle-dark-mode:hover {
+    background-color: #000000; /* Fondo negro */
+    box-shadow: none; /* Eliminar borde blanco */
+    transform: translateY(-5px);
+}
+
+/* Hover en modo oscuro (mantiene el fondo blanco) */
+body.dark-mode .toggle-dark-mode:hover {
+    background-color: white;
+    box-shadow: none; /* Eliminar borde blanco */
+    transform: translateY(-5px);
+}
+
+
+.toggle-dark-mode:hover {
+    background-color: white;
+    box-shadow: 0 0 10px 2px white;
+    transform: translateY(-5px);
+}
+
+/* Modo Oscuro */
+body.dark-mode {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+/* Estilos de las tarjetas en modo oscuro */
+.dark-mode .card {
+    background-color: #000000;
+    color: #ffffff;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1), 0 4px 15px rgba(255, 255, 255, 0.2);
+}
+
+/* Estilos de los íconos en modo oscuro */
+body.dark-mode .card-text i {
+    color: #747474;
+}
+
+
+
+/* Estilo del cuerpo de la tarjeta en modo oscuro */
+.dark-mode .card-body {
+    background-color: #000000;
+}
+
+/* Estilo del encabezado del perfil en modo oscuro */
+.dark-mode .profile-info .profile-name,
+.dark-mode .profile-info .profile-title {
+    color: #ffffff;
+}
+
+/* Estilos para la versión móvil */
+@media (max-width: 576px) {
+    .toggle-container {
+        top: 10px;
+        right: 5px;
+        flex-direction: column; /* Mantener los botones en fila */
+        gap: 5px;
+        background-color: rgba(0, 0, 0, 0.705); /* Fondo negro */
+        padding: 10px; /* Espaciado interno */
+        border-radius: 10px; /* Bordes redondeados */
+        box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2); /* Sombra */
+    }
+
+    .toggle-dark-mode {
+        width: 10px; /* Reducir tamaño */
+        height: 10px; /* Reducir tamaño */
+        font-size: 1.2rem; /* Ajustar tamaño del ícono */
+        color: white; /* Asegurar contraste */
+    }
+
+    .profile-name {
+        font-size: 1.5rem;
+    }
+
+    .profile-title {
+        font-size: 1rem;
+    }
+
+    .card-body {
+        padding: 15px;
+    }
+
+    .portfolio-container {
+        padding: 10px;
+    }
+
+    .card {
+        min-width: 100%;
+    }
+
+    .g-recaptcha {
+        transform: scale(0.77);
+        transform-origin: 0 0;
+    }
+}
+
+
+/* Estilos responsivos para tablets */
+@media (min-width: 576px) and (max-width: 768px) {
+    .card {
+        min-width: 100%;
+    }
+
+    .profile-name {
+        font-size: 1.8rem;
+    }
+
+    .profile-title {
+        font-size: 1.1rem;
+    }
+}
+
+
+
