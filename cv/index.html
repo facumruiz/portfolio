@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        /* Asegura que el body ocupe todo el alto de la pantalla */
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+        }
+
+        /* Centrado vertical y horizontal utilizando flexbox */
+        .centered-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100%;
+            padding-top: 20px;
+        }
+
+        /* Ajustar el ancho máximo de la tarjeta y darle un poco de margen y sombra */
+        .card {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: auto;
+        }
+
+        /* Centrar todo el contenido dentro del card-header */
+        .card-header {
+            text-align: center;
+        }
+
+        .table td,
+        .table th {
+            text-align: left;
+        }
+
+        .table td:nth-child(2),
+        .table th:nth-child(2) {
+            text-align: right;
+        }
+
+        /* Estilo del botón */
+        .language-btn {
+            text-align: right;
+ 
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="centered-container">
+        <div class="card" id="cv-card">
+            <!-- Botón para cambiar el idioma -->
+            <button class="btn btn-gray language-btn" onclick="changeLanguage()">Cambiar a Inglés</button>
+            
+            <div class="card-header">
+                <h1 id="name"></h1>
+                <h4 id="location"></h4>
+                <p id="contact"></p>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Objetivo</h5>
+                <p class="card-text" id="objective"></p>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Educación</h5>
+                <table class="table" id="education-table">
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <div class="card-body">
+                <h5 class="card-title">Experiencia</h5>
+                <table class="table" id="experience-table">
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Cursos y certificados</h5>
+                <table class="table" id="courses-table">
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentLanguage = 'es'; // Idioma por defecto (español)
+
+        // Función para cargar el archivo JSON y actualizar el contenido en el HTML
+        function loadCVData(language) {
+            fetch('data.json')
+                .then(response => response.json())
+                .then(data => {
+                    const cv = data.cv;
+
+                    // Personal Info
+                    document.getElementById("name").textContent = cv.personal_info.name[language];
+                    document.getElementById("location").textContent = cv.personal_info.location[language];
+                    document.getElementById("contact").textContent = `${cv.personal_info.contact.phone} | ${cv.personal_info.contact.email} | ${cv.personal_info.contact.linkedin}`;
+
+                    // Objetivo
+                    document.getElementById("objective").textContent = cv.objective[language];
+
+                    // Educación
+                    const educationTable = document.getElementById("education-table").querySelector("tbody");
+                    educationTable.innerHTML = "";
+                    cv.education.forEach(item => {
+                        const row = document.createElement("tr");
+                        row.innerHTML = `<th>${item.title[language]}</th><th>${item.period}</th>`;
+                        educationTable.appendChild(row);
+                    });
+
+                    // Experiencia
+                    const experienceTable = document.getElementById("experience-table").querySelector("tbody");
+                    experienceTable.innerHTML = "";
+                    cv.experience.forEach(item => {
+                        const row1 = document.createElement("tr");
+                        row1.innerHTML = `<th>${item.position[language]}</th><th>${item.period}</th>`;
+                        const row2 = document.createElement("tr");
+                        row2.innerHTML = `<td colspan="2">${item.description[language]}</td>`;
+                        experienceTable.appendChild(row1);
+                        experienceTable.appendChild(row2);
+                    });
+
+                    // Cursos y Certificados
+                    const coursesTable = document.getElementById("courses-table").querySelector("tbody");
+                    coursesTable.innerHTML = "";
+                    cv.courses_and_certifications.forEach(item => {
+                        const row = document.createElement("tr");
+                        row.innerHTML = `<td>${item.title[language]}</td><td>${item.date}</td>`;
+                        coursesTable.appendChild(row);
+                    });
+                })
+                .catch(error => console.error('Error al cargar el archivo JSON:', error));
+        }
+
+        // Cambiar entre español e inglés
+        function changeLanguage() {
+            currentLanguage = currentLanguage === 'es' ? 'en' : 'es'; // Alterna entre 'es' y 'en'
+            loadCVData(currentLanguage);
+
+            // Actualizar el texto del botón según el idioma actual
+            const button = document.querySelector('.language-btn');
+            if (currentLanguage === 'es') {
+                button.textContent = 'Cambiar a Inglés';
+            } else {
+                button.textContent = 'Switch to Spanish';
+            }
+        }
+
+        // Cargar la información en español por defecto
+        loadCVData(currentLanguage);
+    </script>
+
+</body>
+
+</html>

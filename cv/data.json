@@ -1,0 +1,130 @@
+{
+    "cv": {
+      "personal_info": {
+        "name": {
+          "es": "Facundo Matias Ruiz Perez",
+          "en": "Facundo Matias Ruiz Perez"
+        },
+        "location": {
+          "es": "San Martin, Buenos Aires",
+          "en": "San Martin, Buenos Aires"
+        },
+        "contact": {
+          "phone": "1157343042",
+          "email": "facundoruizdev@gmail.com",
+          "linkedin": "linkedin.com/in/facumruiz"
+        }
+      },
+      "objective": {
+        "es": "Técnico Electrónico con orientación al desarrollo de firmware y programación. Estoy en búsqueda de nuevas oportunidades en el mundo del desarrollo.",
+        "en": "Electronic Technician with a focus on firmware development and programming. I am looking for new opportunities in the development field."
+      },
+      "education": [
+        {
+          "title": {
+            "es": "Técnico Superior en Sistemas Embebidos e IoT, IFTS n⁰ 14",
+            "en": "Higher Technician in Embedded Systems and IoT, IFTS n⁰ 14"
+          },
+          "period": "Ene. 2024 - Dic. 2027"
+        },
+        {
+          "title": {
+            "es": "Técnico electrónico, E.E.S.T Nro 1 \"Eduardo Ader\"",
+            "en": "Electronic Technician, E.E.S.T Nro 1 \"Eduardo Ader\""
+          },
+          "period": "Ene. 2012 - Dic. 2019"
+        }
+      ],
+      "experience": [
+        {
+          "position": {
+            "es": "Full Stack Developer - AFEC Football Academy",
+            "en": "Full Stack Developer - AFEC Football Academy"
+          },
+          "period": "Abr. 2023 - Nov. 2023",
+          "description": {
+            "es": "Me encargué del desarrollo backend de una aplicación para la recomendación de entrenamientos, implementando la lógica del algoritmo bayesiano para generar programas personalizados a partir de cuestionarios. También gestioné la funcionalidad para guardar planes por usuario y crear nuevos entrenamientos según las preferencias del entrenador o del usuario final.",
+            "en": "I was in charge of the backend development of an application for training recommendations, implementing the logic of the Bayesian algorithm to generate personalized programs from questionnaires. I also managed the functionality to save plans by user and create new workouts according to the trainer's or end user's preferences."
+          }
+        },
+        {
+          "position": {
+            "es": "Full Stack Developer - OnetoOne Int'l Trade Consulting",
+            "en": "Full Stack Developer - OnetoOne Int'l Trade Consulting"
+          },
+          "period": "Ene. 2021 - Dic. 2022",
+          "description": {
+            "es": "Desarrollé un sistema web para gestionar y asignar productos a clientes, mejorando los procesos administrativos y permitiendo a los clientes ver los productos asignados y el estado del envío. Luego, fui contratado para crear contenido SEO, redactando blogs optimizados para aumentar el tráfico web y alineados con los intereses del público y las necesidades de la página.",
+            "en": "I developed a web system to manage and assign products to clients, improving administrative processes and allowing clients to see assigned products and shipping status. Later, I was hired to create SEO content, writing optimized blogs to increase web traffic and align with audience interests and the website's needs."
+          }
+        },
+        {
+          "position": {
+            "es": "Software Developer - ESTUDIO DTRES",
+            "en": "Software Developer - ESTUDIO DTRES"
+          },
+          "period": "Ene. 2020 - Dic. 2020",
+          "description": {
+            "es": "Desarrollé soluciones tecnológicas para simuladores de entrenamiento médico, automatizando el análisis y registro de tiempos en ejercicios quirúrgicos mediante el uso de Python.",
+            "en": "I developed technological solutions for medical training simulators, automating the analysis and recording of times in surgical exercises using Python."
+          }
+        },
+        {
+          "position": {
+            "es": "Firmware Developer - FAB LAB Vicente Lopez",
+            "en": "Firmware Developer - FAB LAB Vicente Lopez"
+          },
+          "period": "May. 2019 - Dic. 2019",
+          "description": {
+            "es": "Realicé mis prácticas de técnico en electrónica en el FabLab de Olivos, Buenos Aires, donde adquirí experiencia en electrónica digital y programación de firmware con Raspberry Pi mediante capacitaciones y asesoramientos técnicos especializados.",
+            "en": "I did my electronic technician internship at FabLab Olivos, Buenos Aires, where I gained experience in digital electronics and firmware programming with Raspberry Pi through specialized training and technical advice."
+          }
+        }
+      ],
+      "courses_and_certifications": [
+        {
+          "title": {
+            "es": "Scientific Computing with Python - freeCodeCamp",
+            "en": "Scientific Computing with Python - freeCodeCamp"
+          },
+          "date": "Nov. 2024"
+        },
+        {
+          "title": {
+            "es": "Google IT Automation with Python - Google",
+            "en": "Google IT Automation with Python - Google"
+          },
+          "date": "May. 2023"
+        },
+        {
+          "title": {
+            "es": "Back End Development and APIs - freeCodeCamp",
+            "en": "Back End Development and APIs - freeCodeCamp"
+          },
+          "date": "Jun. 2022"
+        },
+        {
+          "title": {
+            "es": "Data Analytics - Coderhouse",
+            "en": "Data Analytics - Coderhouse"
+          },
+          "date": "Ene. 2021"
+        },
+        {
+          "title": {
+            "es": "Corte Laser y Impresion 3D - FAB LAB Vicente Lopez",
+            "en": "Laser Cutting and 3D Printing - FAB LAB Vicente Lopez"
+          },
+          "date": "Jun. 2019"
+        },
+        {
+          "title": {
+            "es": "INTERNET OF THINGS - Cisco Networking Academy",
+            "en": "INTERNET OF THINGS - Cisco Networking Academy"
+          },
+          "date": "May. 2017"
+        }
+      ]
+    }
+  }
+  
