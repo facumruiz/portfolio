@@ -52,9 +52,7 @@ function changeLanguage(language) {
     <div class="card-body">
         <div class="d-flex align-items-center justify-content-between">
             <h5 class="card-title mb-4">${project.title}</h5>
-            <div class="tech-icons mb-4 mr-3">
-                ${getTechIcons(project.technologies)}
-            </div>
+
         </div>
         <p class="card-text">${project.description}</p>
         ${project.demo_link

@@ -249,10 +249,10 @@ body.dark-mode .card-text i {
         right: 5px;
         flex-direction: column; /* Mantener los botones en fila */
         gap: 5px;
-        background-color: rgba(0, 0, 0, 0.705); /* Fondo negro */
+        background-color: rgba(0, 0, 0, 0); /* Fondo negro */
         padding: 10px; /* Espaciado interno */
         border-radius: 10px; /* Bordes redondeados */
-        box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2); /* Sombra */
+        box-shadow: 0 4px 8px rgba(255, 255, 255, 0); /* Sombra */
     }
 
     .toggle-dark-mode {

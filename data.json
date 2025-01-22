@@ -8,21 +8,21 @@
     "projects": [
       {
         "title": "One to one",
-        "description": "A system designed for a one-to-one courier company. This system is of the CRUD type, providing the capability to input the products purchased by the customer and requiring delivery. Within the same system, the shipment status for each product can be edited. Notably, each time this status is updated, the customer is notified via email.",
+        "description": "System for a one-to-one courier company that uses <strong>HTML</strong> and <strong>CSS</strong> for the interface, <strong>JavaScript</strong> for interactivity, and <strong>Firebase</strong> with <strong>Firestore</strong> for real-time data management. <strong>Firebase Cloud Functions</strong> allow updating shipment statuses and sending email notifications. <strong>Node.js</strong> handles server processes and facilitates communication between client, backend, and database.",
         "image": "./gifs/proyectochina.webm",
         "technologies": "firebase, html, bootstrap, javascript",
         "demo_link": null
       },
       {
         "title": "Futbol Managment",
-        "description": "This application is designed for soccer team management, utilizing a CRUD system through an API deployed on AWS Lightsail. The backend is implemented in Node.js, and the frontend is developed in React. It allows for the addition and management of players, including personal and contract details, and offers filter options to facilitate the sorting and display of team data.",
+        "description": "Application for soccer team management, utilizing a CRUD system through an API deployed on <strong>AWS Lightsail</strong>. The backend is implemented in <strong>Node.js</strong> and the frontend is developed in <strong>React</strong>. It allows for the addition and management of players, including personal and contract details, and offers filter options to sort and display team data. The technologies used include <strong>MongoDB</strong>, <strong>Express.js</strong>, <strong>React</strong>, and <strong>Node.js</strong>.",
         "image": "./gifs/gif_proyectofutbol.webm",
         "technologies": "react, mongo, mongoose, express",
         "demo_link": null
       },
       {
         "title": "How Trainer",
-        "description": "A system designed for a surgical training simulator, wherein the interface records the duration of each exercise performed by the student. Subsequently, these recorded times can be analyzed through graphical representation, providing insights into the user's best times and the quantity of repetitions completed for each exercise.",
+        "description": "This system is a migration from <strong>Python</strong>-based software to a <strong>MERN</strong> stack environment. It is designed for a surgical training simulator, recording exercise durations and enabling graphical analysis of best times and completed repetitions. The technologies used are <strong>MongoDB</strong>, <strong>Express.js</strong>, <strong>React</strong>, and <strong>Node.js</strong>.",
         "image": "./gifs/gif_trainerproyecto.webm",
         "technologies": "react, mongo, mongoose, bootstrap, express",
         "demo_link": null
@@ -36,7 +36,7 @@
       },
       {
         "title": "RfidHub",
-        "description": "API for authentication using RFID cards, developed in Node.js. Manages user authentication with the UID data from the cards and provides endpoints for managing users, roles, and access control.",
+        "description": "API for authentication using RFID cards, developed in <strong>Node.js</strong>. It manages user authentication with the UID data from the cards and provides endpoints for managing users, roles, and access control.",
         "image": "./gifs/rfidhub.webm",
         "technologies": "firebase, html, bootstrap, javascript",
         "demo_link": null
@@ -62,21 +62,21 @@
     "projects": [
       {
         "title": "One to one",
-        "description": "Un sistema diseñado para una empresa de mensajería uno a uno. Este sistema es de tipo CRUD, permitiendo ingresar los productos comprados por el cliente y que requieren ser entregados. Dentro del mismo sistema, se puede editar el estado de envío de cada producto. Cabe destacar que cada vez que se actualiza este estado, el cliente es notificado por correo electrónico.",
+        "description": "Sistema para una empresa de mensajería uno a uno que utiliza <strong>HTML</strong> y <strong>CSS</strong> para la interfaz, <strong>JavaScript</strong> para la interactividad, y <strong>Firebase</strong> con <strong>Firestore</strong> para la gestión de datos en tiempo real. Las <strong>Cloud Functions</strong> de Firebase permiten actualizar el estado de los envíos y enviar notificaciones por correo electrónico. <strong>Node.js</strong> maneja los procesos del servidor y facilita la comunicación entre cliente, backend y base de datos.",
         "image": "./gifs/proyectochina.webm",
         "technologies": "firebase, html, bootstrap, javascript",
         "demo_link": null
       },
       {
         "title": "Futbol Managment",
-        "description": "Esta aplicación está diseñada para la gestión de equipos de fútbol, utilizando un sistema CRUD a través de una API desplegada en AWS Lightsail. El backend está implementado en Node.js, y el frontend se desarrolla en React. Permite agregar y gestionar jugadores, incluyendo detalles personales y contractuales, y ofrece opciones de filtro para facilitar la organización y visualización de los datos del equipo.",
+        "description": "Aplicación para la gestión de equipos de fútbol, que utiliza un sistema CRUD a través de una API desplegada en <strong>AWS Lightsail</strong>. El backend está implementado en <strong>Node.js</strong> y el frontend se desarrolla en <strong>React</strong>. Permite agregar y gestionar jugadores, incluyendo detalles personales y de contrato, y ofrece opciones de filtrado para ordenar y mostrar los datos del equipo. Las tecnologías utilizadas son <strong>MongoDB</strong>, <strong>Express.js</strong>, <strong>React</strong> y <strong>Node.js</strong>.",
         "image": "./gifs/gif_proyectofutbol.webm",
         "technologies": "react, mongo, mongoose, material-ui, express",
         "demo_link": null
       },
       {
         "title": "How Trainer",
-        "description": "Un sistema diseñado para un simulador de entrenamiento quirúrgico, donde la interfaz registra la duración de cada ejercicio realizado por el estudiante. Posteriormente, estos tiempos registrados pueden analizarse mediante representaciones gráficas, proporcionando información sobre los mejores tiempos del usuario y la cantidad de repeticiones completadas para cada ejercicio.",
+        "description": "Este sistema es una migración de un software hecho en <strong>Python</strong> a un entorno basado en el stack <strong>MERN</strong>. Está diseñado para un simulador de entrenamiento quirúrgico, registrando la duración de los ejercicios realizados por el estudiante y permitiendo su análisis gráfico, mostrando los mejores tiempos y repeticiones completadas. Las tecnologías utilizadas son <strong>MongoDB</strong>, <strong>Express.js</strong>, <strong>React</strong> y <strong>Node.js</strong>.",
         "image": "./gifs/gif_trainerproyecto.webm",
         "technologies": "react, mongo, mongoose, bootstrap, express",
         "demo_link": null
@@ -90,7 +90,7 @@
       },
       {
         "title": "RfidHub",
-        "description": "API para autenticación mediante tarjetas RFID, desarrollada en Node.js. Gestiona la autenticación de usuarios con los datos UID de las tarjetas y ofrece endpoints para administrar usuarios, roles y control de acceso.",
+        "description": "API para autenticación mediante tarjetas RFID, desarrollada en <strong>Node.js</strong>. Gestiona la autenticación de usuarios con los datos UID de las tarjetas y proporciona endpoints para la gestión de usuarios, roles y control de acceso.",
         "image": "./gifs/rfidhub.webm",
         "technologies": "firebase, html, bootstrap, javascript",
         "demo_link": null
