@@ -18,7 +18,7 @@
         "description": "Application for soccer team management, utilizing a CRUD system through an API deployed on <strong>AWS Lightsail</strong>. The backend is implemented in <strong>Node.js</strong> and the frontend is developed in <strong>React</strong>. It allows for the addition and management of players, including personal and contract details, and offers filter options to sort and display team data. The technologies used include <strong>MongoDB</strong>, <strong>Express.js</strong>, <strong>React</strong>, and <strong>Node.js</strong>.",
         "image": "./gifs/gif_proyectofutbol.webm",
         "technologies": "react, mongo, mongoose, express",
-        "demo_link": null
+        "demo_link": "https://fuchi-manager.onrender.com/"
       },
       {
         "title": "How Trainer",
@@ -39,7 +39,7 @@
         "description": "API for authentication using RFID cards, developed in <strong>Node.js</strong>. It manages user authentication with the UID data from the cards and provides endpoints for managing users, roles, and access control.",
         "image": "./gifs/rfidhub.webm",
         "technologies": "firebase, html, bootstrap, javascript",
-        "demo_link": null
+        "demo_link": "https://www.youtube.com/watch?v=89fvR8XMqS8"
       }
     ],
     "contact": {
@@ -72,7 +72,7 @@
         "description": "Aplicación para la gestión de equipos de fútbol, que utiliza un sistema CRUD a través de una API desplegada en <strong>AWS Lightsail</strong>. El backend está implementado en <strong>Node.js</strong> y el frontend se desarrolla en <strong>React</strong>. Permite agregar y gestionar jugadores, incluyendo detalles personales y de contrato, y ofrece opciones de filtrado para ordenar y mostrar los datos del equipo. Las tecnologías utilizadas son <strong>MongoDB</strong>, <strong>Express.js</strong>, <strong>React</strong> y <strong>Node.js</strong>.",
         "image": "./gifs/gif_proyectofutbol.webm",
         "technologies": "react, mongo, mongoose, material-ui, express",
-        "demo_link": null
+        "demo_link": "https://fuchi-manager.onrender.com/"
       },
       {
         "title": "How Trainer",
@@ -93,7 +93,7 @@
         "description": "API para autenticación mediante tarjetas RFID, desarrollada en <strong>Node.js</strong>. Gestiona la autenticación de usuarios con los datos UID de las tarjetas y proporciona endpoints para la gestión de usuarios, roles y control de acceso.",
         "image": "./gifs/rfidhub.webm",
         "technologies": "firebase, html, bootstrap, javascript",
-        "demo_link": null
+        "demo_link": "https://www.youtube.com/watch?feature=shared&v=89fvR8XMqS8"
       }
     ],
     "contact": {
