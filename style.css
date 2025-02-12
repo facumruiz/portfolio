@@ -11,6 +11,19 @@ body {
     color: #333;
 }
 
+.icon {
+    width: 15px !important;
+    height: 15px !important;
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 2px;
+}
+
+.invert {
+    filter: invert(1);
+    /* Solo los íconos con esta clase se invierten */
+}
+
 /* Contenedor principal del portafolio */
 .portfolio-container {
     display: flex;
@@ -163,16 +176,22 @@ button {
 
 /* Estilos generales para que siempre sea visible */
 .toggle-container {
-    position: fixed; /* Siempre visible */
-    top: 10px; /* Margen superior */
-    right: 10px; /* Margen derecho */
+    position: fixed;
+    /* Siempre visible */
+    top: 10px;
+    /* Margen superior */
+    right: 10px;
+    /* Margen derecho */
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 100; /* Asegurar que quede encima de otros elementos */
-    background-color: rgba(0, 0, 0, 0); /* Fondo negro */
+    z-index: 100;
+    /* Asegurar que quede encima de otros elementos */
+    background-color: rgba(0, 0, 0, 0);
+    /* Fondo negro */
     padding: 10px;
-    border-radius: 0 0 0 10px; /* Bordes redondeados solo en la esquina inferior izquierda */
+    border-radius: 0 0 0 10px;
+    /* Bordes redondeados solo en la esquina inferior izquierda */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -192,15 +211,18 @@ button {
 
 /* Hover en modo claro (cambia a fondo negro) */
 body:not(.dark-mode) .toggle-dark-mode:hover {
-    background-color: #000000; /* Fondo negro */
-    box-shadow: none; /* Eliminar borde blanco */
+    background-color: #000000;
+    /* Fondo negro */
+    box-shadow: none;
+    /* Eliminar borde blanco */
     transform: translateY(-5px);
 }
 
 /* Hover en modo oscuro (mantiene el fondo blanco) */
 body.dark-mode .toggle-dark-mode:hover {
     background-color: white;
-    box-shadow: none; /* Eliminar borde blanco */
+    box-shadow: none;
+    /* Eliminar borde blanco */
     transform: translateY(-5px);
 }
 
@@ -245,21 +267,46 @@ body.dark-mode .card-text i {
 /* Estilos para la versión móvil */
 @media (max-width: 576px) {
     .toggle-container {
-        top: 10px;
+        top: 1px;
         right: 5px;
-        flex-direction: column; /* Mantener los botones en fila */
+        flex-direction: column;
+        /* Mantener los botones en fila */
         gap: 5px;
-        background-color: rgba(0, 0, 0, 0); /* Fondo negro */
-        padding: 10px; /* Espaciado interno */
-        border-radius: 10px; /* Bordes redondeados */
-        box-shadow: 0 4px 8px rgba(255, 255, 255, 0); /* Sombra */
+        background-color: rgba(153, 153, 153, 0.712);
+        /* Fondo negro */
+        padding: 5px;
+        /* Espaciado interno */
+
+        /* Bordes redondeados */
+        box-shadow: 0 4px 8px rgba(255, 255, 255, 0);
+        /* Sombra */
+    }
+
+ 
+
+    .en {
+        font-size: 0.8rem;
+        margin-bottom: 1px !important;
+        margin-top: 0px !important;
+
+    }
+
+    .es {
+        font-size: 0.8rem;
+        margin-top: 1px !important;
+
     }
 
     .toggle-dark-mode {
-        width: 10px; /* Reducir tamaño */
-        height: 10px; /* Reducir tamaño */
-        font-size: 1.2rem; /* Ajustar tamaño del ícono */
-        color: white; /* Asegurar contraste */
+        width: 5px;
+        /* Reducir tamaño */
+        height: 5px;
+        /* Reducir tamaño */
+        font-size: 1rem;
+        /* Ajustar tamaño del ícono */
+        color: white;
+        margin-bottom: 10px !important;
+        margin-top: 20px !important;
     }
 
     .profile-name {
@@ -303,6 +350,3 @@ body.dark-mode .card-text i {
         font-size: 1.1rem;
     }
 }
-
-
-
