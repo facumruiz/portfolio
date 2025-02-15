@@ -29,7 +29,7 @@
       },
       {
         "title": "Game Colors",
-        "description": "A mental agility game where you must quickly choose the correct color based on visual cues and patterns. Test your reaction time and decision-making skills as the game challenges your ability to stay focused and think fast.",
+        "description": "A mental agility game built with React and MongoDB to track and store reaction times. The game challenges users to quickly select the correct color based on visual cues, testing their decision-making and focus. The application is deployed on Vercel for easy access and performance. ",
         "image": "./gifs/juegos-colores.webm",
         "technologies": "react, mongo, mongoose, express",
         "demo_link": "https://coloresfront.onrender.com/"
@@ -40,6 +40,13 @@
         "image": "./gifs/rfidhub.webm",
         "technologies": "firebase, html, bootstrap, javascript",
         "demo_link": "https://www.youtube.com/watch?v=89fvR8XMqS8"
+      },
+      {
+        "title": "API REST",
+        "description": "A REST API built with Express that implements a CRUD system, authentication and authorization with JWT, and email confirmation. It manages users, roles, and protected resources, using MongoDB as the database.",
+        "image": "./gifs/api.webm",
+        "technologies": "firebase, html, bootstrap, javascript",
+        "demo_link": "https://nodejs-api-nakk.onrender.com/"
       }
     ],
     "contact": {
@@ -83,7 +90,7 @@
       },
       {
         "title": "Juego de colores",
-        "description": "Un juego de agilidad mental en el que debes elegir rápidamente el color correcto según las pistas visuales y los patrones. Pon a prueba tu tiempo de reacción y habilidades de toma de decisiones mientras el juego desafía tu concentración y rapidez mental.",
+        "description": "Un juego de agilidad mental desarrollado con React y MongoDB para registrar y almacenar tiempos de reacción. Desafía a los usuarios a seleccionar rápidamente el color correcto según señales visuales, poniendo a prueba su capacidad de toma de decisiones y concentración. La aplicación está desplegada en Vercel para facilitar el acceso y mejorar el rendimiento.",
         "image": "./gifs/juegos-colores.webm",
         "technologies": "react, mongo, mongoose, express",
         "demo_link": "https://coloresfront.onrender.com/"
@@ -94,7 +101,16 @@
         "image": "./gifs/rfidhub.webm",
         "technologies": "firebase, html, bootstrap, javascript",
         "demo_link": "https://www.youtube.com/watch?feature=shared&v=89fvR8XMqS8"
+      },
+      {
+        "title": "API REST",
+        "description": "Una API REST desarrollada con Express que implementa un sistema CRUD, autenticación y autorización con JWT, y confirmación de correo electrónico. Permite gestionar usuarios, roles y recursos protegidos, utilizando MongoDB como base de datos.",
+        "image": "./gifs/api.webm",
+        "technologies": "firebase, html, bootstrap, javascript",
+        "demo_link": "https://nodejs-api-nakk.onrender.com/"
       }
+      
+ 
     ],
     "contact": {
       "header": "Contáctame",
