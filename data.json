@@ -47,6 +47,13 @@
         "image": "./gifs/api.webm",
         "technologies": "firebase, html, bootstrap, javascript",
         "demo_link": "https://nodejs-api-nakk.onrender.com/"
+      },
+      {
+        "title": "ReactCarList (testdev-ego)",
+        "description": "This project was a test for a selection process that had to be completed in a maximum of one week. The goal was to replicate the aesthetics of a responsive design in Figma, adapt it to React, and consume data from an API. The application lists cars and displays their details.",
+        "image": "./gifs/autos.webm",
+        "technologies": "firebase, html, bootstrap, javascript",
+        "demo_link": "https://testdev-ego.onrender.com/"
       }
     ],
     "contact": {
@@ -108,6 +115,13 @@
         "image": "./gifs/api.webm",
         "technologies": "firebase, html, bootstrap, javascript",
         "demo_link": "https://nodejs-api-nakk.onrender.com/"
+      },
+      {
+        "title": "ReactCarList (testdev-ego)",
+        "description": "Este proyecto fue una prueba para un proceso de selección que debía completarse en un máximo de una semana. El objetivo era copiar la estética de un diseño responsive en Figma, adaptarlo a React y consumir datos de una API. La aplicación lista los coches y muestra sus detalles.",
+        "image": "./gifs/autos.webm",
+        "technologies": "firebase, html, bootstrap, javascript",
+        "demo_link": "https://testdev-ego.onrender.com/"
       }
       
  
