@@ -54,6 +54,13 @@
         "image": "./gifs/autos.webm",
         "technologies": "firebase, html, bootstrap, javascript",
         "demo_link": "https://testdev-ego.onrender.com/"
+      },
+      {
+        "title": "Demo Landing (JusticiaLex)",
+        "description": "A landing page for a law firm is a specially designed web page created to attract and engage visitors interested in legal services. Its main purpose is to provide clear, concise information about the firm's expertise, services, and contact options, encouraging potential clients to take action such as scheduling a consultation or requesting more information. The page is optimized to be responsive and visually appealing to build trust and professionalism.",
+        "image": "./gifs/justicialex.webm",
+        "technologies": "HTML, CSS, Bootstrap, JavaScript",
+        "demo_link": "https://justicialex.onrender.com/"
       }
     ],
     "contact": {
@@ -122,8 +129,14 @@
         "image": "./gifs/autos.webm",
         "technologies": "firebase, html, bootstrap, javascript",
         "demo_link": "https://testdev-ego.onrender.com/"
+      },
+      {
+        "title": "Demo Landing (JusticiaLex)",
+        "description": "Una landing page para un estudio jurídico es una página web especialmente diseñada para atraer y captar la atención de visitantes interesados en servicios legales. Su objetivo principal es ofrecer información clara y concisa sobre la experiencia, servicios y formas de contacto del estudio, motivando a los posibles clientes a tomar acción, como agendar una consulta o solicitar más información. La página está optimizada para ser responsiva y visualmente atractiva, generando confianza y profesionalismo.",
+        "image": "./gifs/justicialex.webm",
+        "technologies": "HTML, CSS, Bootstrap, JavaScript",
+        "demo_link": "https://justicialex.onrender.com/"
       }
-      
  
     ],
     "contact": {
