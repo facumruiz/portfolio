@@ -2,52 +2,63 @@
 const { lang, t } = Astro.props;
 const switchUrl = lang === "es" ? "/en" : "/";
 ---
-<header>
+<header class="site-header">
   <nav class="nav">
-  <strong class="logo">Facundo Ruiz</strong>
+    <!-- LOGO -->
+    <strong class="logo">Facundo Ruiz</strong>
 
-  <!-- Acciones derecha -->
-  <div class="nav-actions">
-    <button
-      id="theme-toggle"
-      aria-label="Toggle theme"
-      class="theme-toggle"
-    >
-      <img
-        id="theme-icon"
-        src="/icons/moon.svg"
-        alt="Toggle theme"
-        width="18"
-        height="18"
-      />
-    </button>
+    <!-- LINKS DESKTOP -->
+    <ul class="nav-links">
+      <li><a href="#projects">{t.nav.projects}</a></li>
+      <li><a href="#skills">{t.nav.skills}</a></li>
+    </ul>
 
-    <button
-      class="nav-toggle"
-      aria-label="Toggle menu"
-      aria-expanded="false"
-    >
-      ☰
-    </button>
-  </div>
-
-  <ul class="nav-menu">
-    <li><a href="#projects">{t.nav.projects}</a></li>
-    <li><a href="#skills">{t.nav.skills}</a></li>
-
-    <li>
-      <a href={switchUrl} transition:name="lang">
+    <!-- ACTIONS -->
+    <div class="nav-actions">
+      <!-- LANG -->
+      <a href={switchUrl} class="nav-lang" transition:name="lang">
         {lang === "es" ? "EN" : "ES"}
       </a>
-    </li>
+
+      <!-- THEME -->
+      <button
+        id="theme-toggle"
+        class="theme-toggle"
+        aria-label="Toggle theme"
+      >
+        <img
+          id="theme-icon"
+          src="/icons/moon.svg"
+          alt=""
+          width="18"
+          height="18"
+        />
+      </button>
+
+      <!-- HAMBURGER -->
+      <button
+        class="nav-toggle"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <ul class="nav-mobile">
+    <li><a href="#projects">{t.nav.projects}</a></li>
+    <li><a href="#skills">{t.nav.skills}</a></li>
   </ul>
-</nav>
 </header>
 
 <script>
   function initHeader() {
     const toggle = document.querySelector(".nav-toggle");
-    const menu = document.querySelector(".nav-menu");
+    const menu = document.querySelector(".nav-mobile");
 
     if (!toggle || !menu) return;
 
@@ -57,10 +68,6 @@ const switchUrl = lang === "es" ? "/en" : "/";
     };
   }
 
-  initHeader();
-  document.addEventListener("astro:page-load", initHeader);
-
-  /* theme toggle (no se toca) */
   function initThemeToggle() {
     const btn = document.getElementById("theme-toggle");
     const icon = document.getElementById("theme-icon");
@@ -69,7 +76,7 @@ const switchUrl = lang === "es" ? "/en" : "/";
     function syncIcon() {
       const isDark = document.documentElement.dataset.theme === "dark";
       icon.src = isDark ? "/icons/sun.svg" : "/icons/moon.svg";
-      icon.alt = isDark ? "Switch to light mode" : "Switch to dark mode";
+      icon.alt = isDark ? "/icons/moon.svg" : "/icons/sun.svg";
     }
 
     syncIcon();
@@ -77,7 +84,12 @@ const switchUrl = lang === "es" ? "/en" : "/";
     document.addEventListener("theme-change", syncIcon);
   }
 
+  initHeader();
   initThemeToggle();
-  document.addEventListener("astro:page-load", initThemeToggle);
+
+  document.addEventListener("astro:page-load", () => {
+    initHeader();
+    initThemeToggle();
+  });
 </script>
 
