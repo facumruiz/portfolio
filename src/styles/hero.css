@@ -1,0 +1,79 @@
+/* ======================================================
+   HERO
+====================================================== */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+  margin-bottom: 4rem;
+}
+
+.hero-content {
+  max-width: 420px;
+}
+
+.hero-content p {
+  font-size: 1.05rem;
+}
+
+.hero-avatar img {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--border);
+}
+
+/* ======================================================
+   SOCIAL ICONS
+====================================================== */
+.socials {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.socials a {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--chip);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.socials a:hover {
+  transform: translateY(-3px);
+  background: var(--border);
+}
+
+.socials img {
+  width: 22px;
+  height: 22px;
+}
+
+[data-theme="dark"] .socials img {
+  filter: invert(100%) brightness(150%);
+}
+
+/* ======================================================
+   RESPONSIVE
+====================================================== */
+@media (max-width: 640px) {
+  .hero {
+    flex-direction: column-reverse;
+    text-align: center;
+    gap: 2rem;
+  }
+
+  .hero-avatar img {
+    width: 140px;
+    height: 140px;
+  }
+}
+

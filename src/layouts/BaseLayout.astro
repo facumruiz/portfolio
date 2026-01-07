@@ -1,5 +1,11 @@
 ---
 import "../styles/global.css";
+import "../styles/layout.css";
+import "../styles/header.css";
+import "../styles/hero.css";
+import "../styles/projects.css";
+import "../styles/skills.css";
+
 import { ViewTransitions } from "astro:transitions";
 
 const { title = "Portfolio", lang = "es" } = Astro.props;
@@ -12,26 +18,26 @@ const { title = "Portfolio", lang = "es" } = Astro.props;
     <title>{title}</title>
     <ViewTransitions />
 
-    <!-- GLOBAL THEME HANDLER (single source of truth) -->
-<script is:inline>
-  (function () {
-    const root = document.documentElement;
-    const stored = localStorage.getItem("theme");
+    <!-- GLOBAL THEME HANDLER -->
+    <script is:inline>
+      (function () {
+        const root = document.documentElement;
+        const stored = localStorage.getItem("theme");
+        const theme = stored ?? "dark";
 
-    // Por defecto usar dark si no hay nada en localStorage
-    const theme = stored ?? "dark"; 
+        root.dataset.theme = theme;
 
-    root.dataset.theme = theme;
-
-    window.toggleTheme = function () {
-      const next = root.dataset.theme === "dark" ? "light" : "dark";
-      root.dataset.theme = next;
-      localStorage.setItem("theme", next);
-      document.dispatchEvent(new CustomEvent("theme-change", { detail: next }));
-    };
-  })();
-</script>
- </head>
+        window.toggleTheme = function () {
+          const next = root.dataset.theme === "dark" ? "light" : "dark";
+          root.dataset.theme = next;
+          localStorage.setItem("theme", next);
+          document.dispatchEvent(
+            new CustomEvent("theme-change", { detail: next })
+          );
+        };
+      })();
+    </script>
+  </head>
 
   <body>
     <main>
