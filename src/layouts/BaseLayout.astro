@@ -1,0 +1,42 @@
+---
+import "../styles/global.css";
+import { ViewTransitions } from "astro:transitions";
+
+const { title = "Portfolio", lang = "es" } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+    <ViewTransitions />
+
+    <!-- GLOBAL THEME HANDLER (single source of truth) -->
+<script is:inline>
+  (function () {
+    const root = document.documentElement;
+    const stored = localStorage.getItem("theme");
+
+    // Por defecto usar dark si no hay nada en localStorage
+    const theme = stored ?? "dark"; 
+
+    root.dataset.theme = theme;
+
+    window.toggleTheme = function () {
+      const next = root.dataset.theme === "dark" ? "light" : "dark";
+      root.dataset.theme = next;
+      localStorage.setItem("theme", next);
+      document.dispatchEvent(new CustomEvent("theme-change", { detail: next }));
+    };
+  })();
+</script>
+ </head>
+
+  <body>
+    <main>
+      <slot />
+    </main>
+  </body>
+</html>
+

@@ -1,0 +1,19 @@
+---
+const { project } = Astro.props;
+---
+<article>
+  <h3>{project.title}</h3>
+  <p>{project.description}</p>
+
+  <ul>
+    {project.tech.map(t => <li>{t}</li>)}
+  </ul>
+
+  <strong>{project.result}</strong>
+
+  <div>
+    <a href={project.url}>Demo</a>
+    <a href={project.repo}>Código</a>
+  </div>
+</article>
+

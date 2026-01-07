@@ -1,0 +1,17 @@
+{
+  "nav": {
+    "projects": "Projects",
+    "skills": "Skills"
+  },
+  "intro": {
+    "title": "Hi, I’m Facundo",
+    "text": "Web developer with 6+ years of experience building fast, accessible and maintainable websites."
+  },
+  "projects": {
+    "title": "Projects"
+  },
+  "skills": {
+    "title": "Skills"
+  }
+}
+

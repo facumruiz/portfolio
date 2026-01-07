@@ -1,0 +1,31 @@
+[
+  {
+    "title": "SaaS Landing Page",
+    "description": "Marketing landing page focused on performance and conversion.",
+    "tech": ["Astro", "CSS", "GitHub Pages"],
+    "repo": "https://github.com/tuuser/saas-landing",
+    "demo": "https://tuuser.github.io/saas-landing"
+  },
+  {
+    "title": "Personal Blog",
+    "description": "Static blog with markdown support and SEO optimization.",
+    "tech": ["Astro", "Markdown", "TypeScript"],
+    "repo": "https://github.com/tuuser/blog",
+    "demo": "#"
+  },
+  {
+    "title": "Admin Dashboard",
+    "description": "Responsive dashboard UI for managing content and users.",
+    "tech": ["React", "TypeScript", "CSS"],
+    "repo": "https://github.com/tuuser/dashboard",
+    "demo": "#"
+  },
+  {
+    "title": "E-commerce Frontend",
+    "description": "Frontend for an e-commerce platform focused on UX.",
+    "tech": ["Next.js", "Tailwind", "Stripe"],
+    "repo": "https://github.com/tuuser/ecommerce",
+    "demo": "#"
+  }
+]
+

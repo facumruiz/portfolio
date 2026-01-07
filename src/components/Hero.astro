@@ -1,0 +1,38 @@
+---
+const { t } = Astro.props;
+---
+<section class="hero">
+  <div class="hero-content">
+    <h1>{t.intro.title}</h1>
+    <p>{t.intro.text}</p>
+
+    <div class="socials hero-socials">
+      <a
+        href="https://github.com/facumruiz"
+        target="_blank"
+        aria-label="GitHub"
+      >
+        <img src="/icons/github.svg" alt="" />
+      </a>
+
+      <a
+        href="https://linkedin.com/in/facumruiz"
+        target="_blank"
+        aria-label="LinkedIn"
+      >
+        <img src="/icons/linkedin.svg" alt="" />
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-avatar">
+    <img
+      src="/avatar.png"
+      alt="Facundo Ruiz"
+      width="180"
+      height="180"
+      loading="eager"
+    />
+  </div>
+</section>
+

@@ -1,0 +1,17 @@
+[
+  {
+    "title": "Landing SaaS",
+    "description": "Landing page enfocada en performance y conversión.",
+    "tech": ["Astro", "CSS", "GitHub Pages"],
+    "repo": "https://github.com/tuuser/saas-landing",
+    "demo": "#"
+  },
+  {
+    "title": "Blog Personal",
+    "description": "Blog estático con soporte Markdown y SEO.",
+    "tech": ["Astro", "TypeScript", "Markdown"],
+    "repo": "#",
+    "demo": "#"
+  }
+]
+

@@ -1,0 +1,23 @@
+---
+const { lang, t } = Astro.props;
+
+const projects =
+  lang === "es"
+    ? (await import("../data/projects/es.json")).default
+    : (await import("../data/projects/en.json")).default;
+---
+<section id="projects">
+  <h2>{t.projects.title}</h2>
+
+  <ul>
+    {projects.map(p => (
+      <li>
+        <h3>{p.title}</h3>
+        <p>{p.description}</p>
+        <p><strong>Tech:</strong> {p.tech.join(", ")}</p>
+        <a href={p.repo}>GitHub</a>
+      </li>
+    ))}
+  </ul>
+</section>
+

@@ -1,0 +1,24 @@
+---
+import en from "../../i18n/en.json";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+import Projects from "../../components/Projects.astro";
+import Hero from "../../components/Hero.astro"
+---
+<BaseLayout title="Facundo Ruiz | Web Developer" lang="en">
+  <Header lang="en" t={en} />
+
+  <Hero lang="en" t={en} />
+
+  <Projects lang="en" t={en} />
+
+  <section id="skills">
+    <h2>{en.skills.title}</h2>
+    <ul>
+      <li>HTML / CSS</li>
+      <li>JavaScript / TypeScript</li>
+      <li>Astro / React</li>
+    </ul>
+  </section>
+</BaseLayout>
+

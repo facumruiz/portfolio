@@ -1,0 +1,17 @@
+{
+  "nav": {
+    "projects": "Proyectos",
+    "skills": "Habilidades"
+  },
+  "intro": {
+    "title": "Hola, soy Facundo",
+    "text": "Desarrollador web con más de 6 años de experiencia creando sitios rápidos, accesibles y mantenibles."
+  },
+  "projects": {
+    "title": "Proyectos"
+  },
+  "skills": {
+    "title": "Habilidades"
+  }
+}
+
