@@ -1,16 +1,29 @@
 [
   {
-    "title": "Landing SaaS",
-    "description": "Landing page enfocada en performance y conversión.",
-    "tech": ["Astro", "CSS", "GitHub Pages"],
-    "repo": "https://github.com/tuuser/saas-landing",
+    "title": "Plataforma de Gestion Deportiva",
+    "description": "Aplicación web para visualizar partidos, equipos y estadísticas en tiempo real.",
+    "tech": ["Astro", "JavaScript", "API REST"],
+    "result": "Mejora en la visualización de datos deportivos y experiencia del usuario.",
+    "video": "/gifs/futbol.webm",
+    "repo": "https://github.com/tuuser/futbol-app",
     "demo": "#"
   },
   {
-    "title": "Blog Personal",
-    "description": "Blog estático con soporte Markdown y SEO.",
-    "tech": ["Astro", "TypeScript", "Markdown"],
-    "repo": "#",
+    "title": "Agencia de Venta de Autos",
+    "description": "Sitio web para mostrar vehículos disponibles, fichas técnicas y contacto directo.",
+    "tech": ["Astro", "CSS", "SEO"],
+    "result": "Catálogo claro y optimizado para captar consultas.",
+    "video": "/gifs/autos.webm",
+    "repo": "https://github.com/tuuser/autos-agencia",
+    "demo": "#"
+  },
+  {
+    "title": "Landing Page Simple",
+    "description": "Landing page enfocada en conversión para servicios o productos.",
+    "tech": ["HTML", "CSS", "Astro"],
+    "result": "Carga rápida y estructura pensada para conversiones.",
+    "video": "/gifs/landing.webm",
+    "repo": "https://github.com/tuuser/landing-simple",
     "demo": "#"
   }
 ]

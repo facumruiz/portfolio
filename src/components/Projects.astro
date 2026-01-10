@@ -9,15 +9,72 @@ const projects =
 <section id="projects">
   <h2>{t.projects.title}</h2>
 
-  <ul>
-    {projects.map(p => (
-      <li>
-        <h3>{p.title}</h3>
-        <p>{p.description}</p>
-        <p><strong>Tech:</strong> {p.tech.join(", ")}</p>
-        <a href={p.repo}>GitHub</a>
+  <ul class="projects-list">
+    {projects.map(project => (
+      <li class="project-card">
+        <!-- VIDEO -->
+        <div class="project-media">
+          <video
+            class="project-video"
+            src={project.video}
+            muted
+            loop
+            playsinline
+            preload="metadata"
+          ></video>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="project-content">
+          <h3>{project.title}</h3>
+          <p>{project.description}</p>
+
+          <p class="project-tech">
+            <strong>Tech:</strong> {project.tech.join(", ")}
+          </p>
+
+          <p class="project-result">
+            <strong>Resultado:</strong> {project.result}
+          </p>
+
+          <div class="project-links">
+            <a href={project.demo}>Demo</a>
+            <a href={project.repo}>Código</a>
+          </div>
+        </div>
       </li>
     ))}
   </ul>
 </section>
+
+<script>
+  function initProjectVideos() {
+    const cards = document.querySelectorAll(".project-card");
+
+    cards.forEach(card => {
+      const video = card.querySelector("video");
+      if (!video) return;
+
+      // Desktop hover
+      card.addEventListener("mouseenter", () => {
+        video.currentTime = 0;
+        video.play();
+      });
+
+      card.addEventListener("mouseleave", () => {
+        video.pause();
+        video.currentTime = 0;
+      });
+
+      // Mobile touch
+      card.addEventListener("touchstart", () => {
+        video.currentTime = 0;
+        video.play();
+      });
+    });
+  }
+
+  initProjectVideos();
+  document.addEventListener("astro:page-load", initProjectVideos);
+</script>
 
