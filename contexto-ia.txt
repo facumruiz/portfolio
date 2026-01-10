@@ -1,7 +1,7 @@
 CONTEXTO DEL PROYECTO ASTRO
-Ruta raíz: /home/facu/portfolio
-Fecha: 2026-01-07T17:01:55.923Z
-Archivos incluidos: 17
+Ruta raíz: /home/facu/portfolio-26
+Fecha: 2026-01-10T23:32:10.347Z
+Archivos incluidos: 22
 
 =============================
 ARCHIVO: src/components/Footer.astro
@@ -24,52 +24,63 @@ ARCHIVO: src/components/Header.astro
 const { lang, t } = Astro.props;
 const switchUrl = lang === "es" ? "/en" : "/";
 ---
-<header>
+<header class="site-header">
   <nav class="nav">
-  <strong class="logo">Facundo Ruiz</strong>
+    <!-- LOGO -->
+    <strong class="logo">Facundo Ruiz</strong>
 
-  <!-- Acciones derecha -->
-  <div class="nav-actions">
-    <button
-      id="theme-toggle"
-      aria-label="Toggle theme"
-      class="theme-toggle"
-    >
-      <img
-        id="theme-icon"
-        src="/icons/moon.svg"
-        alt="Toggle theme"
-        width="18"
-        height="18"
-      />
-    </button>
+    <!-- LINKS DESKTOP -->
+    <ul class="nav-links">
+      <li><a href="#projects">{t.nav.projects}</a></li>
+      <li><a href="#skills">{t.nav.skills}</a></li>
+    </ul>
 
-    <button
-      class="nav-toggle"
-      aria-label="Toggle menu"
-      aria-expanded="false"
-    >
-      ☰
-    </button>
-  </div>
-
-  <ul class="nav-menu">
-    <li><a href="#projects">{t.nav.projects}</a></li>
-    <li><a href="#skills">{t.nav.skills}</a></li>
-
-    <li>
-      <a href={switchUrl} transition:name="lang">
+    <!-- ACTIONS -->
+    <div class="nav-actions">
+      <!-- LANG -->
+      <a href={switchUrl} class="nav-lang" transition:name="lang">
         {lang === "es" ? "EN" : "ES"}
       </a>
-    </li>
+
+      <!-- THEME -->
+      <button
+        id="theme-toggle"
+        class="theme-toggle"
+        aria-label="Toggle theme"
+      >
+        <img
+          id="theme-icon"
+          src="/icons/moon.svg"
+          alt=""
+          width="18"
+          height="18"
+        />
+      </button>
+
+      <!-- HAMBURGER -->
+      <button
+        class="nav-toggle"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <ul class="nav-mobile">
+    <li><a href="#projects">{t.nav.projects}</a></li>
+    <li><a href="#skills">{t.nav.skills}</a></li>
   </ul>
-</nav>
 </header>
 
 <script>
   function initHeader() {
     const toggle = document.querySelector(".nav-toggle");
-    const menu = document.querySelector(".nav-menu");
+    const menu = document.querySelector(".nav-mobile");
 
     if (!toggle || !menu) return;
 
@@ -79,10 +90,6 @@ const switchUrl = lang === "es" ? "/en" : "/";
     };
   }
 
-  initHeader();
-  document.addEventListener("astro:page-load", initHeader);
-
-  /* theme toggle (no se toca) */
   function initThemeToggle() {
     const btn = document.getElementById("theme-toggle");
     const icon = document.getElementById("theme-icon");
@@ -91,7 +98,7 @@ const switchUrl = lang === "es" ? "/en" : "/";
     function syncIcon() {
       const isDark = document.documentElement.dataset.theme === "dark";
       icon.src = isDark ? "/icons/sun.svg" : "/icons/moon.svg";
-      icon.alt = isDark ? "Switch to light mode" : "Switch to dark mode";
+      icon.alt = isDark ? "/icons/moon.svg" : "/icons/sun.svg";
     }
 
     syncIcon();
@@ -99,8 +106,13 @@ const switchUrl = lang === "es" ? "/en" : "/";
     document.addEventListener("theme-change", syncIcon);
   }
 
+  initHeader();
   initThemeToggle();
-  document.addEventListener("astro:page-load", initThemeToggle);
+
+  document.addEventListener("astro:page-load", () => {
+    initHeader();
+    initThemeToggle();
+  });
 </script>
 
 
@@ -203,17 +215,74 @@ const projects =
 <section id="projects">
   <h2>{t.projects.title}</h2>
 
-  <ul>
-    {projects.map(p => (
-      <li>
-        <h3>{p.title}</h3>
-        <p>{p.description}</p>
-        <p><strong>Tech:</strong> {p.tech.join(", ")}</p>
-        <a href={p.repo}>GitHub</a>
+  <ul class="projects-list">
+    {projects.map(project => (
+      <li class="project-card">
+        <!-- VIDEO -->
+        <div class="project-media">
+          <video
+            class="project-video"
+            src={project.video}
+            muted
+            loop
+            playsinline
+            preload="metadata"
+          ></video>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="project-content">
+          <h3>{project.title}</h3>
+          <p>{project.description}</p>
+
+          <p class="project-tech">
+            <strong>Tech:</strong> {project.tech.join(", ")}
+          </p>
+
+          <p class="project-result">
+            <strong>Resultado:</strong> {project.result}
+          </p>
+
+          <div class="project-links">
+            <a href={project.demo}>Demo</a>
+            <a href={project.repo}>Código</a>
+          </div>
+        </div>
       </li>
     ))}
   </ul>
 </section>
+
+<script>
+  function initProjectVideos() {
+    const cards = document.querySelectorAll(".project-card");
+
+    cards.forEach(card => {
+      const video = card.querySelector("video");
+      if (!video) return;
+
+      // Desktop hover
+      card.addEventListener("mouseenter", () => {
+        video.currentTime = 0;
+        video.play();
+      });
+
+      card.addEventListener("mouseleave", () => {
+        video.pause();
+        video.currentTime = 0;
+      });
+
+      // Mobile touch
+      card.addEventListener("touchstart", () => {
+        video.currentTime = 0;
+        video.play();
+      });
+    });
+  }
+
+  initProjectVideos();
+  document.addEventListener("astro:page-load", initProjectVideos);
+</script>
 
 
 
@@ -264,17 +333,30 @@ ARCHIVO: src/data/projects/es.json
 
 [
   {
-    "title": "Landing SaaS",
-    "description": "Landing page enfocada en performance y conversión.",
-    "tech": ["Astro", "CSS", "GitHub Pages"],
-    "repo": "https://github.com/tuuser/saas-landing",
+    "title": "Plataforma de Gestion Deportiva",
+    "description": "Aplicación web para visualizar partidos, equipos y estadísticas en tiempo real.",
+    "tech": ["Astro", "JavaScript", "API REST"],
+    "result": "Mejora en la visualización de datos deportivos y experiencia del usuario.",
+    "video": "/gifs/futbol.webm",
+    "repo": "https://github.com/tuuser/futbol-app",
     "demo": "#"
   },
   {
-    "title": "Blog Personal",
-    "description": "Blog estático con soporte Markdown y SEO.",
-    "tech": ["Astro", "TypeScript", "Markdown"],
-    "repo": "#",
+    "title": "Agencia de Venta de Autos",
+    "description": "Sitio web para mostrar vehículos disponibles, fichas técnicas y contacto directo.",
+    "tech": ["Astro", "CSS", "SEO"],
+    "result": "Catálogo claro y optimizado para captar consultas.",
+    "video": "/gifs/autos.webm",
+    "repo": "https://github.com/tuuser/autos-agencia",
+    "demo": "#"
+  },
+  {
+    "title": "Landing Page Simple",
+    "description": "Landing page enfocada en conversión para servicios o productos.",
+    "tech": ["HTML", "CSS", "Astro"],
+    "result": "Carga rápida y estructura pensada para conversiones.",
+    "video": "/gifs/landing.webm",
+    "repo": "https://github.com/tuuser/landing-simple",
     "demo": "#"
   }
 ]
@@ -370,6 +452,12 @@ ARCHIVO: src/layouts/BaseLayout.astro
 
 ---
 import "../styles/global.css";
+import "../styles/layout.css";
+import "../styles/header.css";
+import "../styles/hero.css";
+import "../styles/projects.css";
+import "../styles/skills.css";
+
 import { ViewTransitions } from "astro:transitions";
 
 const { title = "Portfolio", lang = "es" } = Astro.props;
@@ -382,26 +470,26 @@ const { title = "Portfolio", lang = "es" } = Astro.props;
     <title>{title}</title>
     <ViewTransitions />
 
-    <!-- GLOBAL THEME HANDLER (single source of truth) -->
-<script is:inline>
-  (function () {
-    const root = document.documentElement;
-    const stored = localStorage.getItem("theme");
+    <!-- GLOBAL THEME HANDLER -->
+    <script is:inline>
+      (function () {
+        const root = document.documentElement;
+        const stored = localStorage.getItem("theme");
+        const theme = stored ?? "dark";
 
-    // Por defecto usar dark si no hay nada en localStorage
-    const theme = stored ?? "dark"; 
+        root.dataset.theme = theme;
 
-    root.dataset.theme = theme;
-
-    window.toggleTheme = function () {
-      const next = root.dataset.theme === "dark" ? "light" : "dark";
-      root.dataset.theme = next;
-      localStorage.setItem("theme", next);
-      document.dispatchEvent(new CustomEvent("theme-change", { detail: next }));
-    };
-  })();
-</script>
- </head>
+        window.toggleTheme = function () {
+          const next = root.dataset.theme === "dark" ? "light" : "dark";
+          root.dataset.theme = next;
+          localStorage.setItem("theme", next);
+          document.dispatchEvent(
+            new CustomEvent("theme-change", { detail: next })
+          );
+        };
+      })();
+    </script>
+  </head>
 
   <body>
     <main>
@@ -512,7 +600,7 @@ ARCHIVO: src/styles/global.css
   --text: #111827;
   --muted: #374151;
   --border: #e5e7eb;
-  --link: #7b5b03;
+  --link: #624800;
   --chip: #f3f4f6;
 }
 
@@ -526,7 +614,7 @@ ARCHIVO: src/styles/global.css
 }
 
 /* ======================================================
-   RESET + TRANSITIONS
+   RESET
 ====================================================== */
 *,
 *::before,
@@ -545,15 +633,6 @@ body {
   background-color: var(--bg);
   color: var(--text);
   line-height: 1.6;
-}
-
-/* ======================================================
-   LAYOUT
-====================================================== */
-main {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 2rem 1.25rem;
 }
 
 /* ======================================================
@@ -585,76 +664,74 @@ a:hover {
 }
 
 /* ======================================================
-   HEADER / NAVBAR
+   BUTTON RESET
 ====================================================== */
-header {
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+
+
+=============================
+ARCHIVO: src/styles/header.css
+=============================
+
+/* ======================================================
+   HEADER
+====================================================== */
+.site-header {
+  position: sticky;       /* fijado en top */
+  top: 0;
+  z-index: 1000;
+  background-color: var(--bg); /* color sólido según tema */
   border-bottom: 1px solid var(--border);
   margin-bottom: 3rem;
-}
-
-.nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: relative;
-}
-
-.logo {
-  font-weight: 600;
-}
-
-/* acciones derecha */
-.nav-actions {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-/* menú desktop */
-.nav-menu {
-  list-style: none;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 0;
-  margin: 0;
-}
-
-/* hamburger */
-.nav-toggle {
-  display: none;
-  font-size: 1.4rem;
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 /* ======================================================
-   MOBILE NAVBAR
+   NAV GRID
 ====================================================== */
-@media (max-width: 640px) {
-  .nav-toggle {
-    display: block;
-  }
+.nav {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  padding: 0.75rem 1rem;
+}
 
-  .nav-menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background: var(--bg);
-    border-top: 1px solid var(--border);
-    padding: 1rem 0;
+/* ======================================================
+   LOGO
+====================================================== */
+.logo {
+  font-weight: 600;
+  font-size: 1rem;
+}
 
-    flex-direction: column;
-    gap: 1rem;
-  }
+/* ======================================================
+   DESKTOP LINKS
+====================================================== */
+.nav-links {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
 
-  .nav-menu.open {
-    display: flex;
-  }
+/* ======================================================
+   ACTIONS
+====================================================== */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
 
-  .nav-menu li {
-    text-align: center;
-  }
+.nav-lang {
+  font-size: 0.9rem;
 }
 
 /* ======================================================
@@ -687,9 +764,97 @@ header {
     invert(90%) sepia(90%) saturate(1200%) hue-rotate(10deg);
 }
 
-.theme-toggle:hover img {
-  transform: scale(1.1);
+/* ======================================================
+   HAMBURGER ICON COMPACT + SUAVE
+====================================================== */
+.nav-toggle {
+  display: none;
+  width: 24px;
+  height: 16px;
+  position: relative;
+  cursor: pointer;
+  z-index: 1100;
 }
+
+.nav-toggle span {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition:
+    top 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.2s ease;
+}
+
+.nav-toggle span:nth-child(1) { top: 0; }
+.nav-toggle span:nth-child(2) { top: 7px; }
+.nav-toggle span:nth-child(3) { top: 14px; }
+
+/* OPEN → X */
+.nav-toggle[aria-expanded="true"] span:nth-child(1) { top: 7px; transform: rotate(45deg); }
+.nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.nav-toggle[aria-expanded="true"] span:nth-child(3) { top: 7px; transform: rotate(-45deg); }
+
+/* ======================================================
+   MOBILE MENU SMOOTH OPEN (FLOTANTE)
+====================================================== */
+.nav-mobile {
+  list-style: none;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: center;
+  padding: 20px 0;
+
+  /* color sólido */
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 900px;
+  background-color: var(--bg); /* color sólido según tema */
+  border-top: 1px solid var(--border);
+
+  /* transición suave */
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.35s ease, opacity 0.35s ease;
+  z-index: 1050;
+}
+
+.nav-mobile.open {
+  max-height: 900px; 
+  opacity: 1;
+}
+
+/* ======================================================
+   MOBILE BREAKPOINT
+====================================================== */
+@media (max-width: 640px) {
+  .nav {
+    grid-template-columns: auto auto;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .nav-toggle {
+    display: block;
+    margin-right: -100px;
+  }
+}
+
+
+
+=============================
+ARCHIVO: src/styles/hero.css
+=============================
 
 /* ======================================================
    HERO
@@ -755,7 +920,7 @@ header {
 }
 
 /* ======================================================
-   RESPONSIVE HERO
+   RESPONSIVE
 ====================================================== */
 @media (max-width: 640px) {
   .hero {
@@ -770,18 +935,157 @@ header {
   }
 }
 
+
+
+=============================
+ARCHIVO: src/styles/layout.css
+=============================
+
 /* ======================================================
-   PROJECTS
+   LAYOUT
 ====================================================== */
-#projects ul {
-  list-style: none;
-  padding: 0;
+main {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem;
 }
 
-#projects li {
-  padding: 1rem 0;
-  border-bottom: 1px solid var(--border);
+
+
+=============================
+ARCHIVO: src/styles/projects.css
+=============================
+
+/* ======================================================
+   PROJECTS SECTION
+====================================================== */
+
+#projects {
+  margin-top: 5rem;
 }
+
+#projects h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* ======================================================
+   PROJECTS LIST (vertical)
+====================================================== */
+
+.projects-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem; /* separación entre cards */
+}
+
+/* ======================================================
+   PROJECT CARD (sin borde, vertical)
+====================================================== */
+
+.project-card {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border); /* línea elegante */
+}
+
+/* ======================================================
+   PROJECT MEDIA (VIDEO)
+====================================================== */
+
+.project-media {
+  width: 320px; /* un poco más grande */
+  height: 175px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--chip);
+}
+
+.project-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+/* ======================================================
+   PROJECT CONTENT
+====================================================== */
+
+.project-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.project-content h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.project-content p {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin: 0.25rem 0;
+}
+
+.project-tech,
+.project-result {
+  font-size: 0.85rem;
+  color: var(--text);
+}
+
+/* ======================================================
+   LINKS
+====================================================== */
+
+.project-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.project-links a {
+  font-size: 0.85rem;
+  color: var(--link);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+.project-links a:hover {
+  border-color: currentColor;
+}
+
+/* ======================================================
+   RESPONSIVE
+====================================================== */
+
+@media (max-width: 640px) {
+  .project-card {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .project-media {
+    width: 100%;
+    height: 180px; /* un poco más alto en móvil */
+  }
+}
+
+
+
+=============================
+ARCHIVO: src/styles/skills.css
+=============================
 
 /* ======================================================
    SKILLS
@@ -799,15 +1103,6 @@ header {
   padding: 0.4rem 0.7rem;
   border-radius: 6px;
   font-size: 0.85rem;
-}
-
-/* ======================================================
-   BUTTON RESET
-====================================================== */
-button {
-  background: none;
-  border: none;
-  cursor: pointer;
 }
 
 
