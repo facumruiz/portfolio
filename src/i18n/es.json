@@ -1,7 +1,7 @@
 {
   "nav": {
     "projects": "Proyectos",
-    "skills": "Habilidades"
+    "skills": "Servicios"
   },
   "intro": {
     "title": "Hola, soy Facundo",
@@ -10,8 +10,20 @@
   "projects": {
     "title": "Proyectos"
   },
-  "skills": {
-    "title": "Habilidades"
+  "services": {
+    "title": "Servicios",
+    "web": {
+      "title": "Desarrollo Web",
+      "text": "Sitios web modernos, rápidos y optimizados para convertir. Trabajo tanto de forma presencial como online."
+    },
+    "tech": {
+      "title": "Asesoramiento",
+      "text": "Consultoría para tomar mejores decisiones técnicas, mejorar rendimiento, arquitectura o mantenimiento."
+    },
+    "custom": {
+      "title": "Mantenimiento",
+      "text": "Actualizaciones, correcciones y mejoras continuas para que tu sitio funcione siempre rápido, seguro y estable."
+    }
   }
 }
 

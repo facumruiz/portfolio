@@ -1,7 +1,7 @@
 {
   "nav": {
     "projects": "Projects",
-    "skills": "Skills"
+    "skills": "Services"
   },
   "intro": {
     "title": "Hi, I’m Facundo",
@@ -10,8 +10,20 @@
   "projects": {
     "title": "Projects"
   },
-  "skills": {
-    "title": "Skills"
+  "services": {
+    "title": "Services",
+    "web": {
+      "title": "Web Development",
+      "text": "Modern, fast and conversion-focused websites. Available for both on-site and remote work."
+    },
+    "tech": {
+      "title": "Technical Consulting",
+      "text": "Guidance to make better technical decisions, improve performance, architecture and maintainability."
+    },
+    "custom": {
+      "title": "Maintenance",
+      "text": "Updates, fixes and continuous improvements to keep your website fast, secure and reliable."
+    }
   }
 }
 
