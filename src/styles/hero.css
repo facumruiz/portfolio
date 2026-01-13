@@ -5,24 +5,32 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 3rem;
-  margin-bottom: 4rem;
+  gap: 4rem;
+  margin-bottom: 6rem;
 }
 
 .hero-content {
-  max-width: 420px;
+  max-width: 480px;
+}
+
+.hero-content h1 {
+  font-size: clamp(2.6rem, 6vw, 3.2rem);
 }
 
 .hero-content p {
-  font-size: 1.05rem;
+  font-size: 1.15rem;
+  line-height: 1.7;
 }
 
+/* ======================================================
+   AVATAR
+====================================================== */
 .hero-avatar img {
-  width: 180px;
-  height: 180px;
+  width: 270px;
+  height: 270px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid var(--border);
+ /*  border: 3px solid var(--border); */
 }
 
 /* ======================================================
@@ -32,13 +40,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1.25rem;
-  margin-top: 1.5rem;
+  gap: 1.5rem;
+  margin-top: 2rem;
 }
 
 .socials a {
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
   background: var(--chip);
   display: inline-flex;
@@ -53,8 +61,8 @@
 }
 
 .socials img {
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
 }
 
 [data-theme="dark"] .socials img {
@@ -68,12 +76,13 @@
   .hero {
     flex-direction: column-reverse;
     text-align: center;
-    gap: 2rem;
+    gap: 2.5rem;
+    margin-bottom: 4.5rem;
   }
 
   .hero-avatar img {
-    width: 140px;
-    height: 140px;
+    width: 190px;
+    height: 190px;
   }
 }
 
