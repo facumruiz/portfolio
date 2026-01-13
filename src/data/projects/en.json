@@ -5,8 +5,8 @@
     "tech": ["Astro", "JavaScript", "REST API"],
     "result": "Improved sports data visualization and overall user experience.",
     "video": "/gifs/futbol.webm",
-    "repo": "https://github.com/tuuser/futbol-app",
-    "demo": "#"
+    "doc": "https://github.com/tuuser/futbol-app",
+    "demo": "https://fuchi-manager.onrender.com/"
   },
   {
     "title": "Car Dealership Website",
@@ -14,8 +14,8 @@
     "tech": ["Astro", "CSS", "SEO"],
     "result": "Clear and optimized catalog to increase inquiries.",
     "video": "/gifs/autos.webm",
-    "repo": "https://github.com/tuuser/autos-agencia",
-    "demo": "#"
+    "doc": "https://github.com/tuuser/autos-agencia",
+    "demo": "https://testdev-ego.onrender.com/"
   },
   {
     "title": "Simple Landing Page",
@@ -23,8 +23,8 @@
     "tech": ["HTML", "CSS", "Astro"],
     "result": "Fast load times and a structure designed to drive conversions.",
     "video": "/gifs/landing.webm",
-    "repo": "https://github.com/tuuser/landing-simple",
-    "demo": "#"
+    "doc": "https://github.com/tuuser/landing-simple",
+    "demo": "https://justicialex.onrender.com/"
   }
 ]
 
