@@ -5,6 +5,7 @@
     "tech": ["Astro", "JavaScript", "REST API"],
     "result": "Improved sports data visualization and overall user experience.",
     "video": "/gifs/futbol.webm",
+    "thumbnail": "/gifs/thumbnails/futbol-thumb.webp",
     "doc": "https://github.com/tuuser/futbol-app",
     "demo": "https://fuchi-manager.onrender.com/"
   },
@@ -14,6 +15,7 @@
     "tech": ["Astro", "CSS", "SEO"],
     "result": "Clear and optimized catalog to increase inquiries.",
     "video": "/gifs/autos.webm",
+    "thumbnail": "/gifs/thumbnails/autos-thumb.webp",
     "doc": "https://github.com/tuuser/autos-agencia",
     "demo": "https://testdev-ego.onrender.com/"
   },
@@ -23,6 +25,7 @@
     "tech": ["HTML", "CSS", "Astro"],
     "result": "Fast load times and a structure designed to drive conversions.",
     "video": "/gifs/landing.webm",
+    "thumbnail": "/gifs/thumbnails/landing-thumb.webp",
     "doc": "https://github.com/tuuser/landing-simple",
     "demo": "https://justicialex.onrender.com/"
   }
