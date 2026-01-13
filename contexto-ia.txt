@@ -1,16 +1,16 @@
 CONTEXTO DEL PROYECTO ASTRO
 Ruta raíz: /home/facu/portfolio-26
-Fecha: 2026-01-11T21:29:21.372Z
-Archivos incluidos: 22
+Fecha: 2026-01-12T22:56:31.130Z
+Archivos incluidos: 24
 
 =============================
 ARCHIVO: src/components/Footer.astro
 =============================
 
-<footer>
+<footer class="site-footer">
   <p>
     © {new Date().getFullYear()} Facundo Ruiz ·
-    <a href="mailto:tuemail@gmail.com">Contact</a>
+    <a href="mailto:facundoruizdev@gmail.com">Contacto</a>
   </p>
 </footer>
 
@@ -287,6 +287,36 @@ const projects =
 
 
 =============================
+ARCHIVO: src/components/Services.astro
+=============================
+
+---
+const { t } = Astro.props;
+---
+<section id="skills" class="services">
+  <h2>{t.services.title}</h2>
+
+  <ul class="services-grid">
+    <li class="service-card">
+      <h3>{t.services.web.title}</h3>
+      <p>{t.services.web.text}</p>
+    </li>
+
+    <li class="service-card">
+      <h3>{t.services.tech.title}</h3>
+      <p>{t.services.tech.text}</p>
+    </li>
+
+    <li class="service-card">
+      <h3>{t.services.custom.title}</h3>
+      <p>{t.services.custom.text}</p>
+    </li>
+  </ul>
+</section>
+
+
+
+=============================
 ARCHIVO: src/components/Skills.astro
 =============================
 
@@ -310,17 +340,30 @@ ARCHIVO: src/data/projects/en.json
 
 [
   {
-    "title": "SaaS Landing Page",
-    "description": "Marketing landing page focused on performance and conversion.",
-    "tech": ["Astro", "CSS", "GitHub Pages"],
-    "repo": "https://github.com/tuuser/saas-landing",
+    "title": "Sports Management Platform",
+    "description": "Web application to visualize matches, teams, and real-time statistics.",
+    "tech": ["Astro", "JavaScript", "REST API"],
+    "result": "Improved sports data visualization and overall user experience.",
+    "video": "/gifs/futbol.webm",
+    "repo": "https://github.com/tuuser/futbol-app",
     "demo": "#"
   },
   {
-    "title": "Personal Blog",
-    "description": "Static blog with Markdown support and SEO.",
-    "tech": ["Astro", "TypeScript", "Markdown"],
-    "repo": "#",
+    "title": "Car Dealership Website",
+    "description": "Website to showcase available vehicles, technical specifications, and direct contact.",
+    "tech": ["Astro", "CSS", "SEO"],
+    "result": "Clear and optimized catalog to increase inquiries.",
+    "video": "/gifs/autos.webm",
+    "repo": "https://github.com/tuuser/autos-agencia",
+    "demo": "#"
+  },
+  {
+    "title": "Simple Landing Page",
+    "description": "Conversion-focused landing page for services or products.",
+    "tech": ["HTML", "CSS", "Astro"],
+    "result": "Fast load times and a structure designed to drive conversions.",
+    "video": "/gifs/landing.webm",
+    "repo": "https://github.com/tuuser/landing-simple",
     "demo": "#"
   }
 ]
@@ -407,7 +450,7 @@ ARCHIVO: src/i18n/en.json
 {
   "nav": {
     "projects": "Projects",
-    "skills": "Skills"
+    "skills": "Services"
   },
   "intro": {
     "title": "Hi, I’m Facundo",
@@ -416,8 +459,20 @@ ARCHIVO: src/i18n/en.json
   "projects": {
     "title": "Projects"
   },
-  "skills": {
-    "title": "Skills"
+  "services": {
+    "title": "Services",
+    "web": {
+      "title": "Web Development",
+      "text": "Modern, fast and conversion-focused websites. Available for both on-site and remote work."
+    },
+    "tech": {
+      "title": "Technical Consulting",
+      "text": "Guidance to make better technical decisions, improve performance, architecture and maintainability."
+    },
+    "custom": {
+      "title": "Maintenance",
+      "text": "Updates, fixes and continuous improvements to keep your website fast, secure and reliable."
+    }
   }
 }
 
@@ -430,7 +485,7 @@ ARCHIVO: src/i18n/es.json
 {
   "nav": {
     "projects": "Proyectos",
-    "skills": "Habilidades"
+    "skills": "Servicios"
   },
   "intro": {
     "title": "Hola, soy Facundo",
@@ -439,8 +494,20 @@ ARCHIVO: src/i18n/es.json
   "projects": {
     "title": "Proyectos"
   },
-  "skills": {
-    "title": "Habilidades"
+  "services": {
+    "title": "Servicios",
+    "web": {
+      "title": "Desarrollo Web",
+      "text": "Sitios web modernos, rápidos y optimizados para convertir. Trabajo tanto de forma presencial como online."
+    },
+    "tech": {
+      "title": "Asesoramiento",
+      "text": "Consultoría para tomar mejores decisiones técnicas, mejorar rendimiento, arquitectura o mantenimiento."
+    },
+    "custom": {
+      "title": "Mantenimiento",
+      "text": "Actualizaciones, correcciones y mejoras continuas para que tu sitio funcione siempre rápido, seguro y estable."
+    }
   }
 }
 
@@ -457,6 +524,7 @@ import "../styles/header.css";
 import "../styles/hero.css";
 import "../styles/projects.css";
 import "../styles/skills.css";
+import "../styles/footer.css"
 
 import { ViewTransitions } from "astro:transitions";
 
@@ -537,23 +605,16 @@ import en from "../../i18n/en.json";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Header from "../../components/Header.astro";
 import Projects from "../../components/Projects.astro";
-import Hero from "../../components/Hero.astro"
+import Hero from "../../components/Hero.astro";
+import Services from "../../components/Services.astro";
+import Footer from "../../components/Footer.astro"
 ---
 <BaseLayout title="Facundo Ruiz | Web Developer" lang="en">
   <Header lang="en" t={en} />
-
-  <Hero lang="en" t={en} />
-
+  <Hero t={en} />
   <Projects lang="en" t={en} />
-
-  <section id="skills">
-    <h2>{en.skills.title}</h2>
-    <ul>
-      <li>HTML / CSS</li>
-      <li>JavaScript / TypeScript</li>
-      <li>Astro / React</li>
-    </ul>
-  </section>
+  <Services t={en} />
+  <Footer />
 </BaseLayout>
 
 
@@ -567,24 +628,49 @@ import es from "../i18n/es.json";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
 import Projects from "../components/Projects.astro";
-import Hero from "../components/Hero.astro"
+import Hero from "../components/Hero.astro";
+import Services from "../components/Services.astro";
+import Footer from "../components/Footer.astro"
 ---
 <BaseLayout title="Facundo Ruiz | Desarrollador Web" lang="es">
   <Header lang="es" t={es} />
-
-  <Hero lang="es" t={es} />
-
+  <Hero t={es} />
   <Projects lang="es" t={es} />
-
-  <section id="skills">
-    <h2>{es.skills.title}</h2>
-    <ul>
-      <li>HTML / CSS</li>
-      <li>JavaScript / TypeScript</li>
-      <li>Astro / React</li>
-    </ul>
-  </section>
+  <Services t={es} />
+  <Footer />
 </BaseLayout>
+
+
+
+=============================
+ARCHIVO: src/styles/footer.css
+=============================
+
+/* ======================================================
+   FOOTER
+====================================================== */
+
+.site-footer {
+  margin-top: 6rem;
+  padding: 2rem 0;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+
+.site-footer p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.site-footer a {
+  color: var(--link);
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  text-decoration: underline;
+}
 
 
 
@@ -1122,21 +1208,63 @@ ARCHIVO: src/styles/skills.css
 =============================
 
 /* ======================================================
-   SKILLS
+   SERVICES
 ====================================================== */
-#skills ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+
+.services {
+  margin-top: 6rem;
 }
 
-#skills li {
-  background: var(--chip);
-  padding: 0.4rem 0.7rem;
-  border-radius: 6px;
-  font-size: 0.85rem;
+.services h2 {
+  font-size: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+/* GRID */
+.services-grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+/* CARD */
+.service-card {
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg);
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--link);
+}
+
+.service-card h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+}
+
+.service-card p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+/* RESPONSIVE */
+@media (max-width: 640px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 
