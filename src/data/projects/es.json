@@ -5,8 +5,8 @@
     "tech": ["Astro", "JavaScript", "API REST"],
     "result": "Mejora en la visualización de datos deportivos y experiencia del usuario.",
     "video": "/gifs/futbol.webm",
-    "repo": "https://github.com/tuuser/futbol-app",
-    "demo": "#"
+    "doc": "https://github.com/tuuser/futbol-app",
+    "demo": "https://fuchi-manager.onrender.com/"
   },
   {
     "title": "Agencia de Venta de Autos",
@@ -14,8 +14,8 @@
     "tech": ["Astro", "CSS", "SEO"],
     "result": "Catálogo claro y optimizado para captar consultas.",
     "video": "/gifs/autos.webm",
-    "repo": "https://github.com/tuuser/autos-agencia",
-    "demo": "#"
+    "doc": "https://github.com/tuuser/autos-agencia",
+    "demo": "https://testdev-ego.onrender.com/"
   },
   {
     "title": "Landing Page Simple",
@@ -23,8 +23,8 @@
     "tech": ["HTML", "CSS", "Astro"],
     "result": "Carga rápida y estructura pensada para conversiones.",
     "video": "/gifs/landing.webm",
-    "repo": "https://github.com/tuuser/landing-simple",
-    "demo": "#"
+    "doc": "https://github.com/tuuser/landing-simple",
+    "demo": "https://justicialex.onrender.com/"
   }
 ]
 
