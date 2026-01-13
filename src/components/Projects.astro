@@ -10,18 +10,24 @@ const projects =
   <h2>{t.projects.title}</h2>
 
   <ul class="projects-list">
-    {projects.map(project => (
-      <li class="project-card">
-        <!-- VIDEO -->
+    {projects.map((project, index) => (
+      <li class="project-card" data-index={index}>
+        <!-- VIDEO WITH LOADING BAR -->
         <div class="project-media">
           <video
             class="project-video"
-            src={project.video}
             muted
             loop
             playsinline
             preload="metadata"
+            poster={project.thumbnail ?? "/gifs/default-thumb.webp"}
+            data-src={project.video}
           ></video>
+
+          <!-- Progress bar overlay -->
+          <div class="progress-bar">
+            <div class="progress-fill"></div>
+          </div>
         </div>
 
         <!-- CONTENT -->
@@ -34,14 +40,11 @@ const projects =
           </p>
 
           <p class="project-result">
-            <strong>Resultado:</strong> {project.result}
+            <strong>Result:</strong> {project.result}
           </p>
 
           <div class="project-links">
             <a href={project.demo}>Demo</a>
-            {/*
-            <a href={project.doc}>Doc</a>
-            */}
           </div>
         </div>
       </li>
@@ -49,34 +52,92 @@ const projects =
   </ul>
 </section>
 
+<style>
+.project-media {
+  position: relative;
+  width: 340px;
+  height: 190px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--chip);
+}
+
+.project-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+/* Loading bar overlay */
+.progress-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.progress-fill {
+  width: 0%;
+  height: 100%;
+  background: var(--border);
+  transition: width 0.1s linear;
+}
+</style>
+
 <script>
-  function initProjectVideos() {
-    const cards = document.querySelectorAll(".project-card");
+function initProjectVideos() {
+  const cards = document.querySelectorAll(".project-card");
 
-    cards.forEach(card => {
-      const video = card.querySelector("video");
-      if (!video) return;
+  cards.forEach((card) => {
+    const video = card.querySelector("video");
+    const progress = card.querySelector(".progress-fill");
+    if (!video || !progress) return;
 
-      // Desktop hover
-      card.addEventListener("mouseenter", () => {
-        video.currentTime = 0;
-        video.play();
-      });
+    let timer;
+    let progressValue = 0;
+    const delay = 1000; // ms to fill bar
+    const intervalTime = 20;
+    const increment = intervalTime / delay * 100;
 
-      card.addEventListener("mouseleave", () => {
-        video.pause();
-        video.currentTime = 0;
-      });
+    const startProgress = () => {
+      // Lazy load video src only when needed
+      if (!video.src) video.src = video.dataset.src;
 
-      // Mobile touch
-      card.addEventListener("touchstart", () => {
-        video.currentTime = 0;
-        video.play();
-      });
-    });
-  }
+      progressValue = 0;
+      progress.style.width = "0%";
 
-  initProjectVideos();
-  document.addEventListener("astro:page-load", initProjectVideos);
+      timer = setInterval(() => {
+        progressValue += increment;
+        if (progressValue >= 100) {
+          progressValue = 100;
+          clearInterval(timer);
+          video.currentTime = 0;
+          video.play().catch(() => console.warn("Autoplay blocked"));
+        }
+        progress.style.width = progressValue + "%";
+      }, intervalTime);
+    };
+
+    const resetProgress = () => {
+      clearInterval(timer);
+      progressValue = 0;
+      progress.style.width = "0%";
+      video.pause();
+      video.currentTime = 0;
+    };
+
+    card.addEventListener("mouseenter", startProgress);
+    card.addEventListener("mouseleave", resetProgress);
+    card.addEventListener("touchstart", startProgress);
+  });
+}
+
+// Re-init videos on page load AND after Astro renders new content (like language switch)
+document.addEventListener("astro:page-load", initProjectVideos);
+document.addEventListener("DOMContentLoaded", initProjectVideos);
 </script>
 
