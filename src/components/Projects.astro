@@ -104,8 +104,9 @@ function initProjectVideos() {
     const increment = intervalTime / delay * 100;
 
     const startProgress = () => {
-      // Lazy load video src only when needed
       if (!video.src) video.src = video.dataset.src;
+
+      video.load(); // fuerza cargar el video
 
       progressValue = 0;
       progress.style.width = "0%";
@@ -116,11 +117,12 @@ function initProjectVideos() {
           progressValue = 100;
           clearInterval(timer);
           video.currentTime = 0;
-          video.play().catch(() => console.warn("Autoplay blocked"));
+          video.play().catch(err => console.warn("Autoplay blocked:", err));
         }
         progress.style.width = progressValue + "%";
       }, intervalTime);
     };
+
 
     const resetProgress = () => {
       clearInterval(timer);
