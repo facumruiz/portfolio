@@ -73,24 +73,33 @@ const projects =
 /* Loading bar overlay */
 .progress-bar {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 5px;
-  background: rgba(255, 255, 255, 0.2);
+  bottom: 6px; /* un poco separada del borde */
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 24px);
+  height: 6px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  overflow: hidden;
+  pointer-events: none;
+  backdrop-filter: blur(4px);
 }
 
 .progress-fill {
-  width: 0%;
   height: 100%;
+  width: 0%;
   background: var(--border);
-  transition: width 0.1s linear;
+  border-radius: inherit;
+  transition: width 0.12s linear;
 }
 </style>
 
 <script>
 function initProjectVideos() {
-  const cards = document.querySelectorAll(".project-card");
+  const cards = document.querySelectorAll(".project-media");
+  const isMobile = window.matchMedia("(hover: none)").matches;
+
+  let activeVideo = null;
 
   cards.forEach((card) => {
     const video = card.querySelector("video");
@@ -99,46 +108,69 @@ function initProjectVideos() {
 
     let timer;
     let progressValue = 0;
+
     const delay = 1000; // ms to fill bar
     const intervalTime = 20;
-    const increment = intervalTime / delay * 100;
+    const increment = (intervalTime / delay) * 100;
+
+    const stopActiveVideo = () => {
+      if (activeVideo && activeVideo !== video) {
+        activeVideo.pause();
+        activeVideo.currentTime = 0;
+
+        const activeProgress =
+          activeVideo.closest(".project-card")?.querySelector(".progress-fill");
+        if (activeProgress) activeProgress.style.width = "0%";
+      }
+    };
 
     const startProgress = () => {
+      stopActiveVideo();
+
       if (!video.src) video.src = video.dataset.src;
+      video.load();
 
-      video.load(); // fuerza cargar el video
-
+      activeVideo = video;
       progressValue = 0;
       progress.style.width = "0%";
 
       timer = setInterval(() => {
         progressValue += increment;
+
         if (progressValue >= 100) {
           progressValue = 100;
           clearInterval(timer);
+
           video.currentTime = 0;
-          video.play().catch(err => console.warn("Autoplay blocked:", err));
+          video.play().catch(() => {});
         }
+
         progress.style.width = progressValue + "%";
       }, intervalTime);
     };
 
+    const resetDesktop = () => {
+      if (isMobile) return;
 
-    const resetProgress = () => {
       clearInterval(timer);
-      progressValue = 0;
       progress.style.width = "0%";
       video.pause();
       video.currentTime = 0;
+      activeVideo = null;
     };
 
+    /* Desktop */
     card.addEventListener("mouseenter", startProgress);
-    card.addEventListener("mouseleave", resetProgress);
-    card.addEventListener("touchstart", startProgress);
+    card.addEventListener("mouseleave", resetDesktop);
+
+    /* Mobile */
+    card.addEventListener("touchstart", (e) => {
+      e.preventDefault();
+      startProgress();
+    });
   });
 }
 
-// Re-init videos on page load AND after Astro renders new content (like language switch)
 document.addEventListener("astro:page-load", initProjectVideos);
 document.addEventListener("DOMContentLoaded", initProjectVideos);
 </script>
