@@ -6,25 +6,38 @@ const projects =
     ? (await import("../data/projects/es.json")).default
     : (await import("../data/projects/en.json")).default;
 ---
+
 <section id="projects">
   <h2>{t.projects.title}</h2>
 
   <ul class="projects-list">
     {projects.map((project, index) => (
       <li class="project-card" data-index={index}>
-        <!-- VIDEO WITH LOADING BAR -->
+        <!-- MEDIA -->
         <div class="project-media">
-          <video
-            class="project-video"
-            muted
-            loop
-            playsinline
-            preload="metadata"
-            poster={project.thumbnail ?? "/gifs/default-thumb.webp"}
-            data-src={project.video}
-          ></video>
+          <a
+            href={project.demo}
+            target="_blank"
+            rel="noopener"
+            class="project-overlay-link"
+            aria-label={`Open demo of ${project.title}`}
+          >
+            <video
+              class="project-video"
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              poster={project.thumbnail ?? "/gifs/default-thumb.webp"}
+              data-src={project.video}
+            ></video>
 
-          <!-- Progress bar overlay -->
+            <span class="project-cta">
+              {lang === "es" ? "Abrir demo ↗" : "Open demo ↗"}
+            </span>
+          </a>
+
+          <!-- Progress bar -->
           <div class="progress-bar">
             <div class="progress-fill"></div>
           </div>
@@ -42,10 +55,6 @@ const projects =
           <p class="project-result">
             <strong>Result:</strong> {project.result}
           </p>
-
-          <div class="project-links">
-            <a href={project.demo}>Demo</a>
-          </div>
         </div>
       </li>
     ))}
@@ -53,6 +62,7 @@ const projects =
 </section>
 
 <style>
+/* MEDIA */
 .project-media {
   position: relative;
   width: 340px;
@@ -60,6 +70,13 @@ const projects =
   border-radius: 12px;
   overflow: hidden;
   background: var(--chip);
+}
+
+.project-overlay-link {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .project-video {
@@ -70,15 +87,42 @@ const projects =
   pointer-events: none;
 }
 
-/* Loading bar overlay */
+/* CTA */
+.project-cta {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  font-size: 0.75rem;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+}
+
+/* Desktop hover */
+.project-media:hover .project-cta {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Mobile active */
+.project-card.is-active .project-cta {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* PROGRESS BAR */
 .progress-bar {
   position: absolute;
-  bottom: 6px; /* un poco separada del borde */
+  bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: calc(100% - 24px);
-  height: 6px;
-  background: rgba(255, 255, 255, 0.15);
+  width: calc(110% - 24px);
+  height: 5px;
   border-radius: 999px;
   overflow: hidden;
   pointer-events: none;
@@ -96,77 +140,96 @@ const projects =
 
 <script>
 function initProjectVideos() {
-  const cards = document.querySelectorAll(".project-media");
-  const isMobile = window.matchMedia("(hover: none)").matches;
+  const cards = document.querySelectorAll(".project-card");
+  const isMobile = window.innerWidth <= 768;
 
-  let activeVideo = null;
+  let active = {
+    card: null,
+    video: null,
+    progress: null,
+    timer: null
+  };
 
-  cards.forEach((card) => {
+  const delay = 1000;
+  const intervalTime = 20;
+  const increment = (intervalTime / delay) * 100;
+
+  function resetActive() {
+    if (!active.card) return;
+
+    clearInterval(active.timer);
+    active.progress.style.width = "0%";
+    active.video.pause();
+    active.video.currentTime = 0;
+    active.card.classList.remove("is-active");
+
+    active = { card: null, video: null, progress: null, timer: null };
+  }
+
+  function start(card) {
+    if (active.card === card) return;
+
+    resetActive();
+
     const video = card.querySelector("video");
     const progress = card.querySelector(".progress-fill");
     if (!video || !progress) return;
 
-    let timer;
+    if (!video.src) video.src = video.dataset.src;
+    video.load();
+
+    card.classList.add("is-active");
+
     let progressValue = 0;
+    progress.style.width = "0%";
 
-    const delay = 1000; // ms to fill bar
-    const intervalTime = 20;
-    const increment = (intervalTime / delay) * 100;
-
-    const stopActiveVideo = () => {
-      if (activeVideo && activeVideo !== video) {
-        activeVideo.pause();
-        activeVideo.currentTime = 0;
-
-        const activeProgress =
-          activeVideo.closest(".project-card")?.querySelector(".progress-fill");
-        if (activeProgress) activeProgress.style.width = "0%";
-      }
-    };
-
-    const startProgress = () => {
-      stopActiveVideo();
-
-      if (!video.src) video.src = video.dataset.src;
-      video.load();
-
-      activeVideo = video;
-      progressValue = 0;
-      progress.style.width = "0%";
-
-      timer = setInterval(() => {
+    active = {
+      card,
+      video,
+      progress,
+      timer: setInterval(() => {
         progressValue += increment;
 
         if (progressValue >= 100) {
           progressValue = 100;
-          clearInterval(timer);
-
+          clearInterval(active.timer);
           video.currentTime = 0;
           video.play().catch(() => {});
         }
 
         progress.style.width = progressValue + "%";
-      }, intervalTime);
+      }, intervalTime)
     };
+  }
 
-    const resetDesktop = () => {
-      if (isMobile) return;
+  /* ======================
+     DESKTOP (hover media)
+  ====================== */
+  if (!isMobile) {
+    document.querySelectorAll(".project-media").forEach((media) => {
+      const card = media.closest(".project-card");
 
-      clearInterval(timer);
-      progress.style.width = "0%";
-      video.pause();
-      video.currentTime = 0;
-      activeVideo = null;
-    };
+      media.addEventListener("mouseenter", () => start(card));
+      media.addEventListener("mouseleave", resetActive);
+    });
+    return;
+  }
 
-    /* Desktop */
-    card.addEventListener("mouseenter", startProgress);
-    card.addEventListener("mouseleave", resetDesktop);
+  /* ======================
+     MOBILE (tap card)
+  ====================== */
+  cards.forEach((card) => {
+    card.addEventListener("click", (e) => {
+      const link = e.target.closest("a");
 
-    /* Mobile */
-    card.addEventListener("touchstart", (e) => {
-      e.preventDefault();
-      startProgress();
+      // If demo button tapped and card is active → allow navigation
+      if (link && card.classList.contains("is-active")) return;
+
+      // First tap anywhere = preview
+      if (!card.classList.contains("is-active")) {
+        e.preventDefault();
+        start(card);
+      }
     });
   });
 }
