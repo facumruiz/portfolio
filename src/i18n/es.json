@@ -4,8 +4,9 @@
     "skills": "Servicios"
   },
   "intro": {
-    "title": "Hola, soy Facundo",
-    "text": "Desarrollador web con más de 6 años de experiencia creando sitios rápidos, accesibles y mantenibles."
+    "welcome": "Bienvenido",
+    "portfolio": "a mi portfolio!",
+    "text": "Diseño y desarrollo sitios web eficientes, accesibles y fáciles de mantener. Combino creatividad y soluciones técnicas sólidas para ayudar a proyectos y empresas a crecer en el entorno digital."
   },
   "projects": {
     "title": "Proyectos"

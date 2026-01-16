@@ -4,8 +4,9 @@
     "skills": "Services"
   },
   "intro": {
-    "title": "Hi, I’m Facundo",
-    "text": "Web developer with 6+ years of experience building fast, accessible and maintainable websites."
+    "welcome": "Welcome",
+    "portfolio": "to my portfolio!",
+    "text": "I design and develop efficient, accessible, and easy-to-maintain websites. I combine creativity with solid technical solutions to help projects and businesses grow in the digital world."
   },
   "projects": {
     "title": "Projects"
@@ -14,15 +15,15 @@
     "title": "Services",
     "web": {
       "title": "Web Development",
-      "text": "Modern, fast and conversion-focused websites. Available for both on-site and remote work."
+      "text": "Modern, fast websites optimized for conversions. I work both on-site and remotely."
     },
     "tech": {
-      "title": "Technical Consulting",
-      "text": "Guidance to make better technical decisions, improve performance, architecture and maintainability."
+      "title": "Consulting",
+      "text": "Technical guidance to make better decisions, improve performance, architecture, and maintenance."
     },
     "custom": {
       "title": "Maintenance",
-      "text": "Updates, fixes and continuous improvements to keep your website fast, secure and reliable."
+      "text": "Ongoing updates, fixes, and improvements to keep your website fast, secure, and stable at all times."
     }
   }
 }
