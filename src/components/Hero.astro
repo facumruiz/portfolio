@@ -3,7 +3,8 @@ const { t } = Astro.props;
 ---
 <section class="hero">
   <div class="hero-content">
-    <h1>{t.intro.title}</h1>
+    <h1 class="hero-title">{t.intro.welcome}</h1>
+    <h2 class="hero-subtitle">{t.intro.portfolio}</h2>
     <p>{t.intro.text}</p>
 
     <div class="socials hero-socials">
