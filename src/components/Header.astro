@@ -59,6 +59,7 @@ const switchUrl = lang === "es" ? "/en" : "/";
   function initHeader() {
     const toggle = document.querySelector(".nav-toggle");
     const menu = document.querySelector(".nav-mobile");
+    const links = menu?.querySelectorAll("a");
 
     if (!toggle || !menu) return;
 
@@ -66,6 +67,14 @@ const switchUrl = lang === "es" ? "/en" : "/";
       const open = menu.classList.toggle("open");
       toggle.setAttribute("aria-expanded", open);
     };
+
+    // close menu on link click (mobile)
+    links?.forEach((link) => {
+      link.onclick = () => {
+        menu.classList.remove("open");
+        toggle.setAttribute("aria-expanded", "false");
+      };
+    });
   }
 
   function initThemeToggle() {
