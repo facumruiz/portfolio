@@ -24,7 +24,7 @@
 /* CARD */
 .service-card {
   padding: 2rem;
-  border: 1px solid var(--link);
+  border: 1px solid var(--border);
   border-radius: 14px;
   background: var(--bg);
 
@@ -33,7 +33,7 @@
 
 .service-card:hover {
   transform: translateY(-4px);
-  border-color: var(--border);
+  border-color: var(--link);
 }
 
 .service-card h3 {
