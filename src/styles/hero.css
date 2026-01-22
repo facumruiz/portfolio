@@ -13,19 +13,33 @@
   max-width: 480px;
 }
 
+/* TITLE */
 .hero-content h1 {
-  font-size: clamp(2.6rem, 6vw, 3.2rem);
+  font-size: clamp(3.5rem, 6vw, 3.2rem);
   margin: 0;
   line-height: 1.1;
+  text-align: center;
 }
 
+/* SUBTITLE (centered, no divider) */
 .hero-content h2 {
-  font-size: clamp(1.5rem, 6vw, 2.8rem);
+  font-size: clamp(2.5rem, 6vw, 2.8rem);
   margin: 0.25rem 0 1.5rem 0;
   font-weight: 400;
-  color: var(--text-muted);
+  color: var(--muted);
+  text-align: center;
+
+  /* Remove global h2 divider */
+  border-bottom: none;
+  padding-bottom: 0;
 }
 
+.hero-content h2::before,
+.hero-content h2::after {
+  content: none;
+}
+
+/* TEXT */
 .hero-content p {
   font-size: 1.15rem;
   line-height: 1.7;
@@ -40,7 +54,7 @@
   height: 270px;
   border-radius: 50%;
   object-fit: cover;
- /*  border: 3px solid var(--border); */
+  /* border: 3px solid var(--border); */
 }
 
 /* ======================================================
