@@ -7,20 +7,20 @@ const switchUrl = lang === "es" ? "/en" : "/";
     <!-- LOGO -->
     <strong class="logo">Facundo Ruiz</strong>
 
-    <!-- LINKS DESKTOP -->
+    <!-- DESKTOP NAV LINKS -->
     <ul class="nav-links">
       <li><a href="#projects">{t.nav.projects}</a></li>
       <li><a href="#skills">{t.nav.skills}</a></li>
     </ul>
 
-    <!-- ACTIONS -->
+    <!-- ACTION BUTTONS -->
     <div class="nav-actions">
-      <!-- LANG -->
+      <!-- LANGUAGE SWITCH -->
       <a href={switchUrl} class="nav-lang" transition:name="lang">
         {lang === "es" ? "EN" : "ES"}
       </a>
 
-      <!-- THEME -->
+      <!-- THEME TOGGLE -->
       <button
         id="theme-toggle"
         class="theme-toggle"
@@ -35,7 +35,7 @@ const switchUrl = lang === "es" ? "/en" : "/";
         />
       </button>
 
-      <!-- HAMBURGER -->
+      <!-- MOBILE HAMBURGER -->
       <button
         class="nav-toggle"
         aria-label="Toggle menu"
@@ -56,6 +56,9 @@ const switchUrl = lang === "es" ? "/en" : "/";
 </header>
 
 <script>
+  /* ===============================
+     MOBILE MENU TOGGLE
+  =============================== */
   function initHeader() {
     const toggle = document.querySelector(".nav-toggle");
     const menu = document.querySelector(".nav-mobile");
@@ -68,7 +71,7 @@ const switchUrl = lang === "es" ? "/en" : "/";
       toggle.setAttribute("aria-expanded", open);
     };
 
-    // close menu on link click (mobile)
+    // Close menu when a link is clicked (mobile)
     links?.forEach((link) => {
       link.onclick = () => {
         menu.classList.remove("open");
@@ -77,6 +80,9 @@ const switchUrl = lang === "es" ? "/en" : "/";
     });
   }
 
+  /* ===============================
+     THEME TOGGLE SYNC
+  =============================== */
   function initThemeToggle() {
     const btn = document.getElementById("theme-toggle");
     const icon = document.getElementById("theme-icon");
@@ -85,7 +91,7 @@ const switchUrl = lang === "es" ? "/en" : "/";
     function syncIcon() {
       const isDark = document.documentElement.dataset.theme === "dark";
       icon.src = isDark ? "/icons/sun.svg" : "/icons/moon.svg";
-      icon.alt = isDark ? "/icons/moon.svg" : "/icons/sun.svg";
+      icon.alt = isDark ? "Sun icon" : "Moon icon";
     }
 
     syncIcon();
@@ -93,12 +99,40 @@ const switchUrl = lang === "es" ? "/en" : "/";
     document.addEventListener("theme-change", syncIcon);
   }
 
+  /* ===============================
+     HEADER BORDER ON SCROLL
+     - No border when page is at top
+     - Border appears after scrolling
+  =============================== */
+  function initHeaderBorder() {
+    const header = document.querySelector(".site-header");
+    if (!header) return;
+
+    function onScroll() {
+      if (window.scrollY === 0) {
+        header.classList.add("at-top");
+      } else {
+        header.classList.remove("at-top");
+      }
+    }
+
+    // Initial state
+    onScroll();
+
+    // Listen for scroll changes
+    window.addEventListener("scroll", onScroll);
+  }
+
+  // Initial load
   initHeader();
   initThemeToggle();
+  initHeaderBorder();
 
+  // Re-init on Astro page transitions
   document.addEventListener("astro:page-load", () => {
     initHeader();
     initThemeToggle();
+    initHeaderBorder();
   });
 </script>
 
