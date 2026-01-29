@@ -52,13 +52,35 @@ const switchUrl = lang === "es" ? "/en" : "/";
   <ul class="nav-mobile">
     <li><a href="#projects">{t.nav.projects}</a></li>
     <li><a href="#skills">{t.nav.skills}</a></li>
+
+    <!-- FOOTER -->
+    <li class="nav-mobile-footer">
+      <div class="nav-socials">
+        <a
+          href="https://github.com/facumruiz"
+          target="_blank"
+          aria-label="GitHub"
+        >
+          <img src="/icons/github.svg" alt="" />
+        </a>
+
+        <a
+          href="https://linkedin.com/in/facumruiz"
+          target="_blank"
+          aria-label="LinkedIn"
+        >
+          <img src="/icons/linkedin.svg" alt="" />
+        </a>
+      </div>
+    </li>
   </ul>
 </header>
 
 <script>
-  /* ===============================
-     MOBILE MENU TOGGLE
-  =============================== */
+  const NAV_HEIGHT = 72;
+  const SCROLL_OFFSET = 8;
+  const SCROLL_DELAY = 320;
+
   function initHeader() {
     const toggle = document.querySelector(".nav-toggle");
     const menu = document.querySelector(".nav-mobile");
@@ -66,23 +88,48 @@ const switchUrl = lang === "es" ? "/en" : "/";
 
     if (!toggle || !menu) return;
 
+    function isOpen() {
+      return toggle.getAttribute("aria-expanded") === "true";
+    }
+
+    function openMenu() {
+      menu.classList.add("open");
+      toggle.setAttribute("aria-expanded", "true");
+    }
+
+    function closeMenu() {
+      menu.classList.remove("open");
+      toggle.setAttribute("aria-expanded", "false");
+    }
+
+    function isAtTop() {
+      return window.scrollY <= 0;
+    }
+
     toggle.onclick = () => {
-      const open = menu.classList.toggle("open");
-      toggle.setAttribute("aria-expanded", open);
+      if (isOpen()) {
+        closeMenu();
+        return;
+      }
+
+      // Never open menu while at top
+      if (isAtTop()) {
+        window.scrollTo({
+          top: NAV_HEIGHT + SCROLL_OFFSET,
+          behavior: "smooth"
+        });
+
+        setTimeout(openMenu, SCROLL_DELAY);
+      } else {
+        openMenu();
+      }
     };
 
-    // Close menu when a link is clicked (mobile)
     links?.forEach((link) => {
-      link.onclick = () => {
-        menu.classList.remove("open");
-        toggle.setAttribute("aria-expanded", "false");
-      };
+      link.onclick = () => closeMenu();
     });
   }
 
-  /* ===============================
-     THEME TOGGLE SYNC
-  =============================== */
   function initThemeToggle() {
     const btn = document.getElementById("theme-toggle");
     const icon = document.getElementById("theme-icon");
@@ -91,7 +138,6 @@ const switchUrl = lang === "es" ? "/en" : "/";
     function syncIcon() {
       const isDark = document.documentElement.dataset.theme === "dark";
       icon.src = isDark ? "/icons/sun.svg" : "/icons/moon.svg";
-      icon.alt = isDark ? "Sun icon" : "Moon icon";
     }
 
     syncIcon();
@@ -99,40 +145,25 @@ const switchUrl = lang === "es" ? "/en" : "/";
     document.addEventListener("theme-change", syncIcon);
   }
 
-  /* ===============================
-     HEADER BORDER ON SCROLL
-     - No border when page is at top
-     - Border appears after scrolling
-  =============================== */
   function initHeaderBorder() {
     const header = document.querySelector(".site-header");
     if (!header) return;
 
     function onScroll() {
-      if (window.scrollY === 0) {
-        header.classList.add("at-top");
-      } else {
-        header.classList.remove("at-top");
-      }
+      header.classList.toggle("at-top", window.scrollY === 0);
     }
 
-    // Initial state
     onScroll();
-
-    // Listen for scroll changes
     window.addEventListener("scroll", onScroll);
   }
 
-  // Initial load
-  initHeader();
-  initThemeToggle();
-  initHeaderBorder();
-
-  // Re-init on Astro page transitions
-  document.addEventListener("astro:page-load", () => {
+  function initAll() {
     initHeader();
     initThemeToggle();
     initHeaderBorder();
-  });
+  }
+
+  initAll();
+  document.addEventListener("astro:page-load", initAll);
 </script>
 
