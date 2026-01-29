@@ -1,6 +1,6 @@
 [
   {
-    "title": "Plataforma de Gestión Deportiva",
+    "title": "Gestión Deportiva",
     "description": "Aplicación web para visualizar partidos, equipos y estadísticas en tiempo real.",
     "tech": ["MongoDB", "Express", "React", "Node"],
     "result": "Mejora en la visualización de datos deportivos y en la experiencia general del usuario.",
@@ -10,7 +10,7 @@
     "demo": "https://fuchi-manager.onrender.com/"
   },
   {
-    "title": "Sitio Web de Concesionaria de Autos",
+    "title": "Concesionaria de Autos",
     "description": "Sitio web para mostrar vehículos disponibles, especificaciones técnicas y contacto directo.",
     "tech": ["React"],
     "result": "Catálogo claro y optimizado para aumentar las consultas.",
@@ -20,7 +20,7 @@
     "demo": "https://testdev-ego.onrender.com/"
   },
   {
-    "title": "Landing Page Simple",
+    "title": "Landing Page",
     "description": "Landing page enfocada en la conversión para servicios o productos.",
     "tech": ["React"],
     "result": "Carga rápida y estructura pensada para impulsar conversiones.",
