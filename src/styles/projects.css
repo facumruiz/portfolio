@@ -111,22 +111,59 @@
 /*   border-color: currentColor; */
 }
 
+
+
 /* ======================================================
-   RESPONSIVE
+   RESPONSIVE – MOBILE (ALL)
 ====================================================== */
-@media (max-width: 640px) {
+@media (max-width: 768px) {
+
+  /* Space between project cards */
   .projects-list {
-    gap: 3rem;
+    gap: 2.5rem;
   }
 
+  /* Stack layout and center everything */
   .project-card {
     flex-direction: column;
-    gap: 1.25rem;
+    align-items: center;
+    text-align: left;
+
+    gap: 1rem;
+    padding: 1.25rem 0;
   }
 
+  /* Media adapts to small screens */
   .project-media {
     width: 100%;
-    height: 200px;
+    max-width: 300px; /* Prevents overflow on 360px devices */
+    aspect-ratio: 16 / 9;
+    height: auto;
+
+    border-radius: 10px;
   }
+
+  /* Content spacing + centering */
+  .project-content {
+    align-items: center;
+    gap: 0.85rem;
+    padding-inline: 0.25rem;
+  }
+
+  .project-content h3 {
+    font-size: 1.25rem;
+  }
+
+  .project-content p {
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
+  /* Center links */
+  .project-links {
+    justify-content: center;
+    margin-top: 0.75rem;
+  }
+
 }
 
