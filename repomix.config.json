@@ -1,0 +1,33 @@
+{
+  "output": {
+    "filePath": "docs/context.ai.md"
+  },
+  "include": [
+    "astro.config.mjs",
+    "package.json",
+    "tsconfig.json",
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    ".astro",
+    ".git",
+    "public",
+    "package-lock.json",
+    "**/*.test.*",
+    "**/*.spec.*"
+  ],
+  "features": {
+    "fileSummary": false,
+    "directoryTree": true,
+    "codeBlocks": true
+  },
+  "limits": {
+    "maxFileSizeKB": 400
+  },
+  "header": {
+    "title": "AI CONTEXT — Portfolio",
+    "description": "Raw repository context optimized for large language models. Minimal prose, maximal signal."
+  }
+}
