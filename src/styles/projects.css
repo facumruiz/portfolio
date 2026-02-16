@@ -42,12 +42,17 @@
   /* border-top: 2px solid var(--border); */
 }
 
+.project-card:hover .project-content h3,
+.project-card:hover .project-tech{  
+  color: var(--border);
+}
+
 /* ======================================================
    PROJECT MEDIA
 ====================================================== */
 .project-media {
   width: 340px;
-  height: 190px;
+  height: 200px;
   flex-shrink: 0;
   border-radius: 12px;
   overflow: hidden;
@@ -75,6 +80,7 @@
   margin: 0;
   font-size: 1.35rem;
   font-weight: 600;
+  text-align: left;
 }
 
 .project-content p {
@@ -84,11 +90,6 @@
   color: var(--muted);
 }
 
-.project-tech,
-.project-result {
-  font-size: 0.9rem;
-  color: var(--text);
-}
 
 /* ======================================================
    LINKS
@@ -126,7 +127,7 @@
   /* Stack layout and center everything */
   .project-card {
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     text-align: left;
 
     gap: 1rem;
@@ -136,11 +137,12 @@
   /* Media adapts to small screens */
   .project-media {
     width: 100%;
-    max-width: 300px; /* Prevents overflow on 360px devices */
+    max-width: 400px; /* Prevents overflow on 360px devices */
     aspect-ratio: 16 / 9;
     height: auto;
 
     border-radius: 10px;
+    margin: 0 auto;
   }
 
   /* Content spacing + centering */
@@ -157,13 +159,13 @@
   .project-content p {
     font-size: 0.95rem;
     line-height: 1.55;
+    text-align: center;
   }
 
   /* Center links */
   .project-links {
-    justify-content: center;
+    justify-content: flex-start;
     margin-top: 0.75rem;
   }
 
 }
-
