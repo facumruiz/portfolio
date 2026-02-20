@@ -1,7 +1,7 @@
 {
   "nav": {
     "projects": "Projects",
-    "skills": "Services"
+    "skills": "Expertise"
   },
   "intro": {
     "welcome": "Welcome",
@@ -12,19 +12,32 @@
     "title": "Projects"
   },
   "services": {
-    "title": "Services",
-    "web": {
-      "title": "Web Development",
-      "text": "Modern, fast websites optimized for conversions. I work both on-site and remotely."
-    },
-    "tech": {
-      "title": "Consulting",
-      "text": "Technical guidance to make better decisions, improve performance, architecture, and maintenance."
-    },
-    "custom": {
-      "title": "Maintenance",
-      "text": "Ongoing updates, fixes, and improvements to keep your website fast, secure, and stable at all times."
-    }
+    "title": "Expertise",
+    "list": [
+      {
+        "title": "Technical Consulting",
+        "items": [
+          "I analyze and propose solutions for architecture, performance, and scalability in web projects.",
+          "I define coding standards and best practices to maintain quality and sustainability.",
+          "I participate in key technical decisions, ensuring clarity and efficiency in project structure."
+        ]
+      },
+      {
+        "title": "Full-Stack Web Development",
+        "items": [
+          "I build efficient, accessible, and scalable applications and websites.",
+          "Experience with React, Node.js, MongoDB, and Express.",
+          "I work on backend (APIs, data) and frontend, integrating both and building reusable, maintainable code."
+        ]
+      },
+      {
+        "title": "Maintenance",
+        "items": [
+          "I manage updates, security, and performance to keep systems stable.",
+          "I implement improvements and refactorings focused on maintainability and project performance.",
+          "Clear documentation to ensure continuity and ease of maintenance."
+        ]
+      }
+    ]
   }
 }
-

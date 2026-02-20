@@ -1,28 +1,18 @@
 ---
 const { t } = Astro.props;
+const services = t.services.list;
 ---
-<section id="skills" class="services">
+<section id="services" class="services">
   <h2>{t.services.title}</h2>
 
-<ul class="services-grid">
-  <!-- 1. Asesoramiento -->
-  <li class="service-card">
-    <h3>{t.services.tech.title}</h3>
-    <p>{t.services.tech.text}</p>
-  </li>
-
-  <!-- 2. Desarrollo Web -->
-  <li class="service-card">
-    <h3>{t.services.web.title}</h3>
-    <p>{t.services.web.text}</p>
-  </li>
-
-  <!-- 3. Mantenimiento -->
-  <li class="service-card">
-    <h3>{t.services.custom.title}</h3>
-    <p>{t.services.custom.text}</p>
-  </li>
-</ul>
-
+  <ul class="services-grid">
+    {services.map(service => (
+      <li class="service-card">
+        <h3>{service.title}</h3>
+        <ul>
+          {service.items.map(item => <li>{item}</li>)}
+        </ul>
+      </li>
+    ))}
+  </ul>
 </section>
-

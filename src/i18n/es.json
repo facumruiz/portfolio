@@ -1,7 +1,7 @@
 {
   "nav": {
     "projects": "Proyectos",
-    "skills": "Servicios"
+    "skills": "Expertise"
   },
   "intro": {
     "welcome": "Bienvenido",
@@ -12,19 +12,32 @@
     "title": "Proyectos"
   },
   "services": {
-    "title": "Servicios",
-    "web": {
-      "title": "Desarrollo Web",
-      "text": "Sitios web modernos, rápidos y optimizados para convertir. Trabajo tanto de forma presencial como online."
-    },
-    "tech": {
-      "title": "Asesoramiento",
-      "text": "Consultoría para tomar mejores decisiones técnicas, mejorar rendimiento, arquitectura o mantenimiento."
-    },
-    "custom": {
-      "title": "Mantenimiento",
-      "text": "Actualizaciones, correcciones y mejoras continuas para que tu sitio funcione siempre rápido, seguro y estable."
-    }
+    "title": "Areas de Expertise",
+    "list": [
+      {
+        "title": "Asesoramiento Técnico",
+        "items": [
+          "Analizo soluciones para arquitectura y rendimiento web",
+          "Establezco buenas prácticas y estándares de código",
+          "Participo en decisiones técnicas clave para proyectos eficientes"
+        ]
+      },
+      {
+        "title": "Desarrollo Web Full-Stack",
+        "items": [
+          "Desarrollo aplicaciones y sitios web accesibles y escalables",
+          "Trabajo con React, Node.js, MongoDB y Express",
+          "Integro backend y frontend con código reutilizable y mantenible"
+        ]
+      },
+      {
+        "title": "Mantenimiento",
+        "items": [
+          "Gestiono actualizaciones y seguridad de sistemas",
+          "Realizo mejoras y refactorizaciones para optimizar proyectos",
+          "Creo documentación clara para mantener continuidad y soporte"
+        ]
+      }
+    ]
   }
 }
-
