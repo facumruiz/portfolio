@@ -1,0 +1,33 @@
+---
+import Icon from "./Icon.astro";
+import { LINKS } from "../data/content.js";
+const { t } = Astro.props;
+---
+<section id="top" class="hero hero--split section">
+  <canvas class="hero-fx" aria-hidden="true"></canvas>
+  <div class="wrap hero__grid hero__grid--solo">
+    <div class="hero__col">
+      <div class="hero__role reveal">
+        <div class="hero__kicker">
+          <span class="dot" aria-hidden="true"></span>
+          <span class="mono-label">{t.hero.kicker}</span>
+        </div>
+      </div>
+      <h1 class="hero__title reveal" style="--reveal-delay:80ms" set:html={t.hero.title1 + "<br /><em>" + t.hero.title2 + "</em>"}></h1>
+      <div class="hero__lead reveal" style="--reveal-delay:160ms"><p>{t.hero.lead}</p></div>
+      <div class="hero__row reveal" style="--reveal-delay:240ms">
+        <div class="hero__ctas">
+          <a class="btn" href="#work">{t.hero.cta} <Icon name="arrow" size={16} /></a>
+          <a class="btn btn--ghost" href="#contact">{t.hero.cta2}</a>
+        </div>
+      </div>
+      <div class="hero__row reveal" style="--reveal-delay:300ms">
+        <div class="hero__socials">
+          <a class="social" href={LINKS.github} target="_blank" rel="noopener" aria-label="GitHub"><Icon name="github" size={19} /></a>
+          <a class="social" href={LINKS.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn"><Icon name="linkedin" size={19} /></a>
+          <a class="social" href={"mailto:" + LINKS.email} aria-label="Email"><Icon name="mail" size={19} /></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

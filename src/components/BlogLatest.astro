@@ -1,0 +1,34 @@
+---
+import Icon from "./Icon.astro";
+import { POSTS } from "../data/content.js";
+const { t, lang = "es" } = Astro.props;
+const base = lang === "es" ? "" : "/en";
+const latest = POSTS.slice(0, 3);
+const fmt = (iso) => new Date(iso + "T00:00:00").toLocaleDateString(lang === "es" ? "es-AR" : "en-US", { year: "numeric", month: "short", day: "numeric" });
+---
+<section id="blog" class="section">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-index">{t.blog.index}</span>
+      <div class="sec-head-text">
+        <h2 class="sec-title">{t.blog.title}</h2>
+        <p class="sec-sub">{t.blog.sub}</p>
+      </div>
+      <a class="arrow-link sec-head__action" href={base + "/blog"}>{t.blog.seeAll} <Icon name="arrow" size={15} /></a>
+    </div>
+    <ul class="post-list">
+      {latest.map((p, i) => (
+        <li class="post-row reveal" style={`--reveal-delay:${i * 60}ms`}>
+          <a class="post-row__btn" href={base + "/blog/" + p.slug}>
+            <span class="post-row__date mono-label">{fmt(p.date)}</span>
+            <span class="post-row__title">{p[lang].title}</span>
+            <span class="post-row__meta">
+              <span class="mono-label">{p.tags[0]}</span>
+              <Icon name="arrow" size={15} />
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

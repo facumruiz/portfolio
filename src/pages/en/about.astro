@@ -1,0 +1,10 @@
+---
+import { STRINGS } from "../../data/content.js";
+import BaseLayout from "../../components/BaseLayout.astro";
+import AboutContent from "../../components/AboutContent.astro";
+const lang = "en";
+const t = STRINGS[lang];
+---
+<BaseLayout t={t} lang={lang} title="About — Facundo Ruiz" description={t.about.pageSub} active="about" esHref="/sobre-mi" enHref="/en/about">
+  <AboutContent t={t} lang={lang} />
+</BaseLayout>

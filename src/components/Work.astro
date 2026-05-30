@@ -1,0 +1,56 @@
+---
+import Icon from "./Icon.astro";
+import { PROJECTS, POSTS } from "../data/content.js";
+const { t, lang = "es" } = Astro.props;
+const base = lang === "es" ? "" : "/en";
+const postFor = (pid) => POSTS.find((po) => po.projectId === pid);
+---
+<section id="work" class="section">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-index">{t.work.index}</span>
+      <div class="sec-head-text">
+        <h2 class="sec-title">{t.work.title}</h2>
+        <p class="sec-sub">{t.work.sub}</p>
+      </div>
+    </div>
+
+    <ol class="work-list">
+      {PROJECTS.map((p, i) => {
+        const c = p[lang];
+        const post = postFor(p.id);
+        const href = post ? base + "/blog/" + post.slug : base + "/blog";
+        return (
+          <li class="work-item reveal" style={`--reveal-delay:${i * 60}ms`}>
+            <a class="work-item__btn" href={href}>
+              <div class="work-item__media">
+                {p.media ? (
+                  <div class="hovid" data-hovid>
+                    <img class="hovid__poster" src={p.media.poster} alt={c.title} loading="lazy" draggable="false" />
+                    <video class="hovid__video" src={p.media.video} muted loop playsinline preload="none"></video>
+                    <span class="hovid__hint mono-label"><span class="hovid__play" aria-hidden="true">▶</span> demo</span>
+                  </div>
+                ) : (
+                  <div class="work-item__placeholder" aria-hidden="true"></div>
+                )}
+              </div>
+              <div class="work-item__body">
+                <div class="work-item__top">
+                  <span class="mono-label">{c.role}</span>
+                  <span class="mono-label work-item__year">{p.year}</span>
+                </div>
+                <h3 class="work-item__title">{c.title}</h3>
+                <p class="work-item__tag">{c.tagline}</p>
+                <p class="work-item__outcome">{c.outcome}</p>
+                <div class="work-item__stack">
+                  {p.stack.map((s) => <span class="tag">{s}</span>)}
+                </div>
+                <span class="arrow-link work-item__link">{t.work.view} <Icon name="arrow" size={15} /></span>
+              </div>
+            </a>
+          </li>
+        );
+      })}
+    </ol>
+  </div>
+</section>

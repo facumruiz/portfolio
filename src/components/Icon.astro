@@ -1,0 +1,32 @@
+---
+// Iconos SVG (trazo, currentColor). name = arrow | arrow-ur | back | github | linkedin | mail | sun | moon
+const { name, size = 16, class: cls = "" } = Astro.props;
+const stroke = { fill: "none", stroke: "currentColor", "stroke-width": "1.6", "stroke-linecap": "round", "stroke-linejoin": "round" };
+---
+{name === "arrow" && (
+  <svg class={"arrow " + cls} width={size} height={size} viewBox="0 0 24 24" {...stroke} aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+)}
+{name === "arrow-ur" && (
+  <svg class={cls} width={size} height={size} viewBox="0 0 24 24" {...stroke} aria-hidden="true"><path d="M7 17 17 7M8 7h9v9" /></svg>
+)}
+{name === "back" && (
+  <svg class={cls} width={size} height={size} viewBox="0 0 24 24" {...stroke} aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6" /></svg>
+)}
+{name === "top" && (
+  <svg class={cls} width={size} height={size} viewBox="0 0 24 24" {...stroke} aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6" /></svg>
+)}
+{name === "github" && (
+  <svg class={cls} width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.85 9.73.5.1.68-.22.68-.49 0-.24-.01-.88-.01-1.73-2.78.62-3.37-1.21-3.37-1.21-.46-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.57 2.34 1.12 2.91.86.09-.66.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05A9.3 9.3 0 0 1 12 6.84c.85 0 1.71.12 2.51.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.93-2.35 4.79-4.58 5.05.36.32.68.95.68 1.92 0 1.39-.01 2.51-.01 2.85 0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z" /></svg>
+)}
+{name === "linkedin" && (
+  <svg class={cls} width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.94 5a1.94 1.94 0 1 1-3.88 0 1.94 1.94 0 0 1 3.88 0ZM3.4 8.4h3.1V21H3.4V8.4Zm5.06 0h2.97v1.72h.04c.41-.78 1.43-1.6 2.94-1.6 3.15 0 3.73 2.07 3.73 4.76V21h-3.1v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94V21H8.46V8.4Z" /></svg>
+)}
+{name === "mail" && (
+  <svg class={cls} width={size} height={size} viewBox="0 0 24 24" {...stroke} aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3.5 7 8.5 6 8.5-6" /></svg>
+)}
+{name === "sun" && (
+  <svg class={"ic-sun " + cls} width={size} height={size} viewBox="0 0 24 24" {...stroke} aria-hidden="true"><circle cx="12" cy="12" r="4.2" /><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8" /></svg>
+)}
+{name === "moon" && (
+  <svg class={"ic-moon " + cls} width={size} height={size} viewBox="0 0 24 24" {...stroke} aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a7 7 0 1 0 10.5 10.5Z" /></svg>
+)}

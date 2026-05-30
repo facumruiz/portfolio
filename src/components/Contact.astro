@@ -1,0 +1,22 @@
+---
+import Icon from "./Icon.astro";
+import { LINKS } from "../data/content.js";
+const { t } = Astro.props;
+---
+<section id="contact" class="section section--contact">
+  <div class="wrap">
+    <span class="sec-index" style="display:block;margin-bottom:24px">{t.contact.index}</span>
+    <h2 class="contact__title reveal">{t.contact.title}</h2>
+    <div class="contact__sub reveal" style="--reveal-delay:100ms"><p>{t.contact.sub}</p></div>
+    <div class="contact__cta reveal" style="--reveal-delay:180ms">
+      <a class="btn" href={"mailto:" + LINKS.email}>{t.contact.email} <Icon name="arrow" size={16} /></a>
+    </div>
+    <div class="contact__alt reveal" style="--reveal-delay:240ms">
+      <span class="mono-label">{t.contact.or}</span>
+      <div class="contact__socials">
+        <a class="arrow-link" href={LINKS.github} target="_blank" rel="noopener">GitHub <Icon name="arrow-ur" size={14} /></a>
+        <a class="arrow-link" href={LINKS.linkedin} target="_blank" rel="noopener">LinkedIn <Icon name="arrow-ur" size={14} /></a>
+      </div>
+    </div>
+  </div>
+</section>

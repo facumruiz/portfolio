@@ -1,0 +1,110 @@
+---
+import Icon from "./Icon.astro";
+import { EXPERIENCE, EDUCATION, CERTS, SKILLS, LINKS } from "../data/content.js";
+const { t, lang = "es" } = Astro.props;
+---
+<main class="blog-page about-page">
+  <section class="section blog-page__head">
+    <div class="wrap">
+      <span class="mono-label">{t.about.index} · {t.nav.about}</span>
+      <h1 class="blog-page__title">{t.about.title}</h1>
+      <p class="blog-page__sub">{t.about.pageSub}</p>
+    </div>
+  </section>
+
+  <section class="section about-page__intro">
+    <div class="wrap">
+      <div class="about-intro">
+        <div class="about-intro__text">
+          <div class="about-body reveal">
+            <p class="about-lead">{t.about.body1}</p>
+            <p class="about-p">{t.about.body2}</p>
+          </div>
+          <div class="about-now reveal" style="--reveal-delay:120ms">
+            <span class="mono-label">{t.about.nowTitle}</span>
+            <p>{t.about.now}</p>
+            <div class="about-now__cta">
+              <a class="arrow-link" href={"mailto:" + LINKS.email}>{t.contact.email} <Icon name="arrow" size={15} /></a>
+            </div>
+          </div>
+        </div>
+        <div class="about-portrait reveal" style="--reveal-delay:120ms">
+          <img src="/img/facundo.webp" alt="Facundo Ruiz" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section about-page__exp">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="sec-index">{t.experience.index}</span>
+        <div class="sec-head-text">
+          <h2 class="sec-title">{t.experience.title}</h2>
+          <p class="sec-sub">{t.experience.sub}</p>
+        </div>
+      </div>
+
+      <ol class="tl">
+        {EXPERIENCE.map((x, i) => {
+          const c = x[lang];
+          return (
+            <li class="tl__row reveal" style={`--reveal-delay:${i * 70}ms`}>
+              <div class="tl__period mono-label">{c.period}</div>
+              <div class="tl__dot" aria-hidden="true"></div>
+              <div class="tl__body">
+                <h3 class="tl__role">{c.role}</h3>
+                <div class="tl__org mono-label">{c.org}</div>
+                <p class="tl__note">{c.note}</p>
+              </div>
+            </li>
+          );
+        })}
+      </ol>
+
+      <div class="edu-grid">
+        <div class="edu-col reveal" style="--reveal-delay:80ms">
+          <span class="mono-label edu-col__label">{t.experience.eduTitle}</span>
+          <ul class="edu-list">
+            {EDUCATION.map((e) => {
+              const c = e[lang];
+              return (
+                <li class="edu-item">
+                  <span class="edu-item__period mono-label">{c.period}</span>
+                  <span class="edu-item__degree">{c.degree}</span>
+                  <span class="edu-item__org mono-label">{c.org}</span>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+        <div class="edu-col reveal" style="--reveal-delay:160ms">
+          <span class="mono-label edu-col__label">{t.experience.certTitle}</span>
+          <ul class="edu-list">
+            {CERTS.map((c) => (
+              <li class="edu-item">
+                <span class="edu-item__period mono-label">{c.year}</span>
+                <span class="edu-item__degree">{c.name}</span>
+                <span class="edu-item__org mono-label">{c.org}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <div class="stack reveal" style="--reveal-delay:120ms">
+        <span class="mono-label stack__label">{t.expertise.stackTitle}</span>
+        <div class="stack__groups">
+          {SKILLS[lang].map((g) => (
+            <div class="stack__group">
+              <span class="stack__group-label mono-label">{g.label}</span>
+              <div class="stack__tags">
+                {g.items.map((it) => <span class="tag">{it}</span>)}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

@@ -1,0 +1,16 @@
+---
+import { STRINGS, POSTS } from "../../../data/content.js";
+import BaseLayout from "../../../components/BaseLayout.astro";
+import BlogPost from "../../../components/BlogPost.astro";
+
+export function getStaticPaths() {
+  return POSTS.map((p) => ({ params: { slug: p.slug }, props: { post: p } }));
+}
+
+const lang = "en";
+const t = STRINGS[lang];
+const { post } = Astro.props;
+---
+<BaseLayout t={t} lang={lang} title={post.en.title + " — Facundo Ruiz"} description={post.en.excerpt} active="blog" esHref={"/blog/" + post.slug} enHref={"/en/blog/" + post.slug}>
+  <BlogPost t={t} lang={lang} post={post} />
+</BaseLayout>

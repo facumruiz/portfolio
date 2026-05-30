@@ -1,0 +1,54 @@
+---
+import Icon from "./Icon.astro";
+import { PROJECTS } from "../data/content.js";
+const { t, lang = "es", post } = Astro.props;
+const base = lang === "es" ? "" : "/en";
+const c = post[lang];
+const project = PROJECTS.find((p) => p.id === post.projectId);
+const fmt = (iso) => new Date(iso + "T00:00:00").toLocaleDateString(lang === "es" ? "es-AR" : "en-US", { year: "numeric", month: "short", day: "numeric" });
+---
+<main class="post-page">
+  <article class="section">
+    <div class="wrap wrap--reading">
+      <a class="arrow-link post-back" href={base + "/blog"}><Icon name="back" size={15} /> {t.blog.back}</a>
+
+      <div class="post-page__meta">
+        <span class="post-row__date mono-label">{fmt(post.date)}</span>
+        <span class="mono-label">·</span>
+        <span class="mono-label">{post.readMin} {t.blog.readTime}</span>
+      </div>
+      <h1 class="post-page__title">{c.title}</h1>
+      <p class="post-page__excerpt">{c.excerpt}</p>
+      <div class="post-page__tags">
+        {post.tags.map((tg) => <span class="tag">{tg}</span>)}
+      </div>
+
+      {project && project.media && (
+        <div class="post-page__hero">
+          <img src={project.media.poster} alt={c.title} loading="lazy" />
+        </div>
+      )}
+
+      <div class="prose">
+        {c.body.map((b) => {
+          if (b.type === "h") return <h2 class="prose__h">{b.text}</h2>;
+          if (b.type === "code") return <pre class="prose__code"><code>{b.text}</code></pre>;
+          return <p class="prose__p">{b.text}</p>;
+        })}
+      </div>
+
+      {project && (
+        <div class="post-page__project">
+          <span class="mono-label">{t.work.stack}</span>
+          <div class="post-card__tags">
+            {project.stack.map((s) => <span class="tag">{s}</span>)}
+          </div>
+        </div>
+      )}
+
+      <div class="post-page__foot">
+        <a class="btn btn--ghost" href={base + "/blog"}><Icon name="back" size={15} /> {t.blog.back}</a>
+      </div>
+    </div>
+  </article>
+</main>

@@ -1,0 +1,52 @@
+---
+import Icon from "./Icon.astro";
+import { POSTS } from "../data/content.js";
+const { t, lang = "es" } = Astro.props;
+const base = lang === "es" ? "" : "/en";
+const fmt = (iso) => new Date(iso + "T00:00:00").toLocaleDateString(lang === "es" ? "es-AR" : "en-US", { year: "numeric", month: "short", day: "numeric" });
+const tags = Array.from(new Set(POSTS.flatMap((p) => p.tags)));
+---
+<main class="blog-page">
+  <section class="section blog-page__head">
+    <div class="wrap">
+      <span class="mono-label">{t.blog.index} · {t.nav.blog}</span>
+      <h1 class="blog-page__title">{t.blog.title}</h1>
+      <p class="blog-page__sub">{t.blog.sub}</p>
+
+      <div class="filterbar" data-blog-filters>
+        <span class="mono-label filterbar__label">{t.blog.filterBy}</span>
+        <div class="filterbar__tags">
+          <button class="tag" data-tag="__all" aria-pressed="true">{t.blog.all}</button>
+          {tags.map((tg) => (
+            <button class="tag" data-tag={tg} aria-pressed="false">{tg}</button>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section blog-page__list">
+    <div class="wrap">
+      <ul class="post-list post-list--full">
+        {POSTS.map((p, i) => (
+          <li class="post-card reveal" style={`--reveal-delay:${i * 50}ms`} data-post-card data-tags={p.tags.join("|")}>
+            <a class="post-card__btn" href={base + "/blog/" + p.slug}>
+              <div class="post-card__top">
+                <span class="post-row__date mono-label">{fmt(p.date)}</span>
+                <span class="mono-label">{p.readMin} {t.blog.readTime}</span>
+              </div>
+              <h2 class="post-card__title">{p[lang].title}</h2>
+              <p class="post-card__excerpt">{p[lang].excerpt}</p>
+              <div class="post-card__foot">
+                <div class="post-card__tags">
+                  {p.tags.map((tg) => <span class="tag">{tg}</span>)}
+                </div>
+                <span class="arrow-link">{t.blog.readMore} <Icon name="arrow" size={15} /></span>
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</main>

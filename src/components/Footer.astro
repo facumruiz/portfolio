@@ -1,0 +1,11 @@
+---
+import Icon from "./Icon.astro";
+const { t } = Astro.props;
+const year = new Date().getFullYear();
+---
+<footer class="footer">
+  <div class="wrap footer__inner">
+    <span class="mono-label">© {year} · {t.footer.built}</span>
+    <a class="arrow-link" href="#top">{t.footer.top} <Icon name="top" size={14} /></a>
+  </div>
+</footer>

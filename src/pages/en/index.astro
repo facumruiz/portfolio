@@ -1,0 +1,21 @@
+---
+import { STRINGS } from "../../data/content.js";
+import BaseLayout from "../../components/BaseLayout.astro";
+import Hero from "../../components/Hero.astro";
+import Work from "../../components/Work.astro";
+import Expertise from "../../components/Expertise.astro";
+import BlogLatest from "../../components/BlogLatest.astro";
+import Contact from "../../components/Contact.astro";
+const lang = "en";
+const t = STRINGS[lang];
+const desc = "Facundo Ruiz — full-stack and embedded/IoT developer. Open to new full-time roles and freelance projects.";
+---
+<BaseLayout t={t} lang={lang} title="Facundo Ruiz — Full-Stack & Embedded Developer" description={desc} active="home" esHref="/" enHref="/en/">
+  <main>
+    <Hero t={t} lang={lang} />
+    <Work t={t} lang={lang} />
+    <Expertise t={t} lang={lang} />
+    <BlogLatest t={t} lang={lang} />
+    <Contact t={t} lang={lang} />
+  </main>
+</BaseLayout>

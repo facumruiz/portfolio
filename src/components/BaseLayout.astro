@@ -1,0 +1,36 @@
+---
+import "../styles/global.css";
+import "../styles/components.css";
+import Nav from "./Nav.astro";
+import Footer from "./Footer.astro";
+const {
+  t, lang = "es",
+  title = "Facundo Ruiz",
+  description = "",
+  active = "home",
+  esHref = "/",
+  enHref = "/en/",
+} = Astro.props;
+---
+<!DOCTYPE html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23211d16'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='17' font-weight='700' fill='%23f4eee2' text-anchor='middle'%3EFR%3C/text%3E%3C/svg%3E" />
+    <!-- Aplica el tema guardado ANTES de pintar (evita parpadeo) -->
+    <script is:inline>
+      (function () {
+        try { var s = localStorage.getItem("fr_theme"); if (s) document.documentElement.setAttribute("data-theme", s); } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <Nav t={t} lang={lang} active={active} esHref={esHref} enHref={enHref} />
+    <slot />
+    <Footer t={t} />
+    <script src="/scripts/client.js" is:inline></script>
+  </body>
+</html>

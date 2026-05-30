@@ -1,0 +1,10 @@
+---
+import { STRINGS } from "../../../data/content.js";
+import BaseLayout from "../../../components/BaseLayout.astro";
+import BlogList from "../../../components/BlogList.astro";
+const lang = "en";
+const t = STRINGS[lang];
+---
+<BaseLayout t={t} lang={lang} title="Blog — Facundo Ruiz" description={t.blog.sub} active="blog" esHref="/blog" enHref="/en/blog">
+  <BlogList t={t} lang={lang} />
+</BaseLayout>

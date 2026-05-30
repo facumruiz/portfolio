@@ -1,0 +1,31 @@
+---
+import { EXPERTISE } from "../data/content.js";
+const { t, lang = "es" } = Astro.props;
+---
+<section id="expertise" class="section">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-index">{t.expertise.index}</span>
+      <div class="sec-head-text">
+        <h2 class="sec-title">{t.expertise.title}</h2>
+        <p class="sec-sub">{t.expertise.sub}</p>
+      </div>
+    </div>
+    <div class="exp-grid">
+      {EXPERTISE.map((e, i) => {
+        const c = e[lang];
+        return (
+          <div class="exp-card reveal" style={`--reveal-delay:${i * 80}ms`}>
+            <span class="exp-card__no mono-label">0{i + 1}</span>
+            <h3 class="exp-card__title">{c.title}</h3>
+            <ul class="exp-card__list">
+              {c.points.map((pt) => (
+                <li><span class="exp-card__bullet">—</span>{pt}</li>
+              ))}
+            </ul>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,182 @@
+/* styles.css — sistema de diseño: cream + ink, developer puro, minimalista */
+
+/* ── Fonts ── */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+/* ── Tokens ── */
+:root {
+  /* dos colores base — tinta cálida sobre crema */
+  --cream: #f4eee2;
+  --cream-2: #efe7d8;      /* superficie ligeramente hundida */
+  --ink: #211d16;          /* tinta cálida casi negra */
+  --ink-80: rgba(33, 29, 22, 0.78);
+  --ink-55: rgba(33, 29, 22, 0.55);
+  --ink-30: rgba(33, 29, 22, 0.28);
+  --line: rgba(33, 29, 22, 0.16);
+  --line-soft: rgba(33, 29, 22, 0.09);
+
+  --bg: var(--cream);
+  --surface: var(--cream-2);
+  --fg: var(--ink);
+  --fg-soft: var(--ink-80);
+  --fg-mute: var(--ink-55);
+  --fg-faint: var(--ink-30);
+  --hairline: var(--line);
+  --hairline-soft: var(--line-soft);
+
+  /* acento opcional (Tweaks) — por defecto = tinta (monocromo de 2 colores) */
+  --accent: var(--ink);
+
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  /* escala (la cambia Tweaks: fontScale) */
+  --scale: 1;
+  --maxw: 1080px;
+  --gutter: clamp(20px, 5vw, 64px);
+  --section-pad: clamp(72px, 11vh, 150px);
+  --radius: 4px;
+
+  --motion: 1; /* 0 = sin animaciones */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-theme="dark"] {
+  --bg: #181511;
+  --surface: #211d17;
+  --fg: #f1eadc;
+  --fg-soft: rgba(241, 234, 220, 0.80);
+  --fg-mute: rgba(241, 234, 220, 0.56);
+  --fg-faint: rgba(241, 234, 220, 0.30);
+  --hairline: rgba(241, 234, 220, 0.16);
+  --hairline-soft: rgba(241, 234, 220, 0.08);
+  --accent: var(--fg);
+}
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: calc(17px * var(--scale));
+  line-height: 1.6;
+  transition: background 0.5s var(--ease), color 0.5s var(--ease);
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+img { display: block; max-width: 100%; }
+::selection { background: var(--fg); color: var(--bg); }
+
+/* ── Layout helpers ── */
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter); }
+.section { padding-block: var(--section-pad); position: relative; }
+.section + .section { border-top: 1px solid var(--hairline-soft); }
+
+/* etiqueta de sección: índice mono + título */
+.sec-head { display: flex; align-items: baseline; gap: 16px; margin-bottom: clamp(36px, 6vh, 64px); flex-wrap: wrap; }
+.sec-index {
+  font-family: var(--font-mono);
+  font-size: calc(13px * var(--scale));
+  font-weight: 500;
+  color: var(--fg-faint);
+  letter-spacing: 0.05em;
+  padding-top: 0.5em;
+}
+.sec-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(28px, 4.6vw, 46px);
+  letter-spacing: -0.02em;
+  line-height: 1.02;
+  margin: 0;
+}
+.sec-sub { color: var(--fg-mute); margin: 10px 0 0; max-width: 46ch; font-size: calc(16px * var(--scale)); }
+.sec-head-text { flex: 1 1 320px; }
+
+/* mono micro-label */
+.mono-label {
+  font-family: var(--font-mono);
+  font-size: calc(11.5px * var(--scale));
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+}
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--font-mono);
+  font-size: calc(13px * var(--scale));
+  letter-spacing: 0.02em;
+  padding: 13px 22px;
+  border: 1px solid var(--fg);
+  border-radius: var(--radius);
+  transition: background 0.3s var(--ease), color 0.3s var(--ease), transform 0.3s var(--ease);
+}
+.btn .arrow { transition: transform 0.35s var(--ease); }
+.btn:hover { background: var(--fg); color: var(--bg); }
+.btn:hover .arrow { transform: translateX(4px); }
+.btn--ghost { border-color: var(--hairline); }
+.btn--ghost:hover { border-color: var(--fg); background: transparent; color: var(--fg); }
+
+/* link con flecha */
+.arrow-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono);
+  font-size: calc(13px * var(--scale));
+  color: var(--fg);
+  position: relative;
+}
+.arrow-link .arrow { transition: transform 0.35s var(--ease); }
+.arrow-link:hover .arrow { transform: translateX(5px); }
+.arrow-link::after {
+  content: ""; position: absolute; left: 0; bottom: -3px; height: 1px; width: 0;
+  background: var(--fg); transition: width 0.35s var(--ease);
+}
+.arrow-link:hover::after { width: calc(100% - 24px); }
+
+/* ── Reveal on scroll ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(calc(18px * var(--motion)));
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal.in { opacity: 1; transform: none; }
+
+/* ── Tags / chips ── */
+.tag {
+  font-family: var(--font-mono);
+  font-size: calc(12px * var(--scale));
+  color: var(--fg-mute);
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  padding: 5px 11px;
+  white-space: nowrap;
+  transition: all 0.25s var(--ease);
+}
+button.tag { cursor: pointer; }
+button.tag:hover { border-color: var(--fg); color: var(--fg); }
+button.tag[aria-pressed="true"], .tag--on { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+
+/* ── grid background lines (developer touch, toggled by Tweaks) ── */
+.gridlines body::before { content: none; }
+[data-grid="on"] .wrap { position: relative; }
+[data-grid="on"] .section::before,
+[data-grid="on"] .section::after {
+  content: "";
+  position: absolute; top: 0; bottom: 0; width: 1px;
+  background: var(--hairline-soft);
+  pointer-events: none;
+}
+[data-grid="on"] .section::before { left: max(var(--gutter), calc(50% - var(--maxw) / 2)); }
+[data-grid="on"] .section::after  { right: max(var(--gutter), calc(50% - var(--maxw) / 2)); }
+
+/* utility */
+.kept-clean { display: none; }
