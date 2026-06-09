@@ -29,8 +29,15 @@ const fmt = (iso) => new Date(iso + "T00:00:00").toLocaleDateString(lang === "es
 
       {post.youtube ? (
         <div class="post-page__hero">
-          <div class="post-video">
-            <iframe class="post-video__frame" src={"https://www.youtube-nocookie.com/embed/" + post.youtube} title={c.title} loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          <div class="post-video" data-yt={post.youtube}>
+            <button class="post-video__poster" type="button" aria-label={(lang === "es" ? "Reproducir video · " : "Play video · ") + c.title}>
+              <img src={post.poster} alt={c.title} draggable="false" />
+              <span class="post-video__scrim" aria-hidden="true"></span>
+              <span class="post-video__play" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="32" height="32"><path d="M8 5v14l11-7z" fill="currentColor"></path></svg>
+              </span>
+              <span class="post-video__cta mono-label">{lang === "es" ? "Ver demo" : "Watch demo"}</span>
+            </button>
           </div>
         </div>
       ) : project && project.media && (
@@ -62,3 +69,26 @@ const fmt = (iso) => new Date(iso + "T00:00:00").toLocaleDateString(lang === "es
     </div>
   </article>
 </main>
+
+<script>
+  function initPostVideo() {
+    document.querySelectorAll(".post-video[data-yt]").forEach((box) => {
+      const poster = box.querySelector(".post-video__poster");
+      if (!poster || box.dataset.bound) return;
+      box.dataset.bound = "1";
+      poster.addEventListener("click", () => {
+        const id = box.getAttribute("data-yt");
+        const iframe = document.createElement("iframe");
+        iframe.className = "post-video__frame";
+        iframe.src = "https://www.youtube-nocookie.com/embed/" + id + "?autoplay=1&rel=0";
+        iframe.title = poster.querySelector("img")?.alt || "video";
+        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+        iframe.allowFullscreen = true;
+        box.innerHTML = "";
+        box.appendChild(iframe);
+      });
+    });
+  }
+  document.addEventListener("astro:page-load", initPostVideo);
+  document.addEventListener("DOMContentLoaded", initPostVideo);
+</script>

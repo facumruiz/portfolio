@@ -349,6 +349,7 @@ const POSTS = [
     tags: ["ESP32", "MQTT", "Home Assistant", "IoT", "C/C++"],
     projectId: "esphome",
     youtube: "GxJcZw_B8DM",
+    poster: "/img/esphome-portada.jpg",
     repo: "https://github.com/facumruiz/esp-home",
     es: {
       title: "esp-home: domótica sobre ESP32, fase a fase",
