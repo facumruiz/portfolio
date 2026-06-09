@@ -272,3 +272,37 @@ section[id] { scroll-margin-top: 88px; }
 /* ── Astro: imagen hero del caso de estudio ── */
 .post-page__hero img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; display: block; }
 .work-item__placeholder { width: 100%; min-height: 200px; background: var(--surface); border-radius: 6px; }
+
+/* ── esp-home: diagrama de arquitectura con animación al hover ── */
+.ehimg { position: relative; width: 100%; height: 100%; overflow: hidden; background: #05070f; }
+.ehimg__img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: contain; object-position: center;
+  transform: scale(1.02); transform-origin: 50% 42%;
+  transition: transform 5.5s var(--ease), filter 0.5s var(--ease);
+  filter: saturate(0.97) brightness(0.95);
+}
+.work-item__btn:hover .ehimg__img { transform: scale(1.14); filter: saturate(1.06) brightness(1.05); }
+.ehimg__sweep {
+  position: absolute; top: -10%; bottom: -10%; width: 48%; left: -55%;
+  pointer-events: none; z-index: 2; opacity: 0;
+  background: linear-gradient(105deg, transparent 0%, rgba(120, 200, 255, 0.14) 42%, rgba(120, 255, 205, 0.20) 55%, transparent 100%);
+  transform: skewX(-12deg);
+}
+.work-item__btn:hover .ehimg__sweep { animation: ehimg-sweep 2.8s ease-in-out 0.2s infinite; }
+@keyframes ehimg-sweep {
+  0% { left: -55%; opacity: 0; }
+  16% { opacity: 1; }
+  62% { opacity: 0.9; }
+  100% { left: 118%; opacity: 0; }
+}
+.work-item__btn:hover .ehimg__hint { opacity: 0; transform: translateY(6px); }
+@media (prefers-reduced-motion: reduce) {
+  .ehimg__img, .work-item__btn:hover .ehimg__img { transition: none; }
+  .work-item__btn:hover .ehimg__sweep { animation: none; }
+}
+
+/* ── caso de estudio: video de YouTube embebido + enlace al repo ── */
+.post-video { position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 8px; overflow: hidden; background: #000; border: 1px solid var(--hairline); }
+.post-video__frame { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.post-page__repo { display: inline-flex; align-items: center; gap: 8px; margin-top: 20px; }

@@ -24,7 +24,13 @@ const postFor = (pid) => POSTS.find((po) => po.projectId === pid);
           <li class="work-item reveal" style={`--reveal-delay:${i * 60}ms`}>
             <a class="work-item__btn" href={href}>
               <div class="work-item__media">
-                {p.media ? (
+                {p.diagram ? (
+                  <div class="ehimg">
+                    <img class="ehimg__img" src={p.diagram} alt={c.title} loading="lazy" draggable="false" />
+                    <span class="ehimg__sweep" aria-hidden="true"></span>
+                    <span class="hovid__hint ehimg__hint mono-label"><span class="hovid__play" aria-hidden="true">▶</span> demo</span>
+                  </div>
+                ) : p.media ? (
                   <div class="hovid" data-hovid>
                     <img class="hovid__poster" src={p.media.poster} alt={c.title} loading="lazy" draggable="false" />
                     <video class="hovid__video" src={p.media.video} muted loop playsinline preload="none"></video>

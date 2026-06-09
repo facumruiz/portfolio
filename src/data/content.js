@@ -140,6 +140,26 @@ const STRINGS = {
 // ─────────────────────────────────────────────────────────────
 const PROJECTS = [
   {
+    id: "esphome",
+    year: "2026",
+    slug: "esp-home-domotica-esp32",
+    diagram: "/img/esphome-arquitectura.png",
+    repo: "https://github.com/facumruiz/esp-home",
+    stack: ["ESP-IDF", "C/C++", "MQTT", "Home Assistant", "Docker"],
+    es: {
+      title: "esp-home — Domótica sobre ESP32",
+      tagline: "Proyecto de fin de carrera: domótica construida fase a fase, de un access point aislado a MQTT + Home Assistant.",
+      outcome: "Control de luces y sensores en tiempo real, integrado a Home Assistant vía MQTT.",
+      role: "Proyecto final · Embebidos & IoT",
+    },
+    en: {
+      title: "esp-home — ESP32 home automation",
+      tagline: "Final-year project: home automation built phase by phase, from an isolated access point to MQTT + Home Assistant.",
+      outcome: "Real-time light & sensor control, integrated into Home Assistant over MQTT.",
+      role: "Final project · Embedded & IoT",
+    },
+  },
+  {
     id: "sports",
     year: "2025",
     slug: "plataforma-gestion-deportiva",
@@ -180,28 +200,6 @@ const PROJECTS = [
       title: "Car Dealership Website",
       tagline: "Site to showcase available vehicles, technical specs and direct contact.",
       outcome: "A clear catalogue optimized to increase enquiries.",
-      role: "Frontend",
-    },
-  },
-  {
-    id: "landing",
-    year: "2024",
-    slug: "landing-page-simple",
-    stack: ["React", "Performance"],
-    media: {
-      poster: "/gifs/thumbnails/landing-thumb.webp",
-      video: "https://raw.githubusercontent.com/facumruiz/portfolio/main//gifs/landing.webm",
-    },
-    es: {
-      title: "Landing Page de Alta Conversión",
-      tagline: "Landing enfocada en la conversión para servicios o productos.",
-      outcome: "Carga rápida y estructura pensada para impulsar conversiones.",
-      role: "Frontend",
-    },
-    en: {
-      title: "High-Conversion Landing Page",
-      tagline: "Landing page focused on conversion for services or products.",
-      outcome: "Fast load and a structure designed to drive conversions.",
       role: "Frontend",
     },
   },
@@ -343,6 +341,52 @@ const CERTS = [
 // Blog — case studies
 // ─────────────────────────────────────────────────────────────
 const POSTS = [
+  {
+    id: "post-esphome",
+    slug: "esp-home-domotica-esp32",
+    date: "2026-04-15",
+    readMin: 9,
+    tags: ["ESP32", "MQTT", "Home Assistant", "IoT", "C/C++"],
+    projectId: "esphome",
+    youtube: "GxJcZw_B8DM",
+    repo: "https://github.com/facumruiz/esp-home",
+    es: {
+      title: "esp-home: domótica sobre ESP32, fase a fase",
+      excerpt: "Mi proyecto de fin de carrera: domótica sobre ESP32 construida fase a fase, de un access point aislado a MQTT + Home Assistant.",
+      body: [
+        { type: "p", text: "esp-home es mi proyecto de fin de carrera de la Tecnicatura en Sistemas Embebidos e IoT. La idea era llevar una placa ESP32 desde un dispositivo aislado hasta un nodo integrado en una instalación domótica real — y hacerlo paso a paso, sin reescribir todo el firmware en cada avance." },
+        { type: "h", text: "El objetivo" },
+        { type: "p", text: "Construir un sistema de domótica progresivo: cada fase debía funcionar por sí sola y, a la vez, ser la base de la siguiente. De esa forma el proyecto se podía mostrar, probar y documentar en cualquier punto del camino." },
+        { type: "h", text: "Fase a fase" },
+        { type: "p", text: "Arranqué con un access point local y un webserver HTTP para encender un LED desde el navegador — cero dependencia de la red de casa. Después levanté Home Assistant en Docker como cerebro central. Por último migré la comunicación a MQTT, con fallback automático entre AP y STA para que el dispositivo nunca quede inalcanzable." },
+        { type: "h", text: "La decisión técnica" },
+        { type: "p", text: "MQTT en lugar de HTTP-polling: el ESP32 publica su estado y se suscribe a comandos por tópico. Mensajes chicos, reconexión barata y Home Assistant descubre el dispositivo casi solo." },
+        { type: "code", text: "// el ESP32 escucha comandos y publica estado\nesp_mqtt_client_subscribe(client, \"home/led/set\", 1);\n\nvoid on_message(const char *topic, const char *payload) {\n  if (!strcmp(topic, \"home/led/set\"))\n    gpio_set_level(LED_GPIO, atoi(payload));\n}" },
+        { type: "h", text: "Módulos" },
+        { type: "p", text: "Sobre esa base sumé una tira WS2812B controlable por MQTT y webserver local, y un sensor de luz LM393 que habilita un modo automático: las luces responden a la luz ambiente sin intervención." },
+        { type: "h", text: "Resultado" },
+        { type: "p", text: "Un sistema domótico funcionando de punta a punta — firmware en C/C++ con ESP-IDF, broker MQTT y Home Assistant — documentado fase por fase en el repositorio para poder reproducirlo o extenderlo. El video muestra el sistema en funcionamiento." },
+      ],
+    },
+    en: {
+      title: "esp-home: ESP32 home automation, phase by phase",
+      excerpt: "My final-year project: ESP32 home automation built phase by phase, from an isolated access point to MQTT + Home Assistant.",
+      body: [
+        { type: "p", text: "esp-home is the final project of my Embedded Systems & IoT degree. The goal was to take an ESP32 board from an isolated device to a node integrated into a real home-automation setup — and to do it step by step, without rewriting the whole firmware at each stage." },
+        { type: "h", text: "The goal" },
+        { type: "p", text: "Build a progressive home-automation system: each phase had to work on its own and, at the same time, be the foundation of the next. That way the project could be shown, tested and documented at any point along the way." },
+        { type: "h", text: "Phase by phase" },
+        { type: "p", text: "I started with a local access point and an HTTP webserver to toggle an LED from the browser — zero dependency on the home network. Then I stood up Home Assistant in Docker as the central brain. Finally I moved communication to MQTT, with automatic fallback between AP and STA so the device is never unreachable." },
+        { type: "h", text: "The technical decision" },
+        { type: "p", text: "MQTT instead of HTTP polling: the ESP32 publishes its state and subscribes to commands by topic. Small messages, cheap reconnection, and Home Assistant discovers the device almost on its own." },
+        { type: "code", text: "// the ESP32 listens for commands and publishes state\nesp_mqtt_client_subscribe(client, \"home/led/set\", 1);\n\nvoid on_message(const char *topic, const char *payload) {\n  if (!strcmp(topic, \"home/led/set\"))\n    gpio_set_level(LED_GPIO, atoi(payload));\n}" },
+        { type: "h", text: "Modules" },
+        { type: "p", text: "On top of that base I added a WS2812B strip controllable over MQTT and a local webserver, plus an LM393 light sensor that enables an automatic mode: the lights respond to ambient light with no intervention." },
+        { type: "h", text: "Outcome" },
+        { type: "p", text: "A home-automation system working end to end — firmware in C/C++ with ESP-IDF, an MQTT broker and Home Assistant — documented phase by phase in the repository so it can be reproduced or extended. The video shows the system in action." },
+      ],
+    },
+  },
   {
     id: "post-sports",
     slug: "tiempo-real-plataforma-deportiva",

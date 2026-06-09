@@ -23,7 +23,17 @@ const fmt = (iso) => new Date(iso + "T00:00:00").toLocaleDateString(lang === "es
         {post.tags.map((tg) => <span class="tag">{tg}</span>)}
       </div>
 
-      {project && project.media && (
+      {post.repo && (
+        <a class="arrow-link post-page__repo" href={post.repo} target="_blank" rel="noopener"><Icon name="github" size={15} /> {post.repo.replace("https://github.com/", "")} <Icon name="arrow-ur" size={13} /></a>
+      )}
+
+      {post.youtube ? (
+        <div class="post-page__hero">
+          <div class="post-video">
+            <iframe class="post-video__frame" src={"https://www.youtube-nocookie.com/embed/" + post.youtube} title={c.title} loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+        </div>
+      ) : project && project.media && (
         <div class="post-page__hero">
           <img src={project.media.poster} alt={c.title} loading="lazy" />
         </div>
