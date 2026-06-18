@@ -30,6 +30,17 @@ const postFor = (pid) => POSTS.find((po) => po.projectId === pid);
                     <span class="ehimg__sweep" aria-hidden="true"></span>
                     <span class="hovid__hint ehimg__hint mono-label"><span class="hovid__play" aria-hidden="true">▶</span> demo</span>
                   </div>
+                ) : p.shots ? (
+                  <div class="pmshot pmshot--hover" data-pmshot>
+                    {p.shots.map((src, si) => (
+                      <img class={"pmshot__img" + (si === 0 ? " is-on" : "")} src={src} alt={c.title} loading="lazy" draggable="false" />
+                    ))}
+                    <span class="pmshot__scrim" aria-hidden="true"></span>
+                    <span class="pmshot__dots" aria-hidden="true">
+                      {p.shots.map((_, si) => <span class={"pmshot__dot" + (si === 0 ? " is-on" : "")}></span>)}
+                    </span>
+                    <span class="hovid__hint pmshot__hint mono-label"><span class="hovid__play" aria-hidden="true">▶</span> demo</span>
+                  </div>
                 ) : p.media ? (
                   <div class="hovid" data-hovid>
                     <img class="hovid__poster" src={p.media.poster} alt={c.title} loading="lazy" draggable="false" />
@@ -60,3 +71,31 @@ const postFor = (pid) => POSTS.find((po) => po.projectId === pid);
     </ol>
   </div>
 </section>
+
+<script>
+  function initPmShots() {
+    document.querySelectorAll("[data-pmshot]").forEach((box) => {
+      if (box.dataset.bound) return;
+      box.dataset.bound = "1";
+      const imgs = box.querySelectorAll(".pmshot__img");
+      const dots = box.querySelectorAll(".pmshot__dot");
+      if (imgs.length < 2) return;
+      let idx = 0, timer = null;
+      const show = (n) => {
+        imgs.forEach((im, k) => im.classList.toggle("is-on", k === n));
+        dots.forEach((d, k) => d.classList.toggle("is-on", k === n));
+      };
+      const tick = () => { idx = (idx + 1) % imgs.length; show(idx); };
+      const start = () => { if (!timer) timer = setInterval(tick, 1600); box.classList.add("is-playing"); };
+      const stop = () => { clearInterval(timer); timer = null; idx = 0; show(0); box.classList.remove("is-playing"); };
+      const auto = box.classList.contains("pmshot--auto");
+      if (auto) { start(); }
+      else {
+        box.addEventListener("mouseenter", start);
+        box.addEventListener("mouseleave", stop);
+      }
+    });
+  }
+  document.addEventListener("astro:page-load", initPmShots);
+  document.addEventListener("DOMContentLoaded", initPmShots);
+</script>

@@ -272,6 +272,36 @@ section[id] { scroll-margin-top: 88px; }
 /* ── Astro: imagen hero del caso de estudio ── */
 .post-page__hero img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; display: block; }
 .work-item__placeholder { width: 100%; min-height: 200px; background: var(--surface); border-radius: 6px; }
+.prose__img { width: 100%; height: auto; border-radius: 10px; border: 1px solid var(--hairline); margin: 4px 0 28px; display: block; }
+
+/* ── Pro Manager: carrusel de capturas con crossfade ── */
+.pmshot { position: relative; width: 100%; height: 100%; overflow: hidden; background: #0a0e16; }
+.pmshot__img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: top center;
+  opacity: 0; transform: scale(1.04);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+.pmshot__img.is-on { opacity: 1; transform: scale(1); }
+.pmshot__scrim { position: absolute; inset: 0; pointer-events: none; z-index: 2; background: linear-gradient(to top, rgba(5,8,15,0.55) 0%, transparent 32%); }
+.pmshot__dots { position: absolute; bottom: 12px; right: 14px; z-index: 3; display: flex; gap: 6px; opacity: 0; transition: opacity 0.3s var(--ease); }
+.pmshot.is-playing .pmshot__dots { opacity: 1; }
+.pmshot__dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.4); transition: background 0.3s var(--ease), transform 0.3s var(--ease); }
+.pmshot__dot.is-on { background: #46e0a0; transform: scale(1.25); }
+.pmshot__hint {
+  position: absolute; left: 14px; bottom: 13px; z-index: 3;
+  display: inline-flex; align-items: center; gap: 7px; font-size: 10px; color: #e3edf8;
+  background: rgba(8,12,24,0.7); -webkit-backdrop-filter: blur(2px); backdrop-filter: blur(2px);
+  border: 1px solid rgba(140,180,230,0.26); padding: 4px 9px; border-radius: 6px;
+  transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
+}
+.pmshot.is-playing .pmshot__hint { opacity: 0; transform: translateY(6px); pointer-events: none; }
+.post-page__hero--shots { position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 8px; overflow: hidden; border: 1px solid var(--hairline); }
+.post-page__hero--shots .pmshot { border-radius: 8px; }
+@media (prefers-reduced-motion: reduce) {
+  .pmshot__img { transition: opacity 0.3s linear; transform: none; }
+  .pmshot__img.is-on { transform: none; }
+}
 
 /* ── esp-home: diagrama de arquitectura con animación al hover ── */
 .ehimg { position: relative; width: 100%; height: 100%; overflow: hidden; background: #05070f; }

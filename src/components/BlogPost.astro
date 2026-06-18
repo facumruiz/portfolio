@@ -27,6 +27,10 @@ const fmt = (iso) => new Date(iso + "T00:00:00").toLocaleDateString(lang === "es
         <a class="arrow-link post-page__repo" href={post.repo} target="_blank" rel="noopener"><Icon name="github" size={15} /> {post.repo.replace("https://github.com/", "")} <Icon name="arrow-ur" size={13} /></a>
       )}
 
+      {post.demo && (
+        <a class="arrow-link post-page__repo" href={post.demo} target="_blank" rel="noopener">{lang === "es" ? "Ver demo en vivo" : "View live demo"} <Icon name="arrow-ur" size={13} /></a>
+      )}
+
       {post.youtube ? (
         <div class="post-page__hero">
           <div class="post-video" data-yt={post.youtube}>
@@ -40,6 +44,18 @@ const fmt = (iso) => new Date(iso + "T00:00:00").toLocaleDateString(lang === "es
             </button>
           </div>
         </div>
+      ) : post.shots ? (
+        <div class="post-page__hero post-page__hero--shots">
+          <div class="pmshot pmshot--auto" data-pmshot>
+            {post.shots.map((src, si) => (
+              <img class={"pmshot__img" + (si === 0 ? " is-on" : "")} src={src} alt={c.title} loading="lazy" draggable="false" />
+            ))}
+            <span class="pmshot__scrim" aria-hidden="true"></span>
+            <span class="pmshot__dots" aria-hidden="true">
+              {post.shots.map((_, si) => <span class={"pmshot__dot" + (si === 0 ? " is-on" : "")}></span>)}
+            </span>
+          </div>
+        </div>
       ) : project && project.media && (
         <div class="post-page__hero">
           <img src={project.media.poster} alt={c.title} loading="lazy" />
@@ -50,6 +66,7 @@ const fmt = (iso) => new Date(iso + "T00:00:00").toLocaleDateString(lang === "es
         {c.body.map((b) => {
           if (b.type === "h") return <h2 class="prose__h">{b.text}</h2>;
           if (b.type === "code") return <pre class="prose__code"><code>{b.text}</code></pre>;
+          if (b.type === "img") return <img class="prose__img" src={b.src} alt={b.alt || ""} loading="lazy" />;
           return <p class="prose__p">{b.text}</p>;
         })}
       </div>
@@ -91,4 +108,23 @@ const fmt = (iso) => new Date(iso + "T00:00:00").toLocaleDateString(lang === "es
   }
   document.addEventListener("astro:page-load", initPostVideo);
   document.addEventListener("DOMContentLoaded", initPostVideo);
+
+  function initPmShotsPost() {
+    document.querySelectorAll("[data-pmshot]").forEach((box) => {
+      if (box.dataset.bound) return;
+      box.dataset.bound = "1";
+      const imgs = box.querySelectorAll(".pmshot__img");
+      const dots = box.querySelectorAll(".pmshot__dot");
+      if (imgs.length < 2) return;
+      let idx = 0;
+      const show = (n) => {
+        imgs.forEach((im, k) => im.classList.toggle("is-on", k === n));
+        dots.forEach((d, k) => d.classList.toggle("is-on", k === n));
+      };
+      setInterval(() => { idx = (idx + 1) % imgs.length; show(idx); }, 2200);
+      box.classList.add("is-playing");
+    });
+  }
+  document.addEventListener("astro:page-load", initPmShotsPost);
+  document.addEventListener("DOMContentLoaded", initPmShotsPost);
 </script>
