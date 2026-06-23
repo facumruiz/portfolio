@@ -487,7 +487,7 @@ const POSTS = [
 // Enlaces de contacto
 const LINKS = {
   github: "https://github.com/facumruiz",
-  linkedin: "https://www.linkedin.com/in/facundoruiz",
+  linkedin: "https://www.linkedin.com/in/facumruiz",
   email: "facundoruizdev@gmail.com",
 };
 
