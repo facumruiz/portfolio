@@ -8,11 +8,11 @@ const STRINGS = {
   es: {
     nav: { work: "Proyectos", expertise: "Áreas", blog: "Documentación", about: "Sobre mí", contact: "Contacto" },
     hero: {
-      role: "Datos · Full-Stack",
+      role: "Backend · Datos",
       kicker: "Disponible para nuevos puestos",
-      title1: "Análisis de datos",
-      title2: "y desarrollo de software.",
-      lead: "Trabajo con datos usando SQL, Python, Power BI y Google Analytics: modelado, limpieza, análisis y visualización. También automatizo la carga y el procesamiento de datos, y desarrollo software full-stack. Técnico electrónico con más de 4 años de experiencia.",
+      title1: "Desarrollo backend",
+      title2: "y análisis de datos.",
+      lead: "Desarrollador full-stack con foco en backend: diseño e implementación de bases de datos y APIs para grandes volúmenes de datos con Node, Nest y Next. También trabajo el dato del lado del análisis — SQL, Python, Power BI y Google Analytics — y automatizo su carga y procesamiento.",
       cta: "Ver proyectos",
       cta2: "Contacto",
     },
@@ -54,10 +54,10 @@ const STRINGS = {
       index: "01",
       title: "Sobre mí",
       pageSub: "Quién soy, mi trayectoria y mi formación.",
-      body1: "Analista de datos y desarrollador. Trabajo con SQL, Python, Power BI y Google Analytics, y tengo experiencia en carga y control de datos.",
-      body2: "Vengo de más de 4 años en desarrollo de software (web y embebidos, C/C++ y Python), lo que me permite automatizar el trabajo con datos en lugar de hacerlo a mano. Actualmente curso la Tecnicatura Superior en Sistemas Embebidos e IoT.",
+      body1: "Desarrollador full-stack con foco en backend. Diseño e implemento bases de datos y APIs pensadas para grandes volúmenes de datos, con Node, Nest y Next. Sobre esos datos también trabajo el análisis con SQL, Python, Power BI y Google Analytics.",
+      body2: "Más de 4 años en desarrollo de software (web y embebidos, C/C++ y Python). Mi base de desarrollo me permite automatizar el trabajo con datos en lugar de hacerlo a mano. Actualmente curso la Tecnicatura Superior en Sistemas Embebidos e IoT y soy futuro licenciado en Ciencia de Datos. Más adelante me gustaría especializarme con un máster en Inteligencia Artificial o Seguridad Informática.",
       nowTitle: "Ahora mismo",
-      now: "Buscando un puesto en análisis o gestión de datos (Data Analyst / Data Entry). Disponible también para desarrollo full-stack.",
+      now: "Buscando un puesto de desarrollo backend o análisis / gestión de datos. Disponible también para desarrollo full-stack.",
     },
     contact: {
       index: "06",
@@ -72,11 +72,11 @@ const STRINGS = {
   en: {
     nav: { work: "Work", expertise: "Areas", blog: "Docs", about: "About", contact: "Contact" },
     hero: {
-      role: "Data · Full-Stack",
+      role: "Backend · Data",
       kicker: "Open to new roles",
-      title1: "Data analysis",
-      title2: "and software development.",
-      lead: "I work with data using SQL, Python, Power BI and Google Analytics: modeling, cleaning, analysis and visualization. I also automate data entry and processing, and develop full-stack software. Electronics technician with 4+ years of experience.",
+      title1: "Backend development",
+      title2: "and data analysis.",
+      lead: "Full-stack developer focused on the backend: designing and implementing databases and APIs for large data volumes with Node, Nest and Next. I also work data on the analysis side — SQL, Python, Power BI and Google Analytics — and automate its loading and processing.",
       cta: "View work",
       cta2: "Get in touch",
     },
@@ -118,10 +118,10 @@ const STRINGS = {
       index: "01",
       title: "About",
       pageSub: "Who I am, my background and my education.",
-      body1: "Data analyst and developer. I work with SQL, Python, Power BI and Google Analytics, and I have experience in data entry and validation.",
-      body2: "I come from 4+ years in software development (web and embedded, C/C++ and Python), which lets me automate data work instead of doing it by hand. I'm currently studying a Higher Technician degree in Embedded Systems & IoT.",
+      body1: "Full-stack developer focused on the backend. I design and implement databases and APIs built for large data volumes, with Node, Nest and Next. On top of that data I also do analysis with SQL, Python, Power BI and Google Analytics.",
+      body2: "4+ years in software development (web and embedded, C/C++ and Python). My development background lets me automate data work instead of doing it by hand. I'm currently studying a Higher Technician degree in Embedded Systems & IoT and I'm a future Data Science graduate. Down the line I'd like to specialize with a master's in Artificial Intelligence or Information Security.",
       nowTitle: "Right now",
-      now: "Looking for a role in data analysis or data management (Data Analyst / Data Entry). Also available for full-stack development.",
+      now: "Looking for a backend development or data analysis / management role. Also available for full-stack development.",
     },
     contact: {
       index: "06",
@@ -206,6 +206,25 @@ const PROJECTS = [
 // ─────────────────────────────────────────────────────────────
 const EXPERTISE = [
   {
+    id: "backend",
+    es: {
+      title: "Backend & Bases de Datos",
+      points: [
+        "Diseño e implementación de bases de datos para grandes volúmenes de datos.",
+        "APIs y servicios con Node, Nest y Next.",
+        "Modelado de datos, integridad y consultas eficientes en SQL.",
+      ],
+    },
+    en: {
+      title: "Backend & Databases",
+      points: [
+        "Database design and implementation for large data volumes.",
+        "APIs and services with Node, Nest and Next.",
+        "Data modeling, integrity and efficient SQL queries.",
+      ],
+    },
+  },
+  {
     id: "data",
     es: {
       title: "Análisis de Datos",
@@ -225,39 +244,20 @@ const EXPERTISE = [
     },
   },
   {
-    id: "automation",
-    es: {
-      title: "Data Entry & Automatización",
-      points: [
-        "Carga y control de datos en sistemas ERP, con foco en precisión.",
-        "Automatización de adquisición y procesamiento con Python.",
-        "Reemplazo de planillas Excel por procesos confiables y repetibles.",
-      ],
-    },
-    en: {
-      title: "Data Entry & Automation",
-      points: [
-        "Data entry and validation in ERP systems, focused on accuracy.",
-        "Automated acquisition and processing with Python.",
-        "Replacing Excel spreadsheets with reliable, repeatable processes.",
-      ],
-    },
-  },
-  {
     id: "fullstack",
     es: {
-      title: "Desarrollo Full-Stack",
+      title: "Desarrollo Full-Stack & Automatización",
       points: [
         "Aplicaciones web con React, Next.js y Node / Express / Nest.",
-        "APIs y bases de datos con MongoDB y MySQL.",
+        "Automatización de carga y procesamiento de datos con Python.",
         "Herramientas internas y visualizaciones a medida sobre los datos.",
       ],
     },
     en: {
-      title: "Full-Stack development",
+      title: "Full-Stack & Automation",
       points: [
         "Web apps with React, Next.js and Node / Express / Nest.",
-        "APIs and databases with MongoDB and MySQL.",
+        "Automated data loading and processing with Python.",
         "Internal tools and custom visualizations on top of the data.",
       ],
     },
@@ -269,15 +269,15 @@ const EXPERTISE = [
 // ─────────────────────────────────────────────────────────────
 const SKILLS = {
   es: [
+    { label: "Backend & Bases de Datos", items: ["Node", "Nest", "Next.js", "Express", "MongoDB", "MySQL", "SQL"] },
     { label: "Datos", items: ["SQL", "Python", "Power BI", "Google Analytics", "Excel"] },
-    { label: "Lenguajes", items: ["Python", "SQL", "JavaScript", "C/C++"] },
-    { label: "Tecnologías", items: ["React", "Next.js", "Node.js", "Express", "MongoDB", "MySQL"] },
+    { label: "Lenguajes", items: ["JavaScript", "TypeScript", "Python", "C/C++"] },
     { label: "Sistemas & herramientas", items: ["Linux", "Git", "Docker", "AWS", "Postman", "Jira"] },
   ],
   en: [
+    { label: "Backend & Databases", items: ["Node", "Nest", "Next.js", "Express", "MongoDB", "MySQL", "SQL"] },
     { label: "Data", items: ["SQL", "Python", "Power BI", "Google Analytics", "Excel"] },
-    { label: "Languages", items: ["Python", "SQL", "JavaScript", "C/C++"] },
-    { label: "Technologies", items: ["React", "Next.js", "Node.js", "Express", "MongoDB", "MySQL"] },
+    { label: "Languages", items: ["JavaScript", "TypeScript", "Python", "C/C++"] },
     { label: "Systems & tools", items: ["Linux", "Git", "Docker", "AWS", "Postman", "Jira"] },
   ],
 };
