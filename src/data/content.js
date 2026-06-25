@@ -338,7 +338,138 @@ const CERTS = [
 // ─────────────────────────────────────────────────────────────
 // Blog — case studies
 // ─────────────────────────────────────────────────────────────
+
+// Cuerpo de la guía SQL (técnico, compartido ES/EN).
+const SQL_BODY = [
+  { type: "h", text: "00 · Setup del entorno de trabajo" },
+  { type: "p", text: "Levantar SQL Server con Docker y cargar AdventureWorks en Linux." },
+  { type: "sub", text: "Paso 0 — Instalar Docker" },
+  { type: "p", text: "Ubuntu / Debian:" },
+  { type: "code", text: "sudo apt update\nsudo apt install -y docker.io\nsudo systemctl enable --now docker\nsudo usermod -aG docker $USER\nnewgrp docker" },
+  { type: "p", text: "Arch Linux:" },
+  { type: "code", text: "sudo pacman -S docker\nsudo systemctl enable --now docker\nsudo usermod -aG docker $USER\nnewgrp docker" },
+  { type: "p", text: "Verificar con `docker ps`. Si no hay contenedores muestra una tabla vacía — eso es correcto." },
+  { type: "sub", text: "Paso 1 — Instalar y levantar SQL Server" },
+  { type: "p", text: "Un único comando descarga SQL Server y lo deja corriendo:" },
+  { type: "code", text: "docker run -e \"ACCEPT_EULA=Y\" -e \"SA_PASSWORD=Admin1234!\" \\\n  -p 1433:1433 --name sqlserver \\\n  -d mcr.microsoft.com/mssql/server:2019-latest" },
+  { type: "p", text: "La primera vez descarga la imagen (1–2 min); después es instantáneo. Para parar o reiniciar:" },
+  { type: "code", text: "docker stop sqlserver    # parar\ndocker start sqlserver   # volver a levantar" },
+  { type: "sub", text: "Paso 2 — Descargar AdventureWorks" },
+  { type: "code", text: "wget https://github.com/Microsoft/sql-server-samples/releases/download/adventureworks/AdventureWorks2019.bak" },
+  { type: "sub", text: "Paso 3 — Copiar el .bak al contenedor" },
+  { type: "code", text: "docker cp AdventureWorks2019.bak sqlserver:/var/opt/mssql/data/" },
+  { type: "sub", text: "Paso 4 — Restaurar la base de datos" },
+  { type: "p", text: "Usar mssql-tools18 (no mssql-tools, ese path no existe en SQL Server 2019 reciente):" },
+  { type: "code", text: "docker exec -it sqlserver /opt/mssql-tools18/bin/sqlcmd \\\n  -S localhost -U SA -P \"Admin1234!\" -No \\\n  -Q \"RESTORE DATABASE AdventureWorks2019 FROM DISK='/var/opt/mssql/data/AdventureWorks2019.bak'\n  WITH MOVE 'AdventureWorks2019' TO '/var/opt/mssql/data/AdventureWorks2019.mdf',\n  MOVE 'AdventureWorks2019_log' TO '/var/opt/mssql/data/AdventureWorks2019_log.ldf'\"" },
+  { type: "sub", text: "Paso 5 — Conectarse a la base" },
+  { type: "p", text: "Modo interactivo (cada bloque termina con GO):" },
+  { type: "code", text: "docker exec -it sqlserver /opt/mssql-tools18/bin/sqlcmd \\\n  -S localhost -U SA -P \"Admin1234!\" -No \\\n  -d AdventureWorks2019" },
+  { type: "p", text: "Modo directo con -Q (ejecuta y sale, cómodo para queries largas):" },
+  { type: "code", text: "docker exec -it sqlserver /opt/mssql-tools18/bin/sqlcmd \\\n  -S localhost -U SA -P \"Admin1234!\" -No \\\n  -d AdventureWorks2019 \\\n  -Q \"SELECT TOP 5 Name FROM Production.Product\"" },
+  { type: "sub", text: "Errores comunes" },
+  { type: "table", head: ["Error", "Causa", "Solución"], rows: [
+    ["mssql-tools/bin/sqlcmd: no such file", "Path viejo de mssql-tools", "Usar mssql-tools18"],
+    ["gzip: stdin: not in gzip format", "URL de descarga incorrecta", "Descargar desde GitHub releases"],
+    ["Could not resolve host", "Sin acceso a esa URL", "Buscar la URL correcta en el repo oficial"],
+    ["Query no ejecuta (interactivo)", "Falta GO al final", "Escribir GO en línea nueva y Enter"],
+    ["-No flag", "Certificado SSL no confiable", "Normal en desarrollo, -No lo ignora"],
+  ] },
+  { type: "note", text: "Verificar que todo funciona: ejecutá SELECT TOP 3 Name, ListPrice FROM Production.Product. Si ves filas con nombres de productos, el entorno está listo." },
+
+  { type: "h", text: "01 · Explorar la base de datos" },
+  { type: "p", text: "Lo primero al entrar a un trabajo nuevo: entender la estructura de la base." },
+  { type: "sub", text: "Ver todas las tablas" },
+  { type: "code", text: "SELECT SCHEMA_NAME(schema_id) AS esquema, name AS tabla\nFROM sys.tables\nORDER BY esquema, tabla" },
+  { type: "sub", text: "Ver columnas de una tabla" },
+  { type: "code", text: "SELECT COLUMN_NAME, DATA_TYPE, IS_NULLABLE\nFROM INFORMATION_SCHEMA.COLUMNS\nWHERE TABLE_NAME = 'NombreDeTuTabla'\nORDER BY ORDINAL_POSITION" },
+  { type: "sub", text: "Ver cuántas filas tiene cada tabla" },
+  { type: "code", text: "SELECT t.TABLE_NAME, p.rows AS CantFilas\nFROM INFORMATION_SCHEMA.TABLES t\nJOIN sys.tables st ON st.name = t.TABLE_NAME\nJOIN sys.partitions p ON p.object_id = st.object_id\nWHERE t.TABLE_TYPE = 'BASE TABLE' AND p.index_id IN (0,1)\nORDER BY p.rows DESC" },
+
+  { type: "h", text: "02 · Reportes de ventas" },
+  { type: "p", text: "La query más pedida en cualquier empresa con datos comerciales." },
+  { type: "sub", text: "Ventas por categoría" },
+  { type: "code", text: "SELECT c.Name AS Categoria,\n       SUM(od.LineTotal) AS TotalVentas,\n       COUNT(DISTINCT oh.SalesOrderID) AS CantOrdenes\nFROM Sales.SalesOrderDetail od\nJOIN Production.Product p ON od.ProductID = p.ProductID\nJOIN Production.ProductSubcategory s ON p.ProductSubcategoryID = s.ProductSubcategoryID\nJOIN Production.ProductCategory c ON s.ProductCategoryID = c.ProductCategoryID\nJOIN Sales.SalesOrderHeader oh ON od.SalesOrderID = oh.SalesOrderID\nGROUP BY c.Name\nORDER BY TotalVentas DESC" },
+  { type: "sub", text: "Ventas por mes y año" },
+  { type: "code", text: "SELECT YEAR(OrderDate) AS Anio,\n       MONTH(OrderDate) AS Mes,\n       SUM(TotalDue) AS TotalVentas\nFROM Sales.SalesOrderHeader\nGROUP BY YEAR(OrderDate), MONTH(OrderDate)\nORDER BY Anio, Mes" },
+  { type: "sub", text: "Top 10 productos más vendidos" },
+  { type: "code", text: "SELECT TOP 10\n    p.Name AS Producto,\n    SUM(od.OrderQty) AS UnidadesVendidas,\n    SUM(od.LineTotal) AS TotalVentas\nFROM Sales.SalesOrderDetail od\nJOIN Production.Product p ON od.ProductID = p.ProductID\nGROUP BY p.Name\nORDER BY UnidadesVendidas DESC" },
+  { type: "sub", text: "Ventas por vendedor" },
+  { type: "code", text: "SELECT\n    p.FirstName + ' ' + p.LastName AS Vendedor,\n    COUNT(oh.SalesOrderID) AS CantOrdenes,\n    SUM(oh.TotalDue) AS TotalVentas\nFROM Sales.SalesOrderHeader oh\nJOIN Sales.SalesPerson sp ON oh.SalesPersonID = sp.BusinessEntityID\nJOIN Person.Person p ON sp.BusinessEntityID = p.BusinessEntityID\nGROUP BY p.FirstName, p.LastName\nORDER BY TotalVentas DESC" },
+
+  { type: "h", text: "03 · Análisis de clientes" },
+  { type: "p", text: "Entender quién compra, cuánto gasta y con qué frecuencia." },
+  { type: "sub", text: "Top clientes por gasto total" },
+  { type: "code", text: "SELECT TOP 10\n    p.FirstName + ' ' + p.LastName AS Cliente,\n    COUNT(oh.SalesOrderID) AS CantOrdenes,\n    SUM(oh.TotalDue) AS TotalGastado\nFROM Sales.SalesOrderHeader oh\nJOIN Sales.Customer c ON oh.CustomerID = c.CustomerID\nJOIN Person.Person p ON c.PersonID = p.BusinessEntityID\nGROUP BY p.FirstName, p.LastName\nORDER BY TotalGastado DESC" },
+  { type: "sub", text: "Clientes que no compraron en el último año" },
+  { type: "code", text: "SELECT p.FirstName + ' ' + p.LastName AS Cliente,\n       MAX(oh.OrderDate) AS UltimaCompra\nFROM Sales.Customer c\nJOIN Person.Person p ON c.PersonID = p.BusinessEntityID\nLEFT JOIN Sales.SalesOrderHeader oh ON c.CustomerID = oh.CustomerID\nGROUP BY p.FirstName, p.LastName\nHAVING MAX(oh.OrderDate) < DATEADD(YEAR, -1, GETDATE())\n    OR MAX(oh.OrderDate) IS NULL\nORDER BY UltimaCompra" },
+
+  { type: "h", text: "04 · Productos e inventario" },
+  { type: "p", text: "Controlar el stock y detectar productos sin movimiento." },
+  { type: "sub", text: "Productos sin ventas" },
+  { type: "code", text: "SELECT p.Name, p.ListPrice\nFROM Production.Product p\nLEFT JOIN Sales.SalesOrderDetail od ON p.ProductID = od.ProductID\nWHERE od.ProductID IS NULL\nORDER BY p.Name" },
+  { type: "sub", text: "Stock bajo mínimo" },
+  { type: "code", text: "SELECT p.Name,\n       pi.Quantity AS StockActual,\n       p.ReorderPoint AS StockMinimo\nFROM Production.Product p\nJOIN Production.ProductInventory pi ON p.ProductID = pi.ProductID\nWHERE pi.Quantity < p.ReorderPoint\nORDER BY pi.Quantity ASC" },
+  { type: "sub", text: "Productos más caros por categoría" },
+  { type: "code", text: "SELECT c.Name AS Categoria,\n       p.Name AS Producto,\n       p.ListPrice\nFROM Production.Product p\nJOIN Production.ProductSubcategory s ON p.ProductSubcategoryID = s.ProductSubcategoryID\nJOIN Production.ProductCategory c ON s.ProductCategoryID = c.ProductCategoryID\nWHERE p.ListPrice = (\n    SELECT MAX(p2.ListPrice)\n    FROM Production.Product p2\n    JOIN Production.ProductSubcategory s2 ON p2.ProductSubcategoryID = s2.ProductSubcategoryID\n    WHERE s2.ProductCategoryID = c.ProductCategoryID\n)\nORDER BY c.Name" },
+
+  { type: "h", text: "05 · Limpieza y calidad de datos" },
+  { type: "p", text: "En cualquier empresa vas a encontrar datos sucios. Estas queries los detectan." },
+  { type: "sub", text: "Filas duplicadas" },
+  { type: "code", text: "SELECT EmailAddress, COUNT(*) AS Repeticiones\nFROM Person.EmailAddress\nGROUP BY EmailAddress\nHAVING COUNT(*) > 1\nORDER BY Repeticiones DESC" },
+  { type: "sub", text: "Valores nulos por columna" },
+  { type: "code", text: "SELECT\n    COUNT(*) AS TotalFilas,\n    SUM(CASE WHEN Color IS NULL THEN 1 ELSE 0 END) AS Color_Nulos,\n    SUM(CASE WHEN Size IS NULL THEN 1 ELSE 0 END) AS Size_Nulos,\n    SUM(CASE WHEN Weight IS NULL THEN 1 ELSE 0 END) AS Weight_Nulos\nFROM Production.Product" },
+
+  { type: "h", text: "06 · Referencia rápida de sintaxis" },
+  { type: "table", head: ["Cláusula", "Para qué sirve", "Ejemplo"], rows: [
+    ["SELECT TOP N", "Limitar filas devueltas", "SELECT TOP 10 *"],
+    ["WHERE", "Filtrar filas", "WHERE Color = 'Red'"],
+    ["AND / OR", "Combinar condiciones", "WHERE Price > 100 AND Color = 'Red'"],
+    ["BETWEEN", "Rango de valores", "WHERE Price BETWEEN 100 AND 500"],
+    ["IN", "Lista de valores", "WHERE Color IN ('Red','Blue')"],
+    ["LIKE", "Búsqueda parcial", "WHERE Name LIKE '%Bike%'"],
+    ["IS NULL", "Detectar nulos", "WHERE Color IS NULL"],
+    ["ORDER BY DESC", "Ordenar descendente", "ORDER BY Price DESC"],
+    ["GROUP BY", "Agrupar para agregar", "GROUP BY Color"],
+    ["HAVING", "Filtrar grupos", "HAVING COUNT(*) > 5"],
+    ["INNER JOIN", "Solo filas con match", "JOIN Tabla b ON a.id = b.id"],
+    ["LEFT JOIN", "Todas las filas izquierda", "LEFT JOIN Tabla b ON a.id = b.id"],
+    ["CASE WHEN", "Lógica condicional", "CASE WHEN x > 0 THEN 'SI' ELSE 'NO' END"],
+    ["DATEADD", "Sumar / restar fechas", "DATEADD(MONTH, -1, GETDATE())"],
+    ["DATEDIFF", "Diferencia de fechas", "DATEDIFF(DAY, FechaInicio, FechaFin)"],
+  ] },
+
+  { type: "h", text: "07 · Funciones de agregación" },
+  { type: "table", head: ["Función", "Qué hace"], rows: [
+    ["COUNT(*)", "Cuenta todas las filas"],
+    ["COUNT(columna)", "Cuenta valores no nulos"],
+    ["SUM(columna)", "Suma los valores"],
+    ["AVG(columna)", "Promedio de los valores"],
+    ["MIN(columna)", "Valor mínimo"],
+    ["MAX(columna)", "Valor máximo"],
+    ["ROUND(n, decimales)", "Redondea un número"],
+    ["CAST(x AS tipo)", "Convierte tipo de dato"],
+  ] },
+];
+
 const POSTS = [
+  {
+    id: "post-sql",
+    slug: "guia-sql-para-el-trabajo",
+    date: "2024-12-10",
+    readMin: 12,
+    noHero: true,
+    tags: ["SQL", "Data", "SQL Server", "Referencia"],
+    es: {
+      title: "Guía SQL",
+      excerpt: "Las queries más usadas en entornos laborales reales: setup con Docker, reportes de ventas, análisis de clientes, inventario, limpieza de datos y referencia de sintaxis. SQL Server + AdventureWorks.",
+      body: SQL_BODY,
+    },
+    en: {
+      title: "SQL guide",
+      excerpt: "The most-used queries in real work settings: Docker setup, sales reports, customer analysis, inventory, data cleaning and a syntax reference. SQL Server + AdventureWorks.",
+      body: SQL_BODY,
+    },
+  },
   {
     id: "post-esphome",
     slug: "esp-home-domotica-esp32",
@@ -490,5 +621,7 @@ const LINKS = {
   linkedin: "https://www.linkedin.com/in/facumruiz",
   email: "facundoruizdev@gmail.com",
 };
+
+POSTS.sort((a, b) => b.date.localeCompare(a.date));
 
 export { STRINGS, LINKS, PROJECTS, EXPERTISE, SKILLS, EXPERIENCE, EDUCATION, CERTS, POSTS };

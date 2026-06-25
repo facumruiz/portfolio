@@ -228,6 +228,13 @@
 .prose__p { font-size: calc(17.5px * var(--scale)); line-height: 1.75; color: var(--fg-soft); margin: 0 0 24px; }
 .prose__h { font-family: var(--font-display); font-weight: 600; font-size: calc(24px * var(--scale)); letter-spacing: -0.015em; margin: 16px 0 16px; }
 .prose__code { background: var(--surface); border: 1px solid var(--hairline); border-radius: 8px; padding: 20px 22px; overflow-x: auto; font-family: var(--font-mono); font-size: calc(14px * var(--scale)); line-height: 1.6; margin: 0 0 28px; color: var(--fg); }
+.prose__codewrap { position: relative; }
+.prose__codewrap .prose__code { margin: 0 0 28px; }
+.prose__copy { position: absolute; top: 10px; right: 10px; z-index: 2; font-size: 11px; letter-spacing: 0.06em; color: var(--fg-soft); background: var(--bg); border: 1px solid var(--hairline); border-radius: 6px; padding: 5px 11px; cursor: pointer; opacity: 0; transition: opacity 0.18s var(--ease), color 0.18s var(--ease), border-color 0.18s var(--ease); }
+.prose__codewrap:hover .prose__copy, .prose__copy:focus-visible { opacity: 1; }
+.prose__copy:hover { color: var(--fg); border-color: var(--fg-mute); }
+.prose__copy.is-done { opacity: 1; color: oklch(0.62 0.15 150); border-color: oklch(0.62 0.15 150); }
+@media (hover: none) { .prose__copy { opacity: 1; } }
 .post-page__project { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; padding: 24px 0; border-top: 1px solid var(--hairline-soft); border-bottom: 1px solid var(--hairline-soft); margin-top: 12px; }
 .post-page__foot { margin-top: 40px; }
 
@@ -273,6 +280,16 @@ section[id] { scroll-margin-top: 88px; }
 .post-page__hero img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; display: block; }
 .work-item__placeholder { width: 100%; min-height: 200px; background: var(--surface); border-radius: 6px; }
 .prose__img { width: 100%; height: auto; border-radius: 10px; border: 1px solid var(--hairline); margin: 4px 0 28px; display: block; }
+.prose__sub { font-family: var(--font-body); font-weight: 600; font-size: calc(16px * var(--scale)); color: var(--fg); margin: 26px 0 10px; display: flex; align-items: center; gap: 9px; }
+.prose__sub::before { content: ""; width: 6px; height: 6px; border-radius: 1px; background: var(--accent, var(--fg)); flex: none; transform: rotate(45deg); }
+.prose__note { background: var(--surface); border: 1px solid var(--hairline); border-left: 3px solid var(--accent, var(--fg)); border-radius: 0 8px 8px 0; padding: 14px 18px; margin: 0 0 24px; font-size: calc(15px * var(--scale)); color: var(--fg-soft); }
+.prose__tablewrap { overflow-x: auto; margin: 0 0 26px; }
+.prose__table { width: 100%; border-collapse: collapse; font-size: calc(14px * var(--scale)); }
+.prose__table th { font-family: var(--font-mono); font-size: calc(11px * var(--scale)); text-transform: uppercase; letter-spacing: 0.08em; color: var(--fg-mute); text-align: left; padding: 9px 12px; border-bottom: 2px solid var(--fg); font-weight: 600; white-space: nowrap; }
+.prose__table td { padding: 9px 12px; border-bottom: 1px solid var(--hairline-soft); vertical-align: top; color: var(--fg-soft); }
+.prose__table td:first-child { font-family: var(--font-mono); font-size: calc(12.5px * var(--scale)); color: var(--fg); white-space: nowrap; }
+.prose__table td:last-child { font-family: var(--font-mono); font-size: calc(12.5px * var(--scale)); }
+.prose--doc .prose__h { font-family: var(--font-mono); font-size: calc(15px * var(--scale)); letter-spacing: 0.02em; text-transform: none; padding-bottom: 12px; border-bottom: 2px solid var(--fg); margin: 40px 0 18px; }
 
 /* ── Pro Manager: carrusel de capturas con crossfade ── */
 .pmshot { position: relative; width: 100%; height: 100%; overflow: hidden; background: #0a0e16; }

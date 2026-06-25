@@ -31,7 +31,7 @@ const fmt = (iso) => new Date(iso + "T00:00:00").toLocaleDateString(lang === "es
         <a class="arrow-link post-page__repo" href={post.demo} target="_blank" rel="noopener">{lang === "es" ? "Ver demo en vivo" : "View live demo"} <Icon name="arrow-ur" size={13} /></a>
       )}
 
-      {post.youtube ? (
+      {!post.noHero && (post.youtube ? (
         <div class="post-page__hero">
           <div class="post-video" data-yt={post.youtube}>
             <button class="post-video__poster" type="button" aria-label={(lang === "es" ? "Reproducir video · " : "Play video · ") + c.title}>
@@ -60,13 +60,28 @@ const fmt = (iso) => new Date(iso + "T00:00:00").toLocaleDateString(lang === "es
         <div class="post-page__hero">
           <img src={project.media.poster} alt={c.title} loading="lazy" />
         </div>
-      )}
+      ))}
 
-      <div class="prose">
+      <div class={"prose" + (post.noHero ? " prose--doc" : "")}>
         {c.body.map((b) => {
           if (b.type === "h") return <h2 class="prose__h">{b.text}</h2>;
-          if (b.type === "code") return <pre class="prose__code"><code>{b.text}</code></pre>;
+          if (b.type === "sub") return <h3 class="prose__sub">{b.text}</h3>;
+          if (b.type === "code") return (
+            <div class="prose__codewrap">
+              <button type="button" class="prose__copy mono-label" data-copy>{lang === "es" ? "Copiar" : "Copy"}</button>
+              <pre class="prose__code"><code>{b.text}</code></pre>
+            </div>
+          );
           if (b.type === "img") return <img class="prose__img" src={b.src} alt={b.alt || ""} loading="lazy" />;
+          if (b.type === "note") return <div class="prose__note">{b.text}</div>;
+          if (b.type === "table") return (
+            <div class="prose__tablewrap">
+              <table class="prose__table">
+                <thead><tr>{b.head.map((h) => <th>{h}</th>)}</tr></thead>
+                <tbody>{b.rows.map((r) => <tr>{r.map((cell) => <td>{cell}</td>)}</tr>)}</tbody>
+              </table>
+            </div>
+          );
           return <p class="prose__p">{b.text}</p>;
         })}
       </div>
@@ -127,4 +142,24 @@ const fmt = (iso) => new Date(iso + "T00:00:00").toLocaleDateString(lang === "es
   }
   document.addEventListener("astro:page-load", initPmShotsPost);
   document.addEventListener("DOMContentLoaded", initPmShotsPost);
+
+  function initCopyButtons() {
+    const es = document.documentElement.lang === "es" || location.pathname.indexOf("/en") !== 0;
+    document.querySelectorAll(".prose__copy[data-copy]").forEach((btn) => {
+      if (btn.dataset.bound) return;
+      btn.dataset.bound = "1";
+      const base = btn.textContent;
+      const done = es ? "¡Copiado!" : "Copied!";
+      btn.addEventListener("click", () => {
+        const code = btn.parentElement.querySelector("code");
+        const text = code ? code.textContent : "";
+        navigator.clipboard.writeText(text).then(() => {
+          btn.textContent = done; btn.classList.add("is-done");
+          setTimeout(() => { btn.textContent = base; btn.classList.remove("is-done"); }, 1500);
+        }).catch(() => {});
+      });
+    });
+  }
+  document.addEventListener("astro:page-load", initCopyButtons);
+  document.addEventListener("DOMContentLoaded", initCopyButtons);
 </script>
