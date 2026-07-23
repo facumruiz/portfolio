@@ -750,7 +750,177 @@ const MQTT_BODY_EN = [
   { type: "p", text: "The most common error: the CN/SAN doesn't match the IP you're connecting to because generate-certs.sh wasn't edited (Part 2, Step 3). Regenerate the certificates with the correct IP and restart: docker compose up -d --build. As a last resort for testing only, mosquitto_sub/pub has --insecure — never use it in production." },
 ];
 
+const GIT_BODY = [
+  { type: "p", text: "Referencia rápida de los comandos de Git más usados en el día a día: configuración, ramas, commits, sincronización con el remoto y cómo deshacer cambios." },
+
+  { type: "h", text: "01 · Configuración" },
+  { type: "table", head: ["Comando", "Descripción"], rows: [
+    ["git config --global user.name \"Tu Nombre\"", "Configura tu nombre de usuario."],
+    ["git config --global user.email \"tuemail@ejemplo.com\"", "Configura tu correo electrónico."],
+  ] },
+
+  { type: "h", text: "02 · Inicialización" },
+  { type: "table", head: ["Comando", "Descripción"], rows: [
+    ["git init", "Inicializa un nuevo repositorio."],
+    ["git clone URL-del-repositorio", "Clona un repositorio existente."],
+  ] },
+
+  { type: "h", text: "03 · Estado del repositorio" },
+  { type: "table", head: ["Comando", "Descripción"], rows: [
+    ["git status", "Muestra el estado del repositorio."],
+  ] },
+
+  { type: "h", text: "04 · Seguimiento de cambios" },
+  { type: "table", head: ["Comando", "Descripción"], rows: [
+    ["git add nombre-archivo", "Agrega un archivo específico al área de preparación."],
+    ["git add .", "Agrega todos los cambios al área de preparación."],
+    ["git reset nombre-archivo", "Elimina un archivo del área de preparación."],
+  ] },
+
+  { type: "h", text: "05 · Ramas" },
+  { type: "table", head: ["Comando", "Descripción"], rows: [
+    ["git branch -a", "Lista todas las ramas."],
+    ["git branch -m nombre-rama", "Crea o renombra una rama."],
+    ["git branch -d nombre-rama", "Elimina una rama."],
+    ["git checkout nombre-rama", "Cambia a una rama existente."],
+    ["git checkout -b nombre-nueva-rama", "Crea y cambia a una nueva rama."],
+    ["git diff rama1 rama2", "Compara dos ramas."],
+  ] },
+
+  { type: "h", text: "06 · Registro de cambios" },
+  { type: "table", head: ["Comando", "Descripción"], rows: [
+    ["git log", "Muestra todos los commits con sus IDs."],
+    ["git checkout id-commit", "Cambia a un commit específico."],
+    ["git diff id-com1 id-com2", "Compara dos commits."],
+  ] },
+
+  { type: "h", text: "07 · Confirmaciones" },
+  { type: "table", head: ["Comando", "Descripción"], rows: [
+    ["git commit -m \"tu comentario\"", "Registra cambios con un comentario."],
+    ["git push", "Sube cambios al repositorio remoto (rama actual)."],
+    ["git push origin nombre-rama", "Sube cambios a una rama específica en el remoto."],
+  ] },
+
+  { type: "h", text: "08 · Sincronización" },
+  { type: "table", head: ["Comando", "Descripción"], rows: [
+    ["git pull", "Obtiene y fusiona cambios del remoto."],
+    ["git fetch", "Muestra diferencias entre local y remoto."],
+  ] },
+
+  { type: "h", text: "09 · Deshacer cambios" },
+  { type: "table", head: ["Comando", "Descripción"], rows: [
+    ["git checkout -- nombre-archivo", "Deshace cambios en un archivo modificado."],
+    ["git reset --soft HEAD~1", "Deshace un commit, manteniendo los cambios."],
+    ["git reset --hard HEAD~1", "Deshace un commit y pierde los cambios. (Precaución)"],
+  ] },
+
+  { type: "h", text: "10 · Otras acciones" },
+  { type: "table", head: ["Comando", "Descripción"], rows: [
+    ["git diff", "Muestra cambios no confirmados."],
+    ["git log nombre-archivo", "Muestra el historial de un archivo específico."],
+    ["git tag nombre-etiqueta", "Etiqueta un commit."],
+  ] },
+
+  { type: "h", text: "Notas adicionales" },
+  { type: "note", text: "Precaución: algunos comandos pueden causar pérdida de datos, como git reset --hard." },
+  { type: "p", text: "Ayuda: usá git help nombre-comando para más información sobre cada comando." },
+];
+
+const GIT_BODY_EN = [
+  { type: "p", text: "Quick reference for the most-used Git commands day to day: setup, branches, commits, syncing with the remote, and undoing changes." },
+
+  { type: "h", text: "01 · Configuration" },
+  { type: "table", head: ["Command", "Description"], rows: [
+    ["git config --global user.name \"Your Name\"", "Sets your username."],
+    ["git config --global user.email \"youremail@example.com\"", "Sets your email address."],
+  ] },
+
+  { type: "h", text: "02 · Initialization" },
+  { type: "table", head: ["Command", "Description"], rows: [
+    ["git init", "Initializes a new repository."],
+    ["git clone REPOSITORY-URL", "Clones an existing repository."],
+  ] },
+
+  { type: "h", text: "03 · Repository status" },
+  { type: "table", head: ["Command", "Description"], rows: [
+    ["git status", "Shows the repository's status."],
+  ] },
+
+  { type: "h", text: "04 · Tracking changes" },
+  { type: "table", head: ["Command", "Description"], rows: [
+    ["git add file-name", "Adds a specific file to the staging area."],
+    ["git add .", "Adds all changes to the staging area."],
+    ["git reset file-name", "Removes a file from the staging area."],
+  ] },
+
+  { type: "h", text: "05 · Branches" },
+  { type: "table", head: ["Command", "Description"], rows: [
+    ["git branch -a", "Lists all branches."],
+    ["git branch -m branch-name", "Creates or renames a branch."],
+    ["git branch -d branch-name", "Deletes a branch."],
+    ["git checkout branch-name", "Switches to an existing branch."],
+    ["git checkout -b new-branch-name", "Creates and switches to a new branch."],
+    ["git diff branch1 branch2", "Compares two branches."],
+  ] },
+
+  { type: "h", text: "06 · Change history" },
+  { type: "table", head: ["Command", "Description"], rows: [
+    ["git log", "Shows all commits with their IDs."],
+    ["git checkout commit-id", "Switches to a specific commit."],
+    ["git diff commit-id-1 commit-id-2", "Compares two commits."],
+  ] },
+
+  { type: "h", text: "07 · Commits" },
+  { type: "table", head: ["Command", "Description"], rows: [
+    ["git commit -m \"your message\"", "Records changes with a message."],
+    ["git push", "Pushes changes to the remote repo (current branch)."],
+    ["git push origin branch-name", "Pushes changes to a specific remote branch."],
+  ] },
+
+  { type: "h", text: "08 · Syncing" },
+  { type: "table", head: ["Command", "Description"], rows: [
+    ["git pull", "Fetches and merges changes from the remote."],
+    ["git fetch", "Shows differences between local and remote."],
+  ] },
+
+  { type: "h", text: "09 · Undoing changes" },
+  { type: "table", head: ["Command", "Description"], rows: [
+    ["git checkout -- file-name", "Discards changes in a modified file."],
+    ["git reset --soft HEAD~1", "Undoes a commit, keeping the changes."],
+    ["git reset --hard HEAD~1", "Undoes a commit and discards the changes. (Caution)"],
+  ] },
+
+  { type: "h", text: "10 · Other actions" },
+  { type: "table", head: ["Command", "Description"], rows: [
+    ["git diff", "Shows uncommitted changes."],
+    ["git log file-name", "Shows the history of a specific file."],
+    ["git tag tag-name", "Tags a commit."],
+  ] },
+
+  { type: "h", text: "Additional notes" },
+  { type: "note", text: "Caution: some commands can cause data loss, such as git reset --hard." },
+  { type: "p", text: "Help: use git help command-name for more information about each command." },
+];
+
 const POSTS = [
+  {
+    id: "post-git",
+    slug: "git-command-datasheet",
+    date: "2024-07-20",
+    readMin: 6,
+    noHero: true,
+    tags: ["Git", "CLI", "Referencia"],
+    es: {
+      title: "Git Command Datasheet",
+      excerpt: "Referencia rápida de los comandos de Git más usados: configuración, ramas, commits, sincronización y cómo deshacer cambios.",
+      body: GIT_BODY,
+    },
+    en: {
+      title: "Git Command Datasheet",
+      excerpt: "Quick reference for the most-used Git commands: setup, branches, commits, syncing and undoing changes.",
+      body: GIT_BODY_EN,
+    },
+  },
   {
     id: "post-mqtt",
     slug: "mosquitto-tls-aws-ec2",
